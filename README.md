@@ -118,8 +118,8 @@ git clone git@github.com:takattila/Clock-With-Weather-Conky.git ~/.conky/Clock-W
 
 - The [appearance](https://github.com/takattila/Clock-With-Weather-Conky/blob/master/settings.lua#L3-L9) section
 
-- The [system](https://github.com/takattila/Clock-With-Weather-Conky/blob/master/settings.lua#L11-L13) section
+- The [system](https://github.com/takattila/Clock-With-Weather-Conky/blob/master/settings.lua#L11-L14) section
 
-- The [weather](https://github.com/takattila/Clock-With-Weather-Conky/blob/master/settings.lua#L15-L22) section
+- The [weather](https://github.com/takattila/Clock-With-Weather-Conky/blob/master/settings.lua#L16-L23) section
 
 [Back to top](#conky-widget-with-clock-and-weather)
