@@ -95,16 +95,25 @@ function draw_elements(cr)
 	text(cr, 200, 180, settings.appearance.transparency_full, ram, settings.appearance.default_font_face, 15, CAIRO_FONT_WEIGHT_NORMAL) 
 
 	ram = conky_parse("${mem} / ${memmax}")
-	text(cr, 240, 180, settings.appearance.transparency_half, ram, settings.appearance.default_font_face, 15, CAIRO_FONT_WEIGHT_NORMAL) 
+	text(cr, 250, 180, settings.appearance.transparency_half, ram, settings.appearance.default_font_face, 15, CAIRO_FONT_WEIGHT_NORMAL) 
 
 	------------------------------------------------------------------------------------------
 
 	-- CPU
 	cpu = "CPU"
-	text(cr, 200, 200, settings.appearance.transparency_full, cpu, settings.appearance.default_font_face, 15, CAIRO_FONT_WEIGHT_NORMAL) 
+	text(cr, 20, 200, settings.appearance.transparency_full, cpu, settings.appearance.default_font_face, 15, CAIRO_FONT_WEIGHT_NORMAL) 
 
 	cpu = conky_parse("${cpu cpu0}%")
-	text(cr, 240, 200, settings.appearance.transparency_half, cpu, settings.appearance.default_font_face, 15, CAIRO_FONT_WEIGHT_NORMAL) 
+	text(cr, 60, 200, settings.appearance.transparency_half, cpu, settings.appearance.default_font_face, 15, CAIRO_FONT_WEIGHT_NORMAL) 
+
+	------------------------------------------------------------------------------------------
+
+	-- SWAP
+	swap = "SWAP"
+	text(cr, 200, 200, settings.appearance.transparency_full, swap, settings.appearance.default_font_face, 15, CAIRO_FONT_WEIGHT_NORMAL) 
+
+	swap = conky_parse("${swapperc}% (size: ${swapmax})")
+	text(cr, 250, 200, settings.appearance.transparency_half, swap, settings.appearance.default_font_face, 15, CAIRO_FONT_WEIGHT_NORMAL) 
 
 	------------------------------------------------------------------------------------------
 
