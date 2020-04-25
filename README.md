@@ -88,7 +88,7 @@ git clone git@github.com:takattila/Clock-With-Weather-Conky.git ~/.conky/Clock-W
 ### 3. Change your settings
 
 - Edit the [~/.conky/Clock-With-Weather-Conky/settings.lua](settings.lua) file.
-- First, you should change the [settings.weather](https://github.com/takattila/Clock-With-Weather-Conky/blob/master/settings.lua#L15) section, as required:
+- First, you should change the [settings.weather](https://github.com/takattila/Clock-With-Weather-Conky/blob/master/settings.lua#L16) section, as required:
   ```bash
   city = "Budapest",    # Where you are right now?
   language_code = "hu", # Check it here: https://openweathermap.org/current#multi
