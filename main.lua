@@ -6,7 +6,7 @@ assert(os.setlocale(settings.system.locale))
 ------------------------------------------------------------------------------------------
 
 function get_weather_data(json_field)
-	return conky_parse(
+	local data = conky_parse(
 		"${exec curl -s '" .. settings.weather.api_url ..
 			"?q=" .. settings.weather.city .. "," .. settings.weather.language_code .. 
 			"&lang=" .. settings.weather.lang .. 
@@ -14,6 +14,10 @@ function get_weather_data(json_field)
 			"&appid=" .. settings.weather.api_key .. 
 		"' | jq -r " .. json_field .. "}"
 	)
+
+	if data == "" then data = 0 end
+
+	return data
 end
 
 function image(cr, pos_x, pos_y, transparency, image_path)
