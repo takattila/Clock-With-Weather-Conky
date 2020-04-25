@@ -126,7 +126,7 @@ function draw.elements(cr, weather_json)
 		------------------------------------------------------------------------------------------
 
 		-- Weather icon
-		local weather_icon = obj.weather[1].icon
+		local weather_icon = "weather/" .. settings.system.iconset .. "/" .. obj.weather[1].icon
 		image(cr, 470, 45, settings.appearance.transparency_weather_icon, weather_icon)
 
 		------------------------------------------------------------------------------------------

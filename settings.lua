@@ -10,6 +10,7 @@ settings.appearance = {
 
 settings.system = {
     locale = "en_US.UTF-8",
+    iconset = "dovora",
 }
 
 settings.weather = {
