@@ -7,6 +7,13 @@ function hex2rgb(hex)
 		tonumber(("0x"..hex:sub(5,6))/255)
 end
 
+function unit_temperature(unit)
+    if unit == "metric" then
+        return "˚C"
+    end
+    return "˚F"
+end
+
 function image(cr, pos_x, pos_y, transparency, image_name)
 	local image_path = "./images/" .. (image_name or "01d") .. ".png"
 	
@@ -38,6 +45,7 @@ end
 function draw.elements(cr, weather_json)
 	if weather_json ~= "" then
 		local obj = json.decode(weather_json)
+		local unit_temperature = unit_temperature(settings.weather.units)
 
 		------------------------------------------------------------------------------------------
 		-- CLOCK section
@@ -133,7 +141,7 @@ function draw.elements(cr, weather_json)
 		image(cr, 440, 140, settings.appearance.transparency_half, "temperature")
 
 		local temperature = obj.main.temp
-		temperature = string.format("%.0f", (temperature or 0)) .. "˚C"
+		temperature = string.format("%.0f", (temperature or 0)) .. unit_temperature
 
 		text(cr, 460, 155, settings.appearance.transparency_full, temperature, settings.appearance.default_font_face, 40, CAIRO_FONT_WEIGHT_BOLD) 
 
@@ -151,7 +159,7 @@ function draw.elements(cr, weather_json)
 		image(cr, 435, 195, settings.appearance.transparency_half, "arrow-down")
 
 		local temp_min = obj.main.temp_min
-		temp_min = string.format("%.0f", (temp_min or 0)) .. "˚C"
+		temp_min = string.format("%.0f", (temp_min or 0)) .. unit_temperature
 
 		text(cr, 445, 200, settings.appearance.transparency_full, temp_min, settings.appearance.default_font_face, 15, CAIRO_FONT_WEIGHT_NORMAL)
 
@@ -161,7 +169,7 @@ function draw.elements(cr, weather_json)
 		image(cr, 495, 195, settings.appearance.transparency_half, "arrow-up")
 
 		local temp_max = obj.main.temp_max
-		temp_max = string.format("%.0f", (temp_max or 0)) .. "˚C"
+		temp_max = string.format("%.0f", (temp_max or 0)) .. unit_temperature
 
 		text(cr, 505, 200, settings.appearance.transparency_full, temp_max, settings.appearance.default_font_face, 15, CAIRO_FONT_WEIGHT_NORMAL)
 
@@ -171,7 +179,7 @@ function draw.elements(cr, weather_json)
 		image(cr, 555, 195, settings.appearance.transparency_half, "white-man")
 
 		local feels_like = obj.main.feels_like
-		feels_like = string.format("%.0f", (feels_like or 0)) .. "˚C"
+		feels_like = string.format("%.0f", (feels_like or 0)) .. unit_temperature
 
 		text(cr, 565, 200, settings.appearance.transparency_full, feels_like, settings.appearance.default_font_face, 15, CAIRO_FONT_WEIGHT_NORMAL)
 	end
