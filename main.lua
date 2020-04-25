@@ -1,26 +1,28 @@
 require 'cairo'
 
+json = require "json"
 settings = require('settings')
+
 assert(os.setlocale(settings.system.locale))
 
 ------------------------------------------------------------------------------------------
 
-function get_weather_data(json_field)
+function get_weather_json()
 	local data = conky_parse(
 		"${exec curl -s '" .. settings.weather.api_url ..
 			"?q=" .. settings.weather.city .. "," .. settings.weather.language_code .. 
 			"&lang=" .. settings.weather.lang .. 
 			"&units=" .. settings.weather.units .. 
 			"&appid=" .. settings.weather.api_key .. 
-		"' | jq -r " .. json_field .. "}"
+		"'}"
 	)
-
-	if data == "" then data = 0 end
 
 	return data
 end
 
-function image(cr, pos_x, pos_y, transparency, image_path)
+function image(cr, pos_x, pos_y, transparency, image_name)
+	local image_path = "./images/" .. (image_name or "01d") .. ".png"
+	
 	cairo_set_operator(cr, CAIRO_OPERATOR_OVER)
 	local image = cairo_image_surface_create_from_png (image_path)
 	local w_img = cairo_image_surface_get_width (image)
@@ -45,7 +47,9 @@ function text(cr, pos_x, pos_y, transparency, text, font_face, font_size, font_w
 	cairo_close_path(cr)
 end
 
-function draw_elements(cr)
+function draw_elements(cr, weather_json)
+	obj = json.decode(weather_json)
+
 	------------------------------------------------------------------------------------------
 	-- CLOCK section
 	------------------------------------------------------------------------------------------
@@ -118,67 +122,67 @@ function draw_elements(cr)
 	------------------------------------------------------------------------------------------
 
 	-- Vertical line
-	image(cr, 415, 130, settings.appearance.transparency_full, "./images/line.png")
+	image(cr, 415, 130, settings.appearance.transparency_full, "line")
 
 	------------------------------------------------------------------------------------------
 	-- WEATHER section
 	------------------------------------------------------------------------------------------
 
 	-- Weather icon
-	image_path = "./images/" .. get_weather_data(".weather[].icon") .. ".png"
-	image(cr, 470, 45, settings.appearance.transparency_weather_icon, image_path)
+	weather_icon = obj.weather[1].icon
+	image(cr, 470, 45, settings.appearance.transparency_weather_icon, weather_icon)
 
 	------------------------------------------------------------------------------------------
 
 	-- City
-	image(cr, 440, 100, settings.appearance.transparency_half, "./images/map-marker.png")
+	image(cr, 440, 100, settings.appearance.transparency_half, "map-marker")
 	text(cr, 455, 110, settings.appearance.transparency_half, settings.weather.city, "Noto Sans", 30, CAIRO_FONT_WEIGHT_THIN)
 
 	------------------------------------------------------------------------------------------
 
 	-- Temperature -> Current
-	image(cr, 440, 140, settings.appearance.transparency_half, "./images/temperature.png")
+	image(cr, 440, 140, settings.appearance.transparency_half, "temperature")
 
-	temperature = get_weather_data(".main.temp")
-	temperature = string.format("%.0f", temperature) .. "˚C"
+	temperature = obj.main.temp
+	temperature = string.format("%.0f", (temperature or 0)) .. "˚C"
 
 	text(cr, 460, 155, settings.appearance.transparency_full, temperature, settings.appearance.default_font_face, 40, CAIRO_FONT_WEIGHT_BOLD) 
 
 	------------------------------------------------------------------------------------------
 
 	-- Temperature -> Details
-	image(cr, 435, 175, settings.appearance.transparency_half, "./images/arrow-right.png")
+	image(cr, 435, 175, settings.appearance.transparency_half, "arrow-right")
 
-	details = get_weather_data(".weather[].description")
+	details = obj.weather[1].description
 	text(cr, 445, 180, settings.appearance.transparency_half, details, settings.appearance.default_font_face, 15, CAIRO_FONT_WEIGHT_NORMAL)
 
 	------------------------------------------------------------------------------------------
 
 	-- Temperature -> MIN
-	image(cr, 435, 195, settings.appearance.transparency_half, "./images/arrow-down.png")
+	image(cr, 435, 195, settings.appearance.transparency_half, "arrow-down")
 
-	temp_min = get_weather_data(".main.temp_min")
-	temp_min = string.format("%.0f", temp_min) .. "˚C"
+	temp_min = obj.main.temp_min
+	temp_min = string.format("%.0f", (temp_min or 0)) .. "˚C"
 
 	text(cr, 445, 200, settings.appearance.transparency_full, temp_min, settings.appearance.default_font_face, 15, CAIRO_FONT_WEIGHT_NORMAL)
 
 	------------------------------------------------------------------------------------------
 
 	-- Temperature -> MAX
-	image(cr, 495, 195, settings.appearance.transparency_half, "./images/arrow-up.png")
+	image(cr, 495, 195, settings.appearance.transparency_half, "arrow-up")
 
-	temp_max = get_weather_data(".main.temp_max")
-	temp_max = string.format("%.0f", temp_max) .. "˚C"
+	temp_max = obj.main.temp_max
+	temp_max = string.format("%.0f", (temp_max or 0)) .. "˚C"
 
 	text(cr, 505, 200, settings.appearance.transparency_full, temp_max, settings.appearance.default_font_face, 15, CAIRO_FONT_WEIGHT_NORMAL)
 
 	------------------------------------------------------------------------------------------
 
 	-- Temperature -> Feels like
-	image(cr, 555, 195, settings.appearance.transparency_half, "./images/white-man.png")
+	image(cr, 555, 195, settings.appearance.transparency_half, "white-man")
 
-	feels_like = get_weather_data(".main.feels_like")
-	feels_like = string.format("%.0f", feels_like) .. "˚C"
+	feels_like = obj.main.feels_like
+	feels_like = string.format("%.0f", (feels_like or 0)) .. "˚C"
 
 	text(cr, 565, 200, settings.appearance.transparency_full, feels_like, settings.appearance.default_font_face, 15, CAIRO_FONT_WEIGHT_NORMAL)
 end
@@ -209,8 +213,11 @@ function conky_start_widgets()
 	)
 
 	local cr = cairo_create(cs)
+	local weather_json = get_weather_json()
 
-	draw_elements(cr)
+	if weather_json ~= "" then
+		draw_elements(cr, weather_json)
+	end
 
 	cairo_surface_destroy(cs)
 	cairo_destroy(cr)
