@@ -1,7 +1,7 @@
 # Conky Widget with Clock and Weather 
 This widget uses [openweathermap.org](https://openweathermap.org) API, to get weather information.
 
-![screenshot](./images/Clock-With-Weather-Conky.png)
+![screenshot](./images/screenshots/Clock-With-Weather-Conky.png)
 
 ## Table of Contents
 
@@ -163,13 +163,13 @@ Here we can change the display settings, such as:
 
 ## Example Themes
 
-![themes](./images/Clock-With-Weather-Conky-Themes.png)
+![themes](./images/screenshots/Clock-With-Weather-Conky-Themes.png)
 
 [Back to top](#conky-widget-with-clock-and-weather)
 
 ### Budapest
 
-![themes](./images/Theme-Budapest.png)
+![themes](./images/screenshots/Theme-Budapest.png)
 
 ```lua
 local settings = {}
@@ -203,7 +203,7 @@ return settings
 
 ### Wien
 
-![themes](./images/Theme-Wien.png)
+![themes](./images/screenshots/Theme-Wien.png)
 
 ```lua
 local settings = {}
@@ -237,7 +237,7 @@ return settings
 
 ### Berlin
 
-![themes](./images/Theme-Berlin.png)
+![themes](./images/screenshots/Theme-Berlin.png)
 
 ```lua
 local settings = {}
@@ -271,7 +271,7 @@ return settings
 
 ### Paris
 
-![themes](./images/Theme-Paris.png)
+![themes](./images/screenshots/Theme-Paris.png)
 
 ```lua
 local settings = {}
@@ -305,7 +305,7 @@ return settings
 
 ### London
 
-![themes](./images/Theme-London.png)
+![themes](./images/screenshots/Theme-London.png)
 
 ```lua
 local settings = {}
@@ -339,7 +339,7 @@ return settings
 
 ### New York
 
-![themes](./images/Theme-New-York.png)
+![themes](./images/screenshots/Theme-New-York.png)
 
 ```lua
 local settings = {}
@@ -373,7 +373,7 @@ return settings
 
 ### Sidney
 
-![themes](./images/Theme-Sidney.png)
+![themes](./images/screenshots/Theme-Sidney.png)
 
 ```lua
 local settings = {}
@@ -407,7 +407,7 @@ return settings
 
 ### Delhi
 
-![themes](./images/Theme-Delhi.png)
+![themes](./images/screenshots/Theme-Delhi.png)
 
 ```lua
 local settings = {}
@@ -441,7 +441,7 @@ return settings
 
 ### Moscow
 
-![themes](./images/Theme-Moscow.png)
+![themes](./images/screenshots/Theme-Moscow.png)
 
 ```lua
 local settings = {}
@@ -475,7 +475,7 @@ return settings
 
 ### Tokyo
 
-![themes](./images/Theme-Tokyo.png)
+![themes](./images/screenshots/Theme-Tokyo.png)
 
 ```lua
 local settings = {}
