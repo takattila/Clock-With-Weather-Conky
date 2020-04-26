@@ -11,6 +11,7 @@ This widget uses [openweathermap.org](https://openweathermap.org) API, to get we
       * [On CentOS](#on-centos)
       * [On ArchLinux](#on-archlinux)
       * [On SuseLinux](#on-suselinux)
+      * [On Mac](#on-mac)
    * [2. Clone repository](#2-clone-repository)
 * [First setup](#first-setup)
    * [1. Get API key](#1-get-api-key)
@@ -56,6 +57,12 @@ sudo pacman -Sy --noconfirm conky
 ```bash
 sudo zypper -n in conky
 ```
+
+[Back to top](#conky-widget-with-clock-and-weather)
+
+#### On Mac
+
+You can find the installation steps on [this page](https://github.com/Conky-for-macOS/conky-for-macOS/wiki/How-to-install).
 
 [Back to top](#conky-widget-with-clock-and-weather)
 
