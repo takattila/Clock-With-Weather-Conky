@@ -1,18 +1,20 @@
-# Conky Widget with Clock and Weather 
+# Conky Widget with Clock and Weather
+
 This widget uses [openweathermap.org](https://openweathermap.org) API, to get weather information.
 
 ![screenshot](./images/screenshots/Clock-With-Weather-Conky.png)
 
 ## Table of Contents
 
-* [How to install?](#how-to-install)
-   * [1. Install conky](#1-install-conky)
+* [Installation](#installation)
+   * [1. Install conky and dependencies](#1-install-conky-and-dependencies)
       * [On Debian based systems](#on-debian-based-systems)
       * [On CentOS](#on-centos)
       * [On ArchLinux](#on-archlinux)
       * [On SuseLinux](#on-suselinux)
       * [On Mac](#on-mac)
    * [2. Clone repository](#2-clone-repository)
+   * [3. Install font](#3-install-font)
 * [First setup](#first-setup)
    * [1. Get API key](#1-get-api-key)
    * [2. Export the API key](#2-export-the-api-key)
@@ -35,15 +37,15 @@ This widget uses [openweathermap.org](https://openweathermap.org) API, to get we
    * [Moscow](#moscow)
    * [Tokyo](#tokyo)
 
-## How to install?
+## Installation
 
-### 1. Install conky
+### 1. Install conky and dependencies
 
 #### On Debian based systems
 
 ```bash
 sudo apt update
-sudo apt install conky-all
+sudo apt install conky-all curl git
 conky --version
 ```
 
@@ -53,7 +55,7 @@ conky --version
 
 ```bash
 sudo yum install -y epel-release
-sudo yum install -y conky
+sudo yum install -y conky curl git
 ```
 
 [Back to top](#conky-widget-with-clock-and-weather)
@@ -61,7 +63,7 @@ sudo yum install -y conky
 #### On ArchLinux
 
 ```bash
-sudo pacman -Sy --noconfirm conky
+sudo pacman -Sy --noconfirm conky curl git
 ```
 
 [Back to top](#conky-widget-with-clock-and-weather)
@@ -69,7 +71,7 @@ sudo pacman -Sy --noconfirm conky
 #### On SuseLinux
 
 ```bash
-sudo zypper -n in conky
+sudo zypper -n in conky curl git
 ```
 
 [Back to top](#conky-widget-with-clock-and-weather)
@@ -83,8 +85,20 @@ You can find the installation steps on [this page](https://github.com/Conky-for-
 ### 2. Clone repository
 
 ```bash
-git clone git@github.com:takattila/Clock-With-Weather-Conky.git ~/.conky/Clock-With-Weather-Conky
+git clone https://github.com/takattila/Clock-With-Weather-Conky.git ~/.conky/Clock-With-Weather-Conky
 ```
+
+[Back to top](#conky-widget-with-clock-and-weather)
+
+### 3. Install font
+
+If you don't have `Noto Sans Regular` font *(usually on Ubuntu)* 
+you can install it as the followings:
+  ```bash
+  mkdir -p ~/.local/share/fonts
+  cp ~/.conky/Clock-With-Weather-Conky/fonts/NotoSans-Regular.ttf ~/.local/share/fonts
+  ls ~/.local/share/fonts
+  ```
 
 [Back to top](#conky-widget-with-clock-and-weather)
 
