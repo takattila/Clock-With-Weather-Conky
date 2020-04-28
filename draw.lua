@@ -1,5 +1,4 @@
 local draw = {}
-local json = require "json"
 
 function hex2rgb(hex)
 	local hex = hex:gsub("#","")
@@ -15,15 +14,9 @@ function unit_temperature(unit)
     return "˚F"
 end
 
-function get_time_zone(weather_json)
-		local obj = json.decode(weather_json)
-		return obj.timezone
-end
-
-function date_time(weather_json, format)
-	local tz = get_time_zone(weather_json)
+function date_time(obj, format)
     return conky_parse(
-		"${exec date -d '+" .. tz .. " seconds' -u '" .. format .. "'}"
+		"${exec date -d '+" .. obj.timezone .. " seconds' -u '" .. format .. "'}"
 	)
 end
 
@@ -55,150 +48,147 @@ function text(cr, pos_x, pos_y, transparency, text, font_face, font_size, font_w
 	cairo_close_path(cr)
 end
 
-function draw.elements(cr, weather_json)
-	if weather_json ~= "" then
-		local obj = json.decode(weather_json)
-		local unit_temperature = unit_temperature(settings.weather.units)
-		local theme_dir = "theme/" .. settings.appearance.theme
-		local elements_dir = theme_dir .. "/elements/"
-		local weather_dir = theme_dir .. "/weather/"
+function draw.elements(cr, obj)
+	local unit_temperature = unit_temperature(settings.weather.units)
+	local theme_dir = "theme/" .. settings.appearance.theme
+	local elements_dir = theme_dir .. "/elements/"
+	local weather_dir = theme_dir .. "/weather/"
 
-		------------------------------------------------------------------------------------------
-		-- CLOCK section
-		------------------------------------------------------------------------------------------
+	------------------------------------------------------------------------------------------
+	-- CLOCK section
+	------------------------------------------------------------------------------------------
 
-		-- Date / year
-		local year = date_time(weather_json, '+%Y.')
-		text(cr, 20, 30, settings.appearance.transparency_full, year, settings.appearance.default_font_face, 20, CAIRO_FONT_WEIGHT_NORMAL)
+	-- Date / year
+	local year = date_time(obj, '+%Y.')
+	text(cr, 20, 30, settings.appearance.transparency_full, year, settings.appearance.default_font_face, 20, CAIRO_FONT_WEIGHT_NORMAL)
 
-		------------------------------------------------------------------------------------------
+	------------------------------------------------------------------------------------------
 
-		-- Date / month text + day number
-		local date = date_time(weather_json, '+| %B %d. | %A')
-		--date = "| Wednesday | December 31."
-		text(cr, 70, 30, settings.appearance.transparency_half, date, settings.appearance.default_font_face, 20, CAIRO_FONT_WEIGHT_NORMAL)
+	-- Date / month text + day number
+	local date = date_time(obj, '+| %B %d. | %A')
+	--date = "| Wednesday | December 31."
+	text(cr, 70, 30, settings.appearance.transparency_half, date, settings.appearance.default_font_face, 20, CAIRO_FONT_WEIGHT_NORMAL)
 
-		------------------------------------------------------------------------------------------
+	------------------------------------------------------------------------------------------
 
-		-- Hour
-		local hour = date_time(weather_json, '+%H')
-		text(cr, 10, 155, settings.appearance.transparency_full, hour, settings.appearance.default_font_face, 145, CAIRO_FONT_WEIGHT_NORMAL)
+	-- Hour
+	local hour = date_time(obj, '+%H')
+	text(cr, 10, 155, settings.appearance.transparency_full, hour, settings.appearance.default_font_face, 145, CAIRO_FONT_WEIGHT_NORMAL)
 
-		------------------------------------------------------------------------------------------
+	------------------------------------------------------------------------------------------
 
-		-- Minutes
-		local minutes = date_time(weather_json, '+:%M')
-		text(cr, 170, 155, settings.appearance.transparency_half, minutes, settings.appearance.default_font_face, 145, CAIRO_FONT_WEIGHT_NORMAL)
+	-- Minutes
+	local minutes = date_time(obj, '+:%M')
+	text(cr, 170, 155, settings.appearance.transparency_half, minutes, settings.appearance.default_font_face, 145, CAIRO_FONT_WEIGHT_NORMAL)
 
-		------------------------------------------------------------------------------------------
+	------------------------------------------------------------------------------------------
 
-		-- Seconds
-		local seconds = ": " .. date_time(weather_json, '+%S')
-		text(cr, 370, 155, settings.appearance.transparency_full, seconds, settings.appearance.default_font_face, 20, CAIRO_FONT_WEIGHT_NORMAL)
+	-- Seconds
+	local seconds = ": " .. date_time(obj, '+%S')
+	text(cr, 370, 155, settings.appearance.transparency_full, seconds, settings.appearance.default_font_face, 20, CAIRO_FONT_WEIGHT_NORMAL)
 
-		------------------------------------------------------------------------------------------
+	------------------------------------------------------------------------------------------
 
-		-- HDD
-		local hdd = "HDD"
-		text(cr, 20, 180, settings.appearance.transparency_full, hdd, settings.appearance.default_font_face, 15, CAIRO_FONT_WEIGHT_NORMAL) 
+	-- HDD
+	local hdd = "HDD"
+	text(cr, 20, 180, settings.appearance.transparency_full, hdd, settings.appearance.default_font_face, 15, CAIRO_FONT_WEIGHT_NORMAL) 
 
-		hdd = conky_parse("${fs_free} / ${fs_size}")
-		text(cr, 60, 180, settings.appearance.transparency_half, hdd, settings.appearance.default_font_face, 15, CAIRO_FONT_WEIGHT_NORMAL) 
+	hdd = conky_parse("${fs_free} / ${fs_size}")
+	text(cr, 60, 180, settings.appearance.transparency_half, hdd, settings.appearance.default_font_face, 15, CAIRO_FONT_WEIGHT_NORMAL) 
 
-		------------------------------------------------------------------------------------------
+	------------------------------------------------------------------------------------------
 
-		-- RAM
-		local ram = "RAM"
-		text(cr, 200, 180, settings.appearance.transparency_full, ram, settings.appearance.default_font_face, 15, CAIRO_FONT_WEIGHT_NORMAL) 
+	-- RAM
+	local ram = "RAM"
+	text(cr, 200, 180, settings.appearance.transparency_full, ram, settings.appearance.default_font_face, 15, CAIRO_FONT_WEIGHT_NORMAL) 
 
-		ram = conky_parse("${mem} / ${memmax}")
-		text(cr, 250, 180, settings.appearance.transparency_half, ram, settings.appearance.default_font_face, 15, CAIRO_FONT_WEIGHT_NORMAL) 
+	ram = conky_parse("${mem} / ${memmax}")
+	text(cr, 250, 180, settings.appearance.transparency_half, ram, settings.appearance.default_font_face, 15, CAIRO_FONT_WEIGHT_NORMAL) 
 
-		------------------------------------------------------------------------------------------
+	------------------------------------------------------------------------------------------
 
-		-- CPU
-		local cpu = "CPU"
-		text(cr, 20, 200, settings.appearance.transparency_full, cpu, settings.appearance.default_font_face, 15, CAIRO_FONT_WEIGHT_NORMAL) 
+	-- CPU
+	local cpu = "CPU"
+	text(cr, 20, 200, settings.appearance.transparency_full, cpu, settings.appearance.default_font_face, 15, CAIRO_FONT_WEIGHT_NORMAL) 
 
-		cpu = conky_parse("${cpu cpu0}%")
-		text(cr, 60, 200, settings.appearance.transparency_half, cpu, settings.appearance.default_font_face, 15, CAIRO_FONT_WEIGHT_NORMAL) 
+	cpu = conky_parse("${cpu cpu0}%")
+	text(cr, 60, 200, settings.appearance.transparency_half, cpu, settings.appearance.default_font_face, 15, CAIRO_FONT_WEIGHT_NORMAL) 
 
-		------------------------------------------------------------------------------------------
+	------------------------------------------------------------------------------------------
 
-		-- SWAP
-		local swap = "SWAP"
-		text(cr, 200, 200, settings.appearance.transparency_full, swap, settings.appearance.default_font_face, 15, CAIRO_FONT_WEIGHT_NORMAL) 
+	-- SWAP
+	local swap = "SWAP"
+	text(cr, 200, 200, settings.appearance.transparency_full, swap, settings.appearance.default_font_face, 15, CAIRO_FONT_WEIGHT_NORMAL) 
 
-		swap = conky_parse("${swapperc}% (size: ${swapmax})")
-		text(cr, 250, 200, settings.appearance.transparency_half, swap, settings.appearance.default_font_face, 15, CAIRO_FONT_WEIGHT_NORMAL) 
+	swap = conky_parse("${swapperc}% (size: ${swapmax})")
+	text(cr, 250, 200, settings.appearance.transparency_half, swap, settings.appearance.default_font_face, 15, CAIRO_FONT_WEIGHT_NORMAL) 
 
-		------------------------------------------------------------------------------------------
+	------------------------------------------------------------------------------------------
 
-		-- Vertical line-colorspace HSI -channel B -level 100,0%  +channel -colorspace sRGB 
-		image(cr, 415, 130, settings.appearance.transparency_full, elements_dir .. "line")
+	-- Vertical line-colorspace HSI -channel B -level 100,0%  +channel -colorspace sRGB 
+	image(cr, 415, 130, settings.appearance.transparency_full, elements_dir .. "line")
 
-		------------------------------------------------------------------------------------------
-		-- WEATHER section
-		------------------------------------------------------------------------------------------
+	------------------------------------------------------------------------------------------
+	-- WEATHER section
+	------------------------------------------------------------------------------------------
 
-		-- Weather icon
-		local weather_icon = weather_dir .. settings.appearance.iconset .. "/" .. obj.weather[1].icon
-		image(cr, 470, 45, settings.appearance.transparency_weather_icon, weather_icon)
+	-- Weather icon
+	local weather_icon = weather_dir .. settings.appearance.iconset .. "/" .. obj.weather[1].icon
+	image(cr, 470, 45, settings.appearance.transparency_weather_icon, weather_icon)
 
-		------------------------------------------------------------------------------------------
+	------------------------------------------------------------------------------------------
 
-		-- City
-		image(cr, 440, 100, settings.appearance.transparency_half, elements_dir .. "map-marker")
-		text(cr, 455, 110, settings.appearance.transparency_half, settings.weather.city, "Noto Sans", 30, CAIRO_FONT_WEIGHT_THIN)
+	-- City
+	image(cr, 440, 100, settings.appearance.transparency_half, elements_dir .. "map-marker")
+	text(cr, 455, 110, settings.appearance.transparency_half, settings.weather.city, "Noto Sans", 30, CAIRO_FONT_WEIGHT_THIN)
 
-		------------------------------------------------------------------------------------------
+	------------------------------------------------------------------------------------------
 
-		-- Temperature -> Current
-		image(cr, 440, 140, settings.appearance.transparency_half, elements_dir .. "temperature")
+	-- Temperature -> Current
+	image(cr, 440, 140, settings.appearance.transparency_half, elements_dir .. "temperature")
 
-		local temperature = obj.main.temp
-		temperature = string.format("%.0f", (temperature or 0)) .. unit_temperature
+	local temperature = obj.main.temp
+	temperature = string.format("%.0f", (temperature or 0)) .. unit_temperature
 
-		text(cr, 460, 155, settings.appearance.transparency_full, temperature, settings.appearance.default_font_face, 40, CAIRO_FONT_WEIGHT_BOLD) 
+	text(cr, 460, 155, settings.appearance.transparency_full, temperature, settings.appearance.default_font_face, 40, CAIRO_FONT_WEIGHT_BOLD) 
 
-		------------------------------------------------------------------------------------------
+	------------------------------------------------------------------------------------------
 
-		-- Temperature -> Details
-		image(cr, 435, 175, settings.appearance.transparency_half, elements_dir .. "arrow-right")
+	-- Temperature -> Details
+	image(cr, 435, 175, settings.appearance.transparency_half, elements_dir .. "arrow-right")
 
-		local details = obj.weather[1].description
-		text(cr, 445, 180, settings.appearance.transparency_half, details, settings.appearance.default_font_face, 15, CAIRO_FONT_WEIGHT_NORMAL)
+	local details = obj.weather[1].description
+	text(cr, 445, 180, settings.appearance.transparency_half, details, settings.appearance.default_font_face, 15, CAIRO_FONT_WEIGHT_NORMAL)
 
-		------------------------------------------------------------------------------------------
+	------------------------------------------------------------------------------------------
 
-		-- Temperature -> MIN
-		image(cr, 435, 195, settings.appearance.transparency_half, elements_dir .. "arrow-down")
+	-- Temperature -> MIN
+	image(cr, 435, 195, settings.appearance.transparency_half, elements_dir .. "arrow-down")
 
-		local temp_min = obj.main.temp_min
-		temp_min = string.format("%.0f", (temp_min or 0)) .. unit_temperature
+	local temp_min = obj.main.temp_min
+	temp_min = string.format("%.0f", (temp_min or 0)) .. unit_temperature
 
-		text(cr, 445, 200, settings.appearance.transparency_full, temp_min, settings.appearance.default_font_face, 15, CAIRO_FONT_WEIGHT_NORMAL)
+	text(cr, 445, 200, settings.appearance.transparency_full, temp_min, settings.appearance.default_font_face, 15, CAIRO_FONT_WEIGHT_NORMAL)
 
-		------------------------------------------------------------------------------------------
+	------------------------------------------------------------------------------------------
 
-		-- Temperature -> MAX
-		image(cr, 495, 195, settings.appearance.transparency_half, elements_dir .. "arrow-up")
+	-- Temperature -> MAX
+	image(cr, 495, 195, settings.appearance.transparency_half, elements_dir .. "arrow-up")
 
-		local temp_max = obj.main.temp_max
-		temp_max = string.format("%.0f", (temp_max or 0)) .. unit_temperature
+	local temp_max = obj.main.temp_max
+	temp_max = string.format("%.0f", (temp_max or 0)) .. unit_temperature
 
-		text(cr, 505, 200, settings.appearance.transparency_full, temp_max, settings.appearance.default_font_face, 15, CAIRO_FONT_WEIGHT_NORMAL)
+	text(cr, 505, 200, settings.appearance.transparency_full, temp_max, settings.appearance.default_font_face, 15, CAIRO_FONT_WEIGHT_NORMAL)
 
-		------------------------------------------------------------------------------------------
+	------------------------------------------------------------------------------------------
 
-		-- Temperature -> Feels like
-		image(cr, 555, 195, settings.appearance.transparency_half, elements_dir .. "white-man")
+	-- Temperature -> Feels like
+	image(cr, 555, 195, settings.appearance.transparency_half, elements_dir .. "white-man")
 
-		local feels_like = obj.main.feels_like
-		feels_like = string.format("%.0f", (feels_like or 0)) .. unit_temperature
+	local feels_like = obj.main.feels_like
+	feels_like = string.format("%.0f", (feels_like or 0)) .. unit_temperature
 
-		text(cr, 565, 200, settings.appearance.transparency_full, feels_like, settings.appearance.default_font_face, 15, CAIRO_FONT_WEIGHT_NORMAL)
-	end
+	text(cr, 565, 200, settings.appearance.transparency_full, feels_like, settings.appearance.default_font_face, 15, CAIRO_FONT_WEIGHT_NORMAL)
 end
 
 return draw

@@ -1,5 +1,4 @@
 local utils = {}
-local json = require "json"
 
 function utils.get_weather_json()
 	return conky_parse(
@@ -47,26 +46,22 @@ function utils.is_set_api_key(cr)
 	return true
 end
 
-function utils.check_api_response_status(cr, weather_json)
-	if weather_json ~= "" then
-		local obj = json.decode(weather_json)
-		
-		if obj.cod == 200 then
-			return true
-		end
-
-		local error_text_1 = "ERROR :("
-		text(cr, 0, 40, settings.appearance.transparency_full, error_text_1, settings.appearance.default_font_face, 40, CAIRO_FONT_WEIGHT_BOLD)
-		
-		local error_text_2 = "- API: " .. obj.message
-		text(cr, 0, 70, settings.appearance.transparency_full, error_text_2, settings.appearance.default_font_face, 20, CAIRO_FONT_WEIGHT_normal)
-		
-		print(
-			   "\n" .. error_text_1 
-			.. "\n" .. error_text_2
-		)
-		return false
+function utils.check_api_response_status(cr, obj)
+	if obj.cod == 200 then
+		return true
 	end
+
+	local error_text_1 = "ERROR :("
+	text(cr, 0, 40, settings.appearance.transparency_full, error_text_1, settings.appearance.default_font_face, 40, CAIRO_FONT_WEIGHT_BOLD)
+	
+	local error_text_2 = "- API: " .. obj.message
+	text(cr, 0, 70, settings.appearance.transparency_full, error_text_2, settings.appearance.default_font_face, 20, CAIRO_FONT_WEIGHT_normal)
+	
+	print(
+			"\n" .. error_text_1 
+		.. "\n" .. error_text_2
+	)
+	return false
 end
 
 return utils

@@ -1,6 +1,7 @@
 require 'cairo'
 
 draw = require "draw"
+json = require "json"
 settings = require "settings"
 utils = require "utils"
 
@@ -22,10 +23,14 @@ function conky_main()
 	if utils.is_set_api_key(cr) then
 		local weather_json = utils.get_weather_json()
 
-		if utils.check_api_response_status(cr, weather_json) then
-			draw.elements(cr, weather_json)
-			cairo_surface_destroy(cs)
-			cairo_destroy(cr)
+		if weather_json ~= "" then
+			local obj = json.decode(weather_json)
+
+			if utils.check_api_response_status(cr, obj) then
+				draw.elements(cr, obj)
+				cairo_surface_destroy(cs)
+				cairo_destroy(cr)
+			end
 		end
 	end
 end
