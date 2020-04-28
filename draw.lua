@@ -1,4 +1,5 @@
 local draw = {}
+local json = require "json"
 
 function hex2rgb(hex)
 	local hex = hex:gsub("#","")

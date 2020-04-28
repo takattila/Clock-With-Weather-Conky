@@ -1,7 +1,6 @@
 require 'cairo'
 
 draw = require "draw"
-json = require "json"
 settings = require "settings"
 utils = require "utils"
 

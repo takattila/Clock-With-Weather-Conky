@@ -1,4 +1,5 @@
 local utils = {}
+local json = require "json"
 
 function utils.get_weather_json()
 	return conky_parse(
