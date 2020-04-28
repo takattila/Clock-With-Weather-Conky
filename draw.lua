@@ -8,21 +8,21 @@ function hex2rgb(hex)
 end
 
 function unit_temperature(unit)
-    if unit == "metric" then
-        return "˚C"
-    end
-    return "˚F"
+	if unit == "metric" then
+		return "˚C"
+	end
+	return "˚F"
 end
 
 function date_time(obj, format)
-    return conky_parse(
+	return conky_parse(
 		"${exec date -d '+" .. obj.timezone .. " seconds' -u '" .. format .. "'}"
 	)
 end
 
 function image(cr, pos_x, pos_y, transparency, image_name)
 	local image_path = "./images/" .. (image_name or "01d") .. ".png"
-	
+
 	cairo_set_operator(cr, CAIRO_OPERATOR_OVER)
 	local image = cairo_image_surface_create_from_png (image_path)
 	local w_img = cairo_image_surface_get_width (image)
