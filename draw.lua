@@ -46,6 +46,9 @@ function draw.elements(cr, weather_json)
 	if weather_json ~= "" then
 		local obj = json.decode(weather_json)
 		local unit_temperature = unit_temperature(settings.weather.units)
+		local theme_dir = "theme/" .. settings.system.theme
+		local elements_dir = theme_dir .. "/elements/"
+		local weather_dir = theme_dir .. "/weather/"
 
 		------------------------------------------------------------------------------------------
 		-- CLOCK section
@@ -118,27 +121,27 @@ function draw.elements(cr, weather_json)
 
 		------------------------------------------------------------------------------------------
 
-		-- Vertical line
-		image(cr, 415, 130, settings.appearance.transparency_full, "line")
+		-- Vertical line-colorspace HSI -channel B -level 100,0%  +channel -colorspace sRGB 
+		image(cr, 415, 130, settings.appearance.transparency_full, elements_dir .. "line")
 
 		------------------------------------------------------------------------------------------
 		-- WEATHER section
 		------------------------------------------------------------------------------------------
 
 		-- Weather icon
-		local weather_icon = "weather/" .. settings.system.iconset .. "/" .. obj.weather[1].icon
+		local weather_icon = weather_dir .. settings.system.iconset .. "/" .. obj.weather[1].icon
 		image(cr, 470, 45, settings.appearance.transparency_weather_icon, weather_icon)
 
 		------------------------------------------------------------------------------------------
 
 		-- City
-		image(cr, 440, 100, settings.appearance.transparency_half, "map-marker")
+		image(cr, 440, 100, settings.appearance.transparency_half, elements_dir .. "map-marker")
 		text(cr, 455, 110, settings.appearance.transparency_half, settings.weather.city, "Noto Sans", 30, CAIRO_FONT_WEIGHT_THIN)
 
 		------------------------------------------------------------------------------------------
 
 		-- Temperature -> Current
-		image(cr, 440, 140, settings.appearance.transparency_half, "temperature")
+		image(cr, 440, 140, settings.appearance.transparency_half, elements_dir .. "temperature")
 
 		local temperature = obj.main.temp
 		temperature = string.format("%.0f", (temperature or 0)) .. unit_temperature
@@ -148,7 +151,7 @@ function draw.elements(cr, weather_json)
 		------------------------------------------------------------------------------------------
 
 		-- Temperature -> Details
-		image(cr, 435, 175, settings.appearance.transparency_half, "arrow-right")
+		image(cr, 435, 175, settings.appearance.transparency_half, elements_dir .. "arrow-right")
 
 		local details = obj.weather[1].description
 		text(cr, 445, 180, settings.appearance.transparency_half, details, settings.appearance.default_font_face, 15, CAIRO_FONT_WEIGHT_NORMAL)
@@ -156,7 +159,7 @@ function draw.elements(cr, weather_json)
 		------------------------------------------------------------------------------------------
 
 		-- Temperature -> MIN
-		image(cr, 435, 195, settings.appearance.transparency_half, "arrow-down")
+		image(cr, 435, 195, settings.appearance.transparency_half, elements_dir .. "arrow-down")
 
 		local temp_min = obj.main.temp_min
 		temp_min = string.format("%.0f", (temp_min or 0)) .. unit_temperature
@@ -166,7 +169,7 @@ function draw.elements(cr, weather_json)
 		------------------------------------------------------------------------------------------
 
 		-- Temperature -> MAX
-		image(cr, 495, 195, settings.appearance.transparency_half, "arrow-up")
+		image(cr, 495, 195, settings.appearance.transparency_half, elements_dir .. "arrow-up")
 
 		local temp_max = obj.main.temp_max
 		temp_max = string.format("%.0f", (temp_max or 0)) .. unit_temperature
@@ -176,7 +179,7 @@ function draw.elements(cr, weather_json)
 		------------------------------------------------------------------------------------------
 
 		-- Temperature -> Feels like
-		image(cr, 555, 195, settings.appearance.transparency_half, "white-man")
+		image(cr, 555, 195, settings.appearance.transparency_half, elements_dir .. "white-man")
 
 		local feels_like = obj.main.feels_like
 		feels_like = string.format("%.0f", (feels_like or 0)) .. unit_temperature
