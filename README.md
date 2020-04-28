@@ -161,8 +161,8 @@ Here we can modify the conky window settings:
 
 Here we can change the display settings, such as:
 
-- [Text color](settings.lua#L3-L9)
-- [Locale, Iconset](settings.lua#L11-L15)
+- [Theme, iconset, text, color](settings.lua#L3-L11)
+- [Locale](settings.lua#L13-L15)
 - [Weather settings](settings.lua#L17-L24)
 
 [Back to top](#conky-widget-with-clock-and-weather)

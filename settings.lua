@@ -1,6 +1,8 @@
 local settings = {}
 
 settings.appearance = {
+    theme = "light",
+    iconset = "dovora",
     transparency_full = 1.0,
     transparency_half = 0.5,
     transparency_weather_icon = 1.0,
@@ -9,8 +11,6 @@ settings.appearance = {
 }
 
 settings.system = {
-    theme = "light",
-    iconset = "dovora",
     locale = "en_US.UTF-8",
 }
 

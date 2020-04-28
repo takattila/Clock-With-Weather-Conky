@@ -46,7 +46,7 @@ function draw.elements(cr, weather_json)
 	if weather_json ~= "" then
 		local obj = json.decode(weather_json)
 		local unit_temperature = unit_temperature(settings.weather.units)
-		local theme_dir = "theme/" .. settings.system.theme
+		local theme_dir = "theme/" .. settings.appearance.theme
 		local elements_dir = theme_dir .. "/elements/"
 		local weather_dir = theme_dir .. "/weather/"
 
@@ -129,7 +129,7 @@ function draw.elements(cr, weather_json)
 		------------------------------------------------------------------------------------------
 
 		-- Weather icon
-		local weather_icon = weather_dir .. settings.system.iconset .. "/" .. obj.weather[1].icon
+		local weather_icon = weather_dir .. settings.appearance.iconset .. "/" .. obj.weather[1].icon
 		image(cr, 470, 45, settings.appearance.transparency_weather_icon, weather_icon)
 
 		------------------------------------------------------------------------------------------
