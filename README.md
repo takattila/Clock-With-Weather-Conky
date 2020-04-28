@@ -542,6 +542,9 @@ return settings
 
 ## Convert images to dark
 
+If you want to add your custom weather icons, you can put them under `images/theme/light/weather/` directory.
+After that, you can convert these icons to dark by `imagemagic` tool.
+
 ### Install imagemagic
 
 You can download binaries from [here](https://www.imagemagick.org/script/download.php#unix).
