@@ -19,6 +19,13 @@ function get_time_zone(weather_json)
 		return obj.timezone / 60 / 60
 end
 
+function date_time(weather_json, format)
+	local tz = get_time_zone(weather_json)
+    return conky_parse(
+		"${exec date -d '" .. tz .. " hours' -u '" .. format .. "'}"
+	)
+end
+
 function image(cr, pos_x, pos_y, transparency, image_name)
 	local image_path = "./images/" .. (image_name or "01d") .. ".png"
 	
@@ -54,39 +61,38 @@ function draw.elements(cr, weather_json)
 		local theme_dir = "theme/" .. settings.appearance.theme
 		local elements_dir = theme_dir .. "/elements/"
 		local weather_dir = theme_dir .. "/weather/"
-		local TZ = get_time_zone(weather_json)
 
 		------------------------------------------------------------------------------------------
 		-- CLOCK section
 		------------------------------------------------------------------------------------------
 
 		-- Date / year
-		local year = conky_parse("${exec date -d '" .. TZ .. " hours' -u '+%Y.'}")
+		local year = date_time(weather_json, '+%Y.')
 		text(cr, 20, 30, settings.appearance.transparency_full, year, settings.appearance.default_font_face, 20, CAIRO_FONT_WEIGHT_NORMAL)
 
 		------------------------------------------------------------------------------------------
 
 		-- Date / month text + day number
-		local date = conky_parse("${exec date -d '" .. TZ .. " hours' -u '+| %B %d. | %A'}")
+		local date = date_time(weather_json, '+| %B %d. | %A')
 		--date = "| Wednesday | December 31."
 		text(cr, 70, 30, settings.appearance.transparency_half, date, settings.appearance.default_font_face, 20, CAIRO_FONT_WEIGHT_NORMAL)
 
 		------------------------------------------------------------------------------------------
 
 		-- Hour
-		local hour = conky_parse("${exec date -d '" .. TZ .. " hours' -u '+%H'}")
+		local hour = date_time(weather_json, '+%H')
 		text(cr, 10, 155, settings.appearance.transparency_full, hour, settings.appearance.default_font_face, 145, CAIRO_FONT_WEIGHT_NORMAL)
 
 		------------------------------------------------------------------------------------------
 
 		-- Minutes
-		local minutes = conky_parse("${exec date -d '" .. TZ .. " hours' -u '+:%M'}")
+		local minutes = date_time(weather_json, '+:%M')
 		text(cr, 170, 155, settings.appearance.transparency_half, minutes, settings.appearance.default_font_face, 145, CAIRO_FONT_WEIGHT_NORMAL)
 
 		------------------------------------------------------------------------------------------
 
 		-- Seconds
-		local seconds = ": " .. conky_parse("${exec date -d '" .. TZ .. " hours' -u '+%S'}")
+		local seconds = ": " .. date_time(weather_json, '+%S')
 		text(cr, 370, 155, settings.appearance.transparency_full, seconds, settings.appearance.default_font_face, 20, CAIRO_FONT_WEIGHT_NORMAL)
 
 		------------------------------------------------------------------------------------------
