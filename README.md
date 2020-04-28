@@ -3,7 +3,24 @@
 - This widget uses [openweathermap.org](https://openweathermap.org) API, to get weather information.
 - Easy to customize, supports **light** and **dark appearance**. *(See: [Example Themes](#example-themes))*
 
-![screenshot](./images/screenshots/Clock-With-Weather-Conky.png)
+<table>
+    <tr>
+        <th>
+            Dark theme
+        </th>
+        <th>
+            Light theme
+        </th>
+    </tr>
+    <tr>
+        <td>
+            <img src="./images/screenshots/Clock-With-Weather-Conky-Themes-Budapest.png">
+        </td>
+        <td>
+            <img src="./images/screenshots/Clock-With-Weather-Conky-Themes-New-York.png">
+        </td>
+    </tr>
+</table>
 
 ## Table of Contents
 
@@ -175,12 +192,14 @@ Here we can change the display settings, such as:
 
 ### Budapest
 
-![themes](./images/screenshots/Theme-Budapest.png)
+![themes](./images/screenshots/Clock-With-Weather-Conky-Themes-Budapest.png)
 
 ```lua
 local settings = {}
 
 settings.appearance = {
+    theme = "light",
+    iconset = "dovora",
     transparency_full = 1.0,
     transparency_half = 0.5,
     transparency_weather_icon = 1.0,
@@ -190,7 +209,6 @@ settings.appearance = {
 
 settings.system = {
     locale = "en_US.UTF-8",
-    iconset = "dovora",
 }
 
 settings.weather = {
@@ -209,12 +227,14 @@ return settings
 
 ### Wien
 
-![themes](./images/screenshots/Theme-Wien.png)
+![themes](./images/screenshots/Clock-With-Weather-Conky-Themes-Wien.png)
 
 ```lua
 local settings = {}
 
 settings.appearance = {
+    theme = "light",
+    iconset = "modern",
     transparency_full = 1.0,
     transparency_half = 0.5,
     transparency_weather_icon = 1.0,
@@ -224,7 +244,6 @@ settings.appearance = {
 
 settings.system = {
     locale = "en_US.UTF-8",
-    iconset = "modern",
 }
 
 settings.weather = {
@@ -243,12 +262,14 @@ return settings
 
 ### Berlin
 
-![themes](./images/screenshots/Theme-Berlin.png)
+![themes](./images/screenshots/Clock-With-Weather-Conky-Themes-Berlin.png)
 
 ```lua
 local settings = {}
 
 settings.appearance = {
+    theme = "light",
+    iconset = "monochrome",
     transparency_full = 1.0,
     transparency_half = 0.5,
     transparency_weather_icon = 1.0,
@@ -258,7 +279,6 @@ settings.appearance = {
 
 settings.system = {
     locale = "en_US.UTF-8",
-    iconset = "monochrome",
 }
 
 settings.weather = {
@@ -277,12 +297,14 @@ return settings
 
 ### Paris
 
-![themes](./images/screenshots/Theme-Paris.png)
+![themes](./images/screenshots/Clock-With-Weather-Conky-Themes-Paris.png)
 
 ```lua
 local settings = {}
 
 settings.appearance = {
+    theme = "light",
+    iconset = "openweathermap",
     transparency_full = 1.0,
     transparency_half = 0.5,
     transparency_weather_icon = 1.0,
@@ -292,7 +314,6 @@ settings.appearance = {
 
 settings.system = {
     locale = "en_US.UTF-8",
-    iconset = "openweathermap",
 }
 
 settings.weather = {
@@ -311,12 +332,14 @@ return settings
 
 ### London
 
-![themes](./images/screenshots/Theme-London.png)
+![themes](./images/screenshots/Clock-With-Weather-Conky-Themes-London.png)
 
 ```lua
 local settings = {}
 
 settings.appearance = {
+    theme = "light",
+    iconset = "vclouds",
     transparency_full = 1.0,
     transparency_half = 0.5,
     transparency_weather_icon = 1.0,
@@ -326,7 +349,6 @@ settings.appearance = {
 
 settings.system = {
     locale = "en_US.UTF-8",
-    iconset = "vclouds",
 }
 
 settings.weather = {
@@ -345,12 +367,14 @@ return settings
 
 ### New York
 
-![themes](./images/screenshots/Theme-New-York.png)
+![themes](./images/screenshots/Clock-With-Weather-Conky-Themes-New-York.png)
 
 ```lua
 local settings = {}
 
 settings.appearance = {
+    theme = "dark",
+    iconset = "dovora",
     transparency_full = 1.0,
     transparency_half = 0.5,
     transparency_weather_icon = 1.0,
@@ -360,7 +384,6 @@ settings.appearance = {
 
 settings.system = {
     locale = "en_US.UTF-8",
-    iconset = "dovora",
 }
 
 settings.weather = {
@@ -379,12 +402,14 @@ return settings
 
 ### Sidney
 
-![themes](./images/screenshots/Theme-Sidney.png)
+![themes](./images/screenshots/Clock-With-Weather-Conky-Themes-Sidney.png)
 
 ```lua
 local settings = {}
 
 settings.appearance = {
+    theme = "dark",
+    iconset = "modern",
     transparency_full = 1.0,
     transparency_half = 0.5,
     transparency_weather_icon = 1.0,
@@ -394,7 +419,6 @@ settings.appearance = {
 
 settings.system = {
     locale = "en_US.UTF-8",
-    iconset = "modern",
 }
 
 settings.weather = {
@@ -413,12 +437,14 @@ return settings
 
 ### Delhi
 
-![themes](./images/screenshots/Theme-Delhi.png)
+![themes](./images/screenshots/Clock-With-Weather-Conky-Themes-Delhi.png)
 
 ```lua
 local settings = {}
 
 settings.appearance = {
+    theme = "dark",
+    iconset = "monochrome",
     transparency_full = 1.0,
     transparency_half = 0.5,
     transparency_weather_icon = 1.0,
@@ -428,7 +454,6 @@ settings.appearance = {
 
 settings.system = {
     locale = "en_US.UTF-8",
-    iconset = "monochrome",
 }
 
 settings.weather = {
@@ -447,12 +472,14 @@ return settings
 
 ### Moscow
 
-![themes](./images/screenshots/Theme-Moscow.png)
+![themes](./images/screenshots/Clock-With-Weather-Conky-Themes-Moscow.png)
 
 ```lua
 local settings = {}
 
 settings.appearance = {
+    theme = "dark",
+    iconset = "openweathermap",
     transparency_full = 1.0,
     transparency_half = 0.5,
     transparency_weather_icon = 1.0,
@@ -462,7 +489,6 @@ settings.appearance = {
 
 settings.system = {
     locale = "en_US.UTF-8",
-    iconset = "modern",
 }
 
 settings.weather = {
@@ -481,12 +507,14 @@ return settings
 
 ### Tokyo
 
-![themes](./images/screenshots/Theme-Tokyo.png)
+![themes](./images/screenshots/Clock-With-Weather-Conky-Themes-Tokyo.png)
 
 ```lua
 local settings = {}
 
 settings.appearance = {
+    theme = "dark",
+    iconset = "vclouds",
     transparency_full = 1.0,
     transparency_half = 0.5,
     transparency_weather_icon = 1.0,
@@ -496,7 +524,6 @@ settings.appearance = {
 
 settings.system = {
     locale = "en_US.UTF-8",
-    iconset = "vclouds",
 }
 
 settings.weather = {
