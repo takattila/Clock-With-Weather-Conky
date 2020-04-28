@@ -16,7 +16,7 @@ This widget uses [openweathermap.org](https://openweathermap.org) API, to get we
    * [2. Clone repository](#2-clone-repository)
    * [3. Install font](#3-install-font)
 * [First setup](#first-setup)
-   * [1. Get API key](#1-get-api-key)
+   * [1. Get OpenWeatherMap API key](#1-get-openweathermap-api-key)
    * [2. Change your settings](#2-change-your-settings)
 * [Start / stop the widget](#start--stop-the-widget)
    * [1. Start the widget](#1-start-the-widget)
@@ -107,7 +107,7 @@ you can install it as the followings:
 
 ## First setup
 
-### 1. Get API key
+### 1. Get OpenWeatherMap API key
 
 - Go to [openweathermap.org/users/sign_up](https://home.openweathermap.org/users/sign_up) and create your account.
 - After the registration, you should receive your API key **via e-mail**.
