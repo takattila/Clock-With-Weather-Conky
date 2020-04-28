@@ -58,9 +58,10 @@ function utils.check_api_response_status(cr, obj)
 	text(cr, 0, 70, settings.appearance.transparency_full, error_text_2, settings.appearance.default_font_face, 20, CAIRO_FONT_WEIGHT_normal)
 	
 	print(
-			"\n" .. error_text_1 
+		   "\n" .. error_text_1 
 		.. "\n" .. error_text_2
 	)
+	
 	return false
 end
 
