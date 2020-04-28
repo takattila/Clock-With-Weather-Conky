@@ -1,13 +1,14 @@
 # Conky Widget with Clock and Weather
 
-This widget uses [openweathermap.org](https://openweathermap.org) API, to get weather information.
+- This widget uses [openweathermap.org](https://openweathermap.org) API, to get weather information.
+- Easy to customize, supports **light** and **dark appearance**. *(See: [Example Themes](#example-themes))*
 
 ![screenshot](./images/screenshots/Clock-With-Weather-Conky.png)
 
 ## Table of Contents
 
 * [Installation](#installation)
-   * [1. Install conky and dependencies](#1-install-conky-and-dependencies)
+   * [1. Install conky and other dependencies](#1-install-conky-and-other-dependencies)
       * [On Debian based systems](#on-debian-based-systems)
       * [On CentOS](#on-centos)
       * [On ArchLinux](#on-archlinux)
@@ -42,7 +43,7 @@ This widget uses [openweathermap.org](https://openweathermap.org) API, to get we
 
 ## Installation
 
-### 1. Install conky and dependencies
+### 1. Install conky and other dependencies
 
 #### On Debian based systems
 
@@ -150,24 +151,19 @@ bash ~/.conky/Clock-With-Weather-Conky/stop.sh
 ### The app.cfg
 
 Here we can modify the conky window settings:
-- [Background](https://github.com/takattila/Clock-With-Weather-Conky/blob/master/app.cfg#L2)
-- [Border](https://github.com/takattila/Clock-With-Weather-Conky/blob/master/app.cfg#L34)
-- [Size](https://github.com/takattila/Clock-With-Weather-Conky/blob/master/app.cfg#L24-L25)
-- [Alignment](https://github.com/takattila/Clock-With-Weather-Conky/blob/master/app.cfg#L27)
+
+- [Background](app.cfg#L2)
+- [Border](app.cfg#L34)
+- [Size](app.cfg#L24-L25)
+- [Alignment](app.cfg#L27)
 
 ### The settings.lua
 
 Here we can change the display settings, such as:
-- Text color
-- Locale
-- Iconset
-- Weather settings
 
-#### Sections
-
-- The [appearance](https://github.com/takattila/Clock-With-Weather-Conky/blob/master/settings.lua#L3-L9) section
-- The [system](https://github.com/takattila/Clock-With-Weather-Conky/blob/master/settings.lua#L11-L14) section
-- The [weather](https://github.com/takattila/Clock-With-Weather-Conky/blob/master/settings.lua#L16-L23) section
+- [Text color](settings.lua#L3-L9)
+- [Locale, Iconset](settings.lua#L11-L15)
+- [Weather settings](settings.lua#L17-L24)
 
 [Back to top](#conky-widget-with-clock-and-weather)
 
