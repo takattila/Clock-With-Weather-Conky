@@ -22,9 +22,11 @@ function conky_main()
 
 	if utils.is_set_api_key(cr) then
 		local weather_json = utils.get_weather_json()
-		draw.elements(cr, weather_json)
 
-		cairo_surface_destroy(cs)
-		cairo_destroy(cr)
+		if utils.check_api_response_status(cr, weather_json) then
+			draw.elements(cr, weather_json)
+			cairo_surface_destroy(cs)
+			cairo_destroy(cr)
+		end
 	end
 end
