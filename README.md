@@ -194,6 +194,8 @@ Here we can change the display settings, such as:
 
 ![themes](./images/screenshots/Clock-With-Weather-Conky-Themes-Budapest.png)
 
+`settings.lua`:
+
 ```lua
 local settings = {}
 
@@ -228,6 +230,8 @@ return settings
 ### Wien
 
 ![themes](./images/screenshots/Clock-With-Weather-Conky-Themes-Wien.png)
+
+`settings.lua`:
 
 ```lua
 local settings = {}
@@ -264,6 +268,8 @@ return settings
 
 ![themes](./images/screenshots/Clock-With-Weather-Conky-Themes-Berlin.png)
 
+`settings.lua`:
+
 ```lua
 local settings = {}
 
@@ -298,6 +304,8 @@ return settings
 ### Paris
 
 ![themes](./images/screenshots/Clock-With-Weather-Conky-Themes-Paris.png)
+
+`settings.lua`:
 
 ```lua
 local settings = {}
@@ -334,6 +342,8 @@ return settings
 
 ![themes](./images/screenshots/Clock-With-Weather-Conky-Themes-London.png)
 
+`settings.lua`:
+
 ```lua
 local settings = {}
 
@@ -368,6 +378,8 @@ return settings
 ### New York
 
 ![themes](./images/screenshots/Clock-With-Weather-Conky-Themes-New-York.png)
+
+`settings.lua`:
 
 ```lua
 local settings = {}
@@ -404,6 +416,8 @@ return settings
 
 ![themes](./images/screenshots/Clock-With-Weather-Conky-Themes-Sidney.png)
 
+`settings.lua`:
+
 ```lua
 local settings = {}
 
@@ -438,6 +452,8 @@ return settings
 ### Delhi
 
 ![themes](./images/screenshots/Clock-With-Weather-Conky-Themes-Delhi.png)
+
+`settings.lua`:
 
 ```lua
 local settings = {}
@@ -474,6 +490,8 @@ return settings
 
 ![themes](./images/screenshots/Clock-With-Weather-Conky-Themes-Moscow.png)
 
+`settings.lua`:
+
 ```lua
 local settings = {}
 
@@ -508,6 +526,8 @@ return settings
 ### Tokyo
 
 ![themes](./images/screenshots/Clock-With-Weather-Conky-Themes-Tokyo.png)
+
+`settings.lua`:
 
 ```lua
 local settings = {}
