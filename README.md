@@ -17,10 +17,10 @@ This widget uses [openweathermap.org](https://openweathermap.org) API, to get we
    * [3. Install font](#3-install-font)
 * [First setup](#first-setup)
    * [1. Get API key](#1-get-api-key)
-   * [2. Export the API key](#2-export-the-api-key)
-   * [3. Change your settings](#3-change-your-settings)
-   * [4. Start the widget](#4-start-the-widget)
-   * [5. Stop the widget](#5-stop-the-widget)
+   * [2. Change your settings](#2-change-your-settings)
+* [Start / stop the widget](#start--stop-the-widget)
+   * [1. Start the widget](#1-start-the-widget)
+   * [2. Stop the widget](#2-stop-the-widget)
 * [Configuration](#configuration)
    * [The app.cfg](#the-appcfg)
    * [The settings.lua](#the-settingslua)
@@ -111,40 +111,33 @@ you can install it as the followings:
 
 [Back to top](#conky-widget-with-clock-and-weather)
 
-### 2. Export the API key
-
-- Open a terminal, and export your API key, like below:
-  ```bash
-  export OPENWEATHER_API_KEY=<YOUR-API-KEY>
-  ```
-
-[Back to top](#conky-widget-with-clock-and-weather)
-
-### 3. Change your settings
+### 2. Change your settings
 
 - Edit the [~/.conky/Clock-With-Weather-Conky/settings.lua](settings.lua) file.
 - First, you should change the [settings.weather](https://github.com/takattila/Clock-With-Weather-Conky/blob/master/settings.lua#L16) section, as required:
   ```bash
   city = "Budapest",    # Where you are right now?
   language_code = "hu", # Check it here: https://openweathermap.org/current#multi
-  lang = "en",          # Check it here: https://openweathermap.org/current#multi
+  lang = "hu",          # Check it here: https://openweathermap.org/current#multi
   units = "metric",     # Units: metric, imperial.
   ```
 
 [Back to top](#conky-widget-with-clock-and-weather)
 
-### 4. Start the widget
+## Start / stop the widget
+
+### 1. Start the widget
 
 ```bash
-~/.conky/Clock-With-Weather-Conky/start.sh
+bash ~/.conky/Clock-With-Weather-Conky/start.sh <YOUR-API-KEY>
 ```
 
 [Back to top](#conky-widget-with-clock-and-weather)
 
-### 5. Stop the widget
+### 2. Stop the widget
 
 ```bash
-~/.conky/Clock-With-Weather-Conky/stop.sh
+bash ~/.conky/Clock-With-Weather-Conky/stop.sh
 ```
 
 [Back to top](#conky-widget-with-clock-and-weather)
