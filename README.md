@@ -36,6 +36,9 @@ This widget uses [openweathermap.org](https://openweathermap.org) API, to get we
    * [Delhi](#delhi)
    * [Moscow](#moscow)
    * [Tokyo](#tokyo)
+* [Convert images to dark](#convert-images-to-dark)
+   * [Install imagemagic](#install-imagemagic)
+   * [Run the command](#run-the-command)
 
 ## Installation
 
@@ -510,6 +513,37 @@ settings.weather = {
 }
 
 return settings
+```
+
+[Back to top](#conky-widget-with-clock-and-weather)
+
+## Convert images to dark
+
+### Install imagemagic
+
+You can download binaries from [here](https://www.imagemagick.org/script/download.php#unix).
+
+[Back to top](#conky-widget-with-clock-and-weather)
+
+### Run the command
+
+```bash
+cd ~/.conky/Clock-With-Weather-Conky
+
+image_dir="monochrome"
+light_dir="images/theme/light/weather/${image_dir}"
+dark_dir="images/theme/dark/weather/${image_dir}"
+
+mkdir -p $dark_dir
+
+for f in $(ls $light_dir) ; do
+    convert "${light_dir}/${f}" \
+        -colorspace HSI \
+        -channel B \
+        -level 100,0% +channel \
+        -colorspace sRGB \
+    "${dark_dir}/${f}"
+done
 ```
 
 [Back to top](#conky-widget-with-clock-and-weather)
