@@ -17,13 +17,13 @@ end
 
 function get_time_zone(weather_json)
 		local obj = json.decode(weather_json)
-		return obj.timezone / 60 / 60
+		return obj.timezone
 end
 
 function date_time(weather_json, format)
 	local tz = get_time_zone(weather_json)
     return conky_parse(
-		"${exec date -d '" .. tz .. " hours' -u '" .. format .. "'}"
+		"${exec date -d '+" .. tz .. " seconds' -u '" .. format .. "'}"
 	)
 end
 
