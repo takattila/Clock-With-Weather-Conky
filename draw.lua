@@ -23,6 +23,26 @@ function date_time(obj, format)
 	)
 end
 
+function background(cr)
+	local corner_r = 50
+	local w = conky_window.width
+	local h = conky_window.height
+	
+	cairo_move_to(cr,corner_r,0)
+	cairo_line_to(cr,w-corner_r,0)
+	cairo_curve_to(cr,w,0,w,0,w,corner_r)
+	cairo_line_to(cr,w,h-corner_r)
+	cairo_curve_to(cr,w,h,w,h,w-corner_r,h)
+	cairo_line_to(cr,corner_r,h)
+	cairo_curve_to(cr,0,h,0,h,0,h-corner_r)
+	cairo_line_to(cr,0,corner_r)
+	cairo_curve_to(cr,0,0,0,0,corner_r,0)
+	cairo_close_path(cr)
+	
+	cairo_set_source_rgba(cr, r_text, g_text, b_text, settings.appearance.background.transparency)
+	cairo_fill(cr)
+end
+
 function image(cr, pos_x, pos_y, transparency, image_name)
 
 	local image_path = "./images/" .. (image_name or "01d") .. ".png"
@@ -51,16 +71,6 @@ function text(cr, pos_x, pos_y, transparency, text, font_face, font_size, font_w
 	cairo_show_text(cr,text)
 	cairo_close_path(cr)
 end
-
-function background(cr)
-	local r_text, g_text, b_text = hex2rgb(settings.appearance.background.color)
-	cairo_set_line_width(cr, line_width)
-	cairo_rectangle(cr, 5, 5, 650, 230)
-	cairo_set_source_rgba(cr, r_text, g_text, b_text, settings.appearance.background.transparency)
-	cairo_fill_preserve(cr)
-	cairo_set_source_rgba(cr, r_text, g_text, b_text, settings.appearance.background.transparency)
-	cairo_stroke(cr)
- end 
 
 function draw.elements(cr, obj)
 	local unit_temperature = unit_temperature(settings.weather.units)
