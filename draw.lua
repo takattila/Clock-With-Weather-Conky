@@ -43,7 +43,6 @@ function background(cr)
 end
 
 function image(cr, pos_x, pos_y, transparency, image_name)
-
 	local image_path = "./images/" .. (image_name or "01d") .. ".png"
 
 	cairo_set_operator(cr, CAIRO_OPERATOR_OVER)
@@ -71,6 +70,35 @@ function text(cr, pos_x, pos_y, transparency, text, font_face, font_size, font_w
 	cairo_close_path(cr)
 end
 
+function get_hour(obj)
+	local hour_format = '%H'
+
+	if settings.system.hour_format_12 then
+		hour_format = '%I'
+	end
+
+	return date_time(obj, hour_format)
+end
+
+function time_prefix(cr, obj)
+	if settings.system.hour_format_12 then
+		cairo_set_line_width (cr, 1)
+		cairo_rectangle (cr, abs_pos_x + 16, abs_pos_y + 128, 54, 32)
+		cairo_set_source_rgba (cr, 255, 255, 255, 0.0)
+		cairo_fill_preserve (cr)
+		cairo_set_source_rgba (cr, 255, 255, 255, 0.0)
+		cairo_stroke (cr)
+
+		local time_prefix = date_time(obj, '%p')
+		text(cr, 20, 155, settings.appearance.text.transparency.min, time_prefix, settings.appearance.text.font.face, 28, CAIRO_FONT_WEIGHT_BOLD)
+	end
+end
+
+function hour(cr, obj)
+	text(cr, 10, 155, settings.appearance.text.transparency.max, get_hour(obj), settings.appearance.text.font.face, 145, CAIRO_FONT_WEIGHT_NORMAL)
+	time_prefix(cr, obj)
+end
+
 function element_clock(cr, obj)
 	-- Date / year
 	local year = date_time(obj, '%Y.')
@@ -85,9 +113,7 @@ function element_clock(cr, obj)
 	------------------------------------------------------------------------------------------
 
 	-- Hour
-	local hour = date_time(obj, '%H')
-	text(cr, 10, 155, settings.appearance.text.transparency.max, hour, settings.appearance.text.font.face, 145, CAIRO_FONT_WEIGHT_NORMAL)
-
+	hour(cr, obj)
 	------------------------------------------------------------------------------------------
 
 	-- Minutes

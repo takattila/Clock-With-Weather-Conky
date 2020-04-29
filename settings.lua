@@ -24,6 +24,7 @@ settings.appearance = {
 
 settings.system = {
     locale = "en_US.UTF-8",
+    hour_format_12 = false,
 }
 
 settings.weather = {

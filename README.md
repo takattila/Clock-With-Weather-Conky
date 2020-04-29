@@ -1,7 +1,8 @@
 # Conky Widget with Clock and Weather
 
 - This widget uses [openweathermap.org](https://openweathermap.org) API, to get weather information.
-- Easy to customize, supports **light** and **dark appearance**. *(See: [Example Themes](#example-themes))*
+- Easy to customize, supports **light** and **dark appearance**. *(See: [Example Themes](#example-themes))*.
+- Supports `12` or `24-hour` clock format.
 
 <table>
     <tr>
@@ -223,6 +224,7 @@ settings.appearance = {
 
 settings.system = {
     locale = "en_US.UTF-8",
+    hour_format_12 = false,
 }
 
 settings.weather = {
@@ -272,6 +274,7 @@ settings.appearance = {
 
 settings.system = {
     locale = "en_US.UTF-8",
+    hour_format_12 = false,
 }
 
 settings.weather = {
@@ -321,6 +324,7 @@ settings.appearance = {
 
 settings.system = {
     locale = "en_US.UTF-8",
+    hour_format_12 = false,
 }
 
 settings.weather = {
@@ -370,6 +374,7 @@ settings.appearance = {
 
 settings.system = {
     locale = "en_US.UTF-8",
+    hour_format_12 = false,
 }
 
 settings.weather = {
@@ -419,6 +424,7 @@ settings.appearance = {
 
 settings.system = {
     locale = "en_US.UTF-8",
+    hour_format_12 = true,
 }
 
 settings.weather = {
@@ -468,6 +474,7 @@ settings.appearance = {
 
 settings.system = {
     locale = "en_US.UTF-8",
+    hour_format_12 = true,
 }
 
 settings.weather = {
@@ -517,6 +524,7 @@ settings.appearance = {
 
 settings.system = {
     locale = "en_US.UTF-8",
+    hour_format_12 = true,
 }
 
 settings.weather = {
@@ -566,6 +574,7 @@ settings.appearance = {
 
 settings.system = {
     locale = "en_US.UTF-8",
+    hour_format_12 = true,
 }
 
 settings.weather = {
@@ -615,6 +624,7 @@ settings.appearance = {
 
 settings.system = {
     locale = "en_US.UTF-8",
+    hour_format_12 = false,
 }
 
 settings.weather = {
@@ -664,6 +674,7 @@ settings.appearance = {
 
 settings.system = {
     locale = "en_US.UTF-8",
+    hour_format_12 = false,
 }
 
 settings.weather = {
