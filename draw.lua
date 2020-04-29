@@ -83,12 +83,14 @@ end
 
 function time_prefix(cr, obj)
 	if settings.system.hour_format_12 then
-		cairo_set_line_width (cr, 1)
-		cairo_rectangle (cr, abs_pos_x + 16, abs_pos_y + 128, 54, 32)
-		cairo_set_source_rgba (cr, 255, 255, 255, 0.0)
-		cairo_fill_preserve (cr)
-		cairo_set_source_rgba (cr, 255, 255, 255, 0.0)
-		cairo_stroke (cr)
+		local r, g, b = hex2rgb(settings.appearance.background.color)
+
+		cairo_set_line_width(cr, 1)
+		cairo_rectangle(cr, abs_pos_x + 16, abs_pos_y + 128, 54, 32)
+		cairo_set_source_rgba(cr, r, g, b, settings.appearance.background.transparency)
+		cairo_fill_preserve(cr)
+		cairo_set_source_rgba(cr, r, g, b, settings.appearance.background.transparency)
+		cairo_stroke(cr)
 
 		local time_prefix = date_time(obj, '%p')
 		text(cr, 20, 155, settings.appearance.font.transparency.min, time_prefix, settings.appearance.font.face, 28, CAIRO_FONT_WEIGHT_BOLD)
