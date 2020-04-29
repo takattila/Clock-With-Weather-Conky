@@ -178,9 +178,9 @@ Here we can modify the conky window settings:
 
 Here we can change the display settings, such as:
 
-- [Theme, iconset, text, color](settings.lua#L3-L11)
-- [Locale](settings.lua#L13-L15)
-- [Weather settings](settings.lua#L17-L24)
+- [Theme, iconset, text, color](settings.lua#L3-L23)
+- [System](settings.lua#L25-L27)
+- [Weather settings](settings.lua#L29-L36)
 
 [Back to top](#conky-widget-with-clock-and-weather)
 
@@ -201,12 +201,24 @@ local settings = {}
 
 settings.appearance = {
     theme = "light",
-    iconset = "dovora",
-    transparency_full = 1.0,
-    transparency_half = 0.5,
-    transparency_weather_icon = 1.0,
-    default_font_face = "Noto Sans",
-    html_text_color = "#ffffff",
+    icon = {
+        set = "dovora",
+        transparency = 1.0,
+    },
+    text = {
+        transparency = {
+            max = 1.0,
+            min = 0.5,
+        },
+        font = {
+            face = "Noto Sans",
+            color = "#ffffff",
+        },
+    },
+    background = {
+        transparency = 0.0,
+        color = "#000000",
+    },
 }
 
 settings.system = {
@@ -238,12 +250,24 @@ local settings = {}
 
 settings.appearance = {
     theme = "light",
-    iconset = "modern",
-    transparency_full = 1.0,
-    transparency_half = 0.5,
-    transparency_weather_icon = 1.0,
-    default_font_face = "Noto Sans",
-    html_text_color = "#03d8fe",
+    icon = {
+        set = "modern",
+        transparency = 1.0,
+    },
+    text = {
+        transparency = {
+            max = 1.0,
+            min = 0.5,
+        },
+        font = {
+            face = "Noto Sans",
+            color = "#03d8fe",
+        },
+    },
+    background = {
+        transparency = 0.0,
+        color = "#000000",
+    },
 }
 
 settings.system = {
@@ -275,12 +299,24 @@ local settings = {}
 
 settings.appearance = {
     theme = "light",
-    iconset = "monochrome",
-    transparency_full = 1.0,
-    transparency_half = 0.5,
-    transparency_weather_icon = 1.0,
-    default_font_face = "Noto Sans",
-    html_text_color = "#34ff26",
+    icon = {
+        set = "monochrome",
+        transparency = 1.0,
+    },
+    text = {
+        transparency = {
+            max = 1.0,
+            min = 0.5,
+        },
+        font = {
+            face = "Noto Sans",
+            color = "#34ff26",
+        },
+    },
+    background = {
+        transparency = 0.0,
+        color = "#000000",
+    },
 }
 
 settings.system = {
@@ -312,12 +348,24 @@ local settings = {}
 
 settings.appearance = {
     theme = "light",
-    iconset = "openweathermap",
-    transparency_full = 1.0,
-    transparency_half = 0.5,
-    transparency_weather_icon = 1.0,
-    default_font_face = "Noto Sans",
-    html_text_color = "#ff7b2c",
+    icon = {
+        set = "openweathermap",
+        transparency = 1.0,
+    },
+    text = {
+        transparency = {
+            max = 1.0,
+            min = 0.5,
+        },
+        font = {
+            face = "Noto Sans",
+            color = "#ff7b2c",
+        },
+    },
+    background = {
+        transparency = 0.0,
+        color = "#000000",
+    },
 }
 
 settings.system = {
@@ -349,12 +397,24 @@ local settings = {}
 
 settings.appearance = {
     theme = "light",
-    iconset = "vclouds",
-    transparency_full = 1.0,
-    transparency_half = 0.5,
-    transparency_weather_icon = 1.0,
-    default_font_face = "Noto Sans",
-    html_text_color = "#ecff18",
+    icon = {
+        set = "vclouds",
+        transparency = 1.0,
+    },
+    text = {
+        transparency = {
+            max = 1.0,
+            min = 0.5,
+        },
+        font = {
+            face = "Noto Sans",
+            color = "#ecff18",
+        },
+    },
+    background = {
+        transparency = 0.0,
+        color = "#000000",
+    },
 }
 
 settings.system = {
@@ -386,12 +446,24 @@ local settings = {}
 
 settings.appearance = {
     theme = "dark",
-    iconset = "dovora",
-    transparency_full = 1.0,
-    transparency_half = 0.5,
-    transparency_weather_icon = 1.0,
-    default_font_face = "Noto Sans",
-    html_text_color = "#2e3436",
+    icon = {
+        set = "dovora",
+        transparency = 1.0,
+    },
+    text = {
+        transparency = {
+            max = 1.0,
+            min = 0.5,
+        },
+        font = {
+            face = "Noto Sans",
+            color = "#2e3436",
+        },
+    },
+    background = {
+        transparency = 0.0,
+        color = "#000000",
+    },
 }
 
 settings.system = {
@@ -423,12 +495,24 @@ local settings = {}
 
 settings.appearance = {
     theme = "dark",
-    iconset = "modern",
-    transparency_full = 1.0,
-    transparency_half = 0.5,
-    transparency_weather_icon = 1.0,
-    default_font_face = "Noto Sans",
-    html_text_color = "#085c6b",
+    icon = {
+        set = "modern",
+        transparency = 1.0,
+    },
+    text = {
+        transparency = {
+            max = 1.0,
+            min = 0.5,
+        },
+        font = {
+            face = "Noto Sans",
+            color = "#085c6b",
+        },
+    },
+    background = {
+        transparency = 0.0,
+        color = "#000000",
+    },
 }
 
 settings.system = {
@@ -460,12 +544,24 @@ local settings = {}
 
 settings.appearance = {
     theme = "dark",
-    iconset = "monochrome",
-    transparency_full = 1.0,
-    transparency_half = 0.5,
-    transparency_weather_icon = 1.0,
-    default_font_face = "Noto Sans",
-    html_text_color = "#2c7a2a",
+    icon = {
+        set = "monochrome",
+        transparency = 1.0,
+    },
+    text = {
+        transparency = {
+            max = 1.0,
+            min = 0.5,
+        },
+        font = {
+            face = "Noto Sans",
+            color = "#2c7a2a",
+        },
+    },
+    background = {
+        transparency = 0.0,
+        color = "#000000",
+    },
 }
 
 settings.system = {
@@ -497,12 +593,24 @@ local settings = {}
 
 settings.appearance = {
     theme = "dark",
-    iconset = "openweathermap",
-    transparency_full = 1.0,
-    transparency_half = 0.5,
-    transparency_weather_icon = 1.0,
-    default_font_face = "Noto Sans",
-    html_text_color = "#b24814",
+    icon = {
+        set = "openweathermap",
+        transparency = 1.0,
+    },
+    text = {
+        transparency = {
+            max = 1.0,
+            min = 0.5,
+        },
+        font = {
+            face = "Noto Sans",
+            color = "#b24814",
+        },
+    },
+    background = {
+        transparency = 0.0,
+        color = "#000000",
+    },
 }
 
 settings.system = {
@@ -534,12 +642,24 @@ local settings = {}
 
 settings.appearance = {
     theme = "dark",
-    iconset = "vclouds",
-    transparency_full = 1.0,
-    transparency_half = 0.5,
-    transparency_weather_icon = 1.0,
-    default_font_face = "Noto Sans",
-    html_text_color = "#5c5d0f",
+    icon = {
+        set = "vclouds",
+        transparency = 1.0,
+    },
+    text = {
+        transparency = {
+            max = 1.0,
+            min = 0.5,
+        },
+        font = {
+            face = "Noto Sans",
+            color = "#5c5d0f",
+        },
+    },
+    background = {
+        transparency = 0.0,
+        color = "#000000",
+    },
 }
 
 settings.system = {

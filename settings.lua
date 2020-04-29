@@ -2,16 +2,24 @@ local settings = {}
 
 settings.appearance = {
     theme = "light",
-    iconset = "dovora",
-    transparency_full = 1.0,
-    transparency_half = 0.5,
-    transparency_weather_icon = 1.0,
-    default_font_face = "Noto Sans",
-    html_text_color = "#ffffff",
+    icon = {
+        set = "dovora",
+        transparency = 1.0,
+    },
+    text = {
+        transparency = {
+            max = 1.0,
+            min = 0.5,
+        },
+        font = {
+            face = "Noto Sans",
+            color = "#ffffff",
+        },
+    },
     background = {
         transparency = 0.0,
-        html_color = "#000000",
-    }
+        color = "#000000",
+    },
 }
 
 settings.system = {
