@@ -72,18 +72,7 @@ function text(cr, pos_x, pos_y, transparency, text, font_face, font_size, font_w
 	cairo_close_path(cr)
 end
 
-function draw.elements(cr, obj)
-	local unit_temperature = unit_temperature(settings.weather.units)
-	local theme_dir = "theme/" .. settings.appearance.theme
-	local elements_dir = theme_dir .. "/elements/"
-	local weather_dir = theme_dir .. "/weather/"
-
-	background(cr)
-
-	------------------------------------------------------------------------------------------
-	-- CLOCK section
-	------------------------------------------------------------------------------------------
-
+function element_clock(cr, obj)
 	-- Date / year
 	local year = date_time(obj, '+%Y.')
 	text(cr, 20, 30, settings.appearance.text.transparency.max, year, settings.appearance.text.font.face, 20, CAIRO_FONT_WEIGHT_NORMAL)
@@ -111,9 +100,9 @@ function draw.elements(cr, obj)
 	-- Seconds
 	local seconds = ": " .. date_time(obj, '+%S')
 	text(cr, 370, 155, settings.appearance.text.transparency.max, seconds, settings.appearance.text.font.face, 20, CAIRO_FONT_WEIGHT_NORMAL)
+end
 
-	------------------------------------------------------------------------------------------
-
+function element_system(cr)
 	-- HDD
 	local hdd = "HDD"
 	text(cr, 20, 180, settings.appearance.text.transparency.max, hdd, settings.appearance.text.font.face, 15, CAIRO_FONT_WEIGHT_NORMAL) 
@@ -147,14 +136,17 @@ function draw.elements(cr, obj)
 
 	swap = conky_parse("${swapperc}% (size: ${swapmax})")
 	text(cr, 250, 200, settings.appearance.text.transparency.min, swap, settings.appearance.text.font.face, 15, CAIRO_FONT_WEIGHT_NORMAL) 
+end
 
-	------------------------------------------------------------------------------------------
+function element_weather(cr, obj)
+	local unit_temperature = unit_temperature(settings.weather.units)
+	local theme_dir = "theme/" .. settings.appearance.theme
+	local elements_dir = theme_dir .. "/elements/"
+	local weather_dir = theme_dir .. "/weather/"
 
-	-- Vertical line-colorspace HSI -channel B -level 100,0%  +channel -colorspace sRGB 
+	-- Vertical line
 	image(cr, 415, 110, settings.appearance.text.transparency.max, elements_dir .. "line")
 
-	------------------------------------------------------------------------------------------
-	-- WEATHER section
 	------------------------------------------------------------------------------------------
 
 	-- Weather icon
@@ -214,6 +206,13 @@ function draw.elements(cr, obj)
 	feels_like = string.format("%.0f", (feels_like or 0)) .. unit_temperature
 
 	text(cr, 565, 200, settings.appearance.text.transparency.max, feels_like, settings.appearance.text.font.face, 15, CAIRO_FONT_WEIGHT_NORMAL)
+end
+
+function draw.elements(cr, obj)
+	background(cr)
+	element_clock(cr, obj)
+	element_system(cr)
+	element_weather(cr, obj)
 end
 
 return draw
