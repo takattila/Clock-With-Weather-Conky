@@ -2,7 +2,7 @@
 
 - This widget uses [openweathermap.org](https://openweathermap.org) API, to get weather information.
 - Easy to customize, supports **light** and **dark appearance**. *(See: [Example Themes](#example-themes))*.
-- Supports `12` or `24-hour` clock format.
+- Supports `12` and `24-hour` clock format.
 
 <table>
     <tr>
