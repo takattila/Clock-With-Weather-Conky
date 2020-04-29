@@ -1,7 +1,7 @@
 local draw = {}
 
 local abs_pos_x = 70
-local abs_pos_y = 45
+local abs_pos_y = 25
 
 function hex2rgb(hex)
 	local hex = hex:gsub("#","")
