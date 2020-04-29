@@ -206,14 +206,12 @@ settings.appearance = {
         set = "dovora",
         transparency = 1.0,
     },
-    text = {
+    font = {
+        face = "Noto Sans",
+        color = "#ffffff",
         transparency = {
             max = 1.0,
             min = 0.5,
-        },
-        font = {
-            face = "Noto Sans",
-            color = "#ffffff",
         },
     },
     background = {
@@ -256,14 +254,12 @@ settings.appearance = {
         set = "modern",
         transparency = 1.0,
     },
-    text = {
+    font = {
+        face = "Noto Sans",
+        color = "#03d8fe",
         transparency = {
             max = 1.0,
             min = 0.5,
-        },
-        font = {
-            face = "Noto Sans",
-            color = "#03d8fe",
         },
     },
     background = {
@@ -306,14 +302,12 @@ settings.appearance = {
         set = "monochrome",
         transparency = 1.0,
     },
-    text = {
+    font = {
+        face = "Noto Sans",
+        color = "#34ff26",
         transparency = {
             max = 1.0,
             min = 0.5,
-        },
-        font = {
-            face = "Noto Sans",
-            color = "#34ff26",
         },
     },
     background = {
@@ -356,14 +350,12 @@ settings.appearance = {
         set = "openweathermap",
         transparency = 1.0,
     },
-    text = {
+    font = {
+        face = "Noto Sans",
+        color = "#ff7b2c",
         transparency = {
             max = 1.0,
             min = 0.5,
-        },
-        font = {
-            face = "Noto Sans",
-            color = "#ff7b2c",
         },
     },
     background = {
@@ -406,14 +398,12 @@ settings.appearance = {
         set = "vclouds",
         transparency = 1.0,
     },
-    text = {
+    font = {
+        face = "Noto Sans",
+        color = "#ecff18",
         transparency = {
             max = 1.0,
             min = 0.5,
-        },
-        font = {
-            face = "Noto Sans",
-            color = "#ecff18",
         },
     },
     background = {
@@ -456,14 +446,12 @@ settings.appearance = {
         set = "dovora",
         transparency = 1.0,
     },
-    text = {
+    font = {
+        face = "Noto Sans",
+        color = "#2e3436",
         transparency = {
             max = 1.0,
             min = 0.5,
-        },
-        font = {
-            face = "Noto Sans",
-            color = "#2e3436",
         },
     },
     background = {
@@ -506,14 +494,12 @@ settings.appearance = {
         set = "modern",
         transparency = 1.0,
     },
-    text = {
+    font = {
+        face = "Noto Sans",
+        color = "#085c6b",
         transparency = {
             max = 1.0,
             min = 0.5,
-        },
-        font = {
-            face = "Noto Sans",
-            color = "#085c6b",
         },
     },
     background = {
@@ -556,14 +542,12 @@ settings.appearance = {
         set = "monochrome",
         transparency = 1.0,
     },
-    text = {
+    font = {
+        face = "Noto Sans",
+        color = "#2c7a2a",
         transparency = {
             max = 1.0,
             min = 0.5,
-        },
-        font = {
-            face = "Noto Sans",
-            color = "#2c7a2a",
         },
     },
     background = {
@@ -606,14 +590,12 @@ settings.appearance = {
         set = "openweathermap",
         transparency = 1.0,
     },
-    text = {
+    font = {
+        face = "Noto Sans",
+        color = "#b24814",
         transparency = {
             max = 1.0,
             min = 0.5,
-        },
-        font = {
-            face = "Noto Sans",
-            color = "#b24814",
         },
     },
     background = {
@@ -656,14 +638,12 @@ settings.appearance = {
         set = "vclouds",
         transparency = 1.0,
     },
-    text = {
+    font = {
+        face = "Noto Sans",
+        color = "#5c5d0f",
         transparency = {
             max = 1.0,
             min = 0.5,
-        },
-        font = {
-            face = "Noto Sans",
-            color = "#5c5d0f",
         },
     },
     background = {

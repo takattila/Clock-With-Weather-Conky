@@ -6,14 +6,12 @@ settings.appearance = {
         set = "dovora",
         transparency = 1.0,
     },
-    text = {
+    font = {
+        face = "Noto Sans",
+        color = "#ffffff",
         transparency = {
             max = 1.0,
             min = 0.5,
-        },
-        font = {
-            face = "Noto Sans",
-            color = "#ffffff",
         },
     },
     background = {
