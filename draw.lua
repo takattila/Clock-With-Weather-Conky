@@ -18,9 +18,8 @@ function unit_temperature(unit)
 end
 
 function date_time(obj, format)
-	return conky_parse(
-		"${exec date -d '+" .. obj.timezone .. " seconds' -u '" .. format .. "'}"
-	)
+	local now = os.time() + obj.timezone
+	return os.date('!' .. format, now)
 end
 
 function background(cr)
@@ -74,31 +73,31 @@ end
 
 function element_clock(cr, obj)
 	-- Date / year
-	local year = date_time(obj, '+%Y.')
+	local year = date_time(obj, '%Y.')
 	text(cr, 20, 30, settings.appearance.text.transparency.max, year, settings.appearance.text.font.face, 20, CAIRO_FONT_WEIGHT_NORMAL)
 
 	------------------------------------------------------------------------------------------
 
 	-- Date / month text + day number
-	local date = date_time(obj, '+| %B %d. | %A')
+	local date = date_time(obj, '| %B %d. | %A')
 	text(cr, 70, 30, settings.appearance.text.transparency.min, date, settings.appearance.text.font.face, 20, CAIRO_FONT_WEIGHT_NORMAL)
 
 	------------------------------------------------------------------------------------------
 
 	-- Hour
-	local hour = date_time(obj, '+%H')
+	local hour = date_time(obj, '%H')
 	text(cr, 10, 155, settings.appearance.text.transparency.max, hour, settings.appearance.text.font.face, 145, CAIRO_FONT_WEIGHT_NORMAL)
 
 	------------------------------------------------------------------------------------------
 
 	-- Minutes
-	local minutes = date_time(obj, '+:%M')
+	local minutes = date_time(obj, ':%M')
 	text(cr, 170, 155, settings.appearance.text.transparency.min, minutes, settings.appearance.text.font.face, 145, CAIRO_FONT_WEIGHT_NORMAL)
 
 	------------------------------------------------------------------------------------------
 
 	-- Seconds
-	local seconds = ": " .. date_time(obj, '+%S')
+	local seconds = ": " .. date_time(obj, '%S')
 	text(cr, 370, 155, settings.appearance.text.transparency.max, seconds, settings.appearance.text.font.face, 20, CAIRO_FONT_WEIGHT_NORMAL)
 end
 
