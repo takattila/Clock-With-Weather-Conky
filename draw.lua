@@ -1,5 +1,8 @@
 local draw = {}
 
+local abs_pos_x = 70
+local abs_pos_y = 45
+
 function hex2rgb(hex)
 	local hex = hex:gsub("#","")
 	return (tonumber("0x"..hex:sub(1,2))/255), 
@@ -21,17 +24,18 @@ function date_time(obj, format)
 end
 
 function image(cr, pos_x, pos_y, transparency, image_name)
+
 	local image_path = "./images/" .. (image_name or "01d") .. ".png"
 
 	cairo_set_operator(cr, CAIRO_OPERATOR_OVER)
-	local image = cairo_image_surface_create_from_png (image_path)
-	local w_img = cairo_image_surface_get_width (image)
-	local h_img = cairo_image_surface_get_height (image)
+	local image = cairo_image_surface_create_from_png(image_path)
+	local w_img = cairo_image_surface_get_width(image)
+	local h_img = cairo_image_surface_get_height(image)
 
 	cairo_save(cr)
-	cairo_set_source_surface (cr, image, pos_x-w_img/2, pos_y-h_img/2)
-	cairo_paint_with_alpha (cr, transparency)
-	cairo_surface_destroy (image)
+	cairo_set_source_surface(cr, image, abs_pos_x + pos_x-w_img / 2, abs_pos_y + pos_y-h_img / 2)
+	cairo_paint_with_alpha(cr, transparency)
+	cairo_surface_destroy(image)
 	cairo_restore(cr)
 end
 
@@ -43,7 +47,7 @@ function text(cr, pos_x, pos_y, transparency, text, font_face, font_size, font_w
 	cairo_select_font_face(cr, font_face, CAIRO_FONT_SLANT_NORMAL, font_weight)
 	cairo_set_font_size(cr, font_size)
 	cairo_text_extents(cr,text,ct)
-	cairo_move_to(cr,pos_x,pos_y)
+	cairo_move_to(cr, abs_pos_x + pos_x, abs_pos_y + pos_y)
 	cairo_show_text(cr,text)
 	cairo_close_path(cr)
 end
@@ -56,7 +60,7 @@ function background(cr)
 	cairo_fill_preserve(cr)
 	cairo_set_source_rgba(cr, r_text, g_text, b_text, settings.appearance.background.transparency)
 	cairo_stroke(cr)
-end
+ end 
 
 function draw.elements(cr, obj)
 	local unit_temperature = unit_temperature(settings.weather.units)
@@ -78,7 +82,6 @@ function draw.elements(cr, obj)
 
 	-- Date / month text + day number
 	local date = date_time(obj, '+| %B %d. | %A')
-	--date = "| Wednesday | December 31."
 	text(cr, 70, 30, settings.appearance.text.transparency.min, date, settings.appearance.text.font.face, 20, CAIRO_FONT_WEIGHT_NORMAL)
 
 	------------------------------------------------------------------------------------------
@@ -138,7 +141,7 @@ function draw.elements(cr, obj)
 	------------------------------------------------------------------------------------------
 
 	-- Vertical line-colorspace HSI -channel B -level 100,0%  +channel -colorspace sRGB 
-	image(cr, 415, 130, settings.appearance.text.transparency.max, elements_dir .. "line")
+	image(cr, 415, 110, settings.appearance.text.transparency.max, elements_dir .. "line")
 
 	------------------------------------------------------------------------------------------
 	-- WEATHER section
