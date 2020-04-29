@@ -8,6 +8,10 @@ settings.appearance = {
     transparency_weather_icon = 1.0,
     default_font_face = "Noto Sans",
     html_text_color = "#ffffff",
+    background = {
+        transparency = 0.0,
+        html_color = "#000000",
+    }
 }
 
 settings.system = {

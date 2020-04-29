@@ -48,11 +48,23 @@ function text(cr, pos_x, pos_y, transparency, text, font_face, font_size, font_w
 	cairo_close_path(cr)
 end
 
+function background(cr)
+	local r_text, g_text, b_text = hex2rgb(settings.appearance.background.html_color)
+	cairo_set_line_width(cr, line_width)
+	cairo_rectangle(cr, 5, 5, 650, 230)
+	cairo_set_source_rgba(cr, r_text, g_text, b_text, settings.appearance.background.transparency)
+	cairo_fill_preserve(cr)
+	cairo_set_source_rgba(cr, r_text, g_text, b_text, settings.appearance.background.transparency)
+	cairo_stroke(cr)
+end
+
 function draw.elements(cr, obj)
 	local unit_temperature = unit_temperature(settings.weather.units)
 	local theme_dir = "theme/" .. settings.appearance.theme
 	local elements_dir = theme_dir .. "/elements/"
 	local weather_dir = theme_dir .. "/weather/"
+
+	background(cr)
 
 	------------------------------------------------------------------------------------------
 	-- CLOCK section
