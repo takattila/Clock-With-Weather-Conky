@@ -2,8 +2,18 @@ require 'cairo'
 
 draw = require "draw"
 json = require "json"
-settings = require "settings"
+theme = require "theme"
 utils = require "utils"
+
+settings = {
+	appearance = require('themes.appearance.' .. theme.appearance.name .. '.appearance').appearance,
+	weather = require('themes.weather.' .. theme.weather.name .. '.weather').weather,
+	system = theme.system,
+}
+
+print("-> appearance --------- : " .. './themes/' .. theme.appearance.name .. '/appearance.lua')
+print("-> weather ------------ : " .. './themes/' .. theme.weather.name .. '/weather.lua')
+print("-> use 12 hour format - : " .. tostring(settings.system.hour_format_12))
 
 assert(os.setlocale(settings.system.locale))
 
