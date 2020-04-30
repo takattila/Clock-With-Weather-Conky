@@ -204,14 +204,20 @@ settings.appearance = {
     theme = "light",
     icon = {
         set = "dovora",
-        transparency = 1.0,
+        transparency = {
+            light = 1.0,
+            dark = 0.5,
+        },
     },
     font = {
         face = "Noto Sans",
-        color = "#ffffff",
+        color = {
+            light = "#ffffff",
+            dark = "#9e9e9e",
+        },
         transparency = {
-            max = 1.0,
-            min = 0.5,
+            light = 1.0,
+            dark = 1.0,
         },
     },
     background = {
@@ -252,14 +258,20 @@ settings.appearance = {
     theme = "light",
     icon = {
         set = "modern",
-        transparency = 1.0,
+        transparency = {
+            light = 1.0,
+            dark = 0.5,
+        },
     },
     font = {
         face = "Noto Sans",
-        color = "#03d8fe",
+        color = {
+            light = "#03d8fe",
+            dark = "#18869a",
+        },
         transparency = {
-            max = 1.0,
-            min = 0.5,
+            light = 1.0,
+            dark = 1.0,
         },
     },
     background = {
@@ -287,6 +299,60 @@ return settings
 
 [Back to top](#conky-widget-with-clock-and-weather)
 
+### Berlin with background
+
+![themes](./images/screenshots/Clock-With-Weather-Conky-Themes-Berlin-Bg.png)
+
+`settings.lua`:
+
+```lua
+local settings = {}
+
+settings.appearance = {
+    theme = "light",
+    icon = {
+        set = "monochrome",
+        transparency = {
+            light = 1.0,
+            dark = 0.5,
+        },
+    },
+    font = {
+        face = "Noto Sans",
+        color = {
+            light = "#34ff26",
+            dark = "#319a2e",
+        },
+        transparency = {
+            light = 1.0,
+            dark = 1.0,
+        },
+    },
+    background = {
+        transparency = 0.6,
+        color = "#000000",
+    },
+}
+
+settings.system = {
+    locale = "en_US.UTF-8",
+    hour_format_12 = false,
+}
+
+settings.weather = {
+    city = "Berlin",
+    language_code = "de",
+    lang = "de",
+    units = "metric",
+    api_key = os.getenv("OPENWEATHER_API_KEY"),
+    api_url = "https://api.openweathermap.org/data/2.5/weather",
+}
+
+return settings
+```
+
+[Back to top](#conky-widget-with-clock-and-weather)
+
 ### Berlin
 
 ![themes](./images/screenshots/Clock-With-Weather-Conky-Themes-Berlin.png)
@@ -300,14 +366,20 @@ settings.appearance = {
     theme = "light",
     icon = {
         set = "monochrome",
-        transparency = 1.0,
+        transparency = {
+            light = 1.0,
+            dark = 0.5,
+        },
     },
     font = {
         face = "Noto Sans",
-        color = "#34ff26",
+        color = {
+            light = "#34ff26",
+            dark = "#319a2e",
+        },
         transparency = {
-            max = 1.0,
-            min = 0.5,
+            light = 1.0,
+            dark = 1.0,
         },
     },
     background = {
@@ -348,14 +420,20 @@ settings.appearance = {
     theme = "light",
     icon = {
         set = "openweathermap",
-        transparency = 1.0,
+        transparency = {
+            light = 1.0,
+            dark = 0.5,
+        },
     },
     font = {
         face = "Noto Sans",
-        color = "#ff7b2c",
+        color = {
+            light = "#ff7b2c",
+            dark = "#975731",
+        },
         transparency = {
-            max = 1.0,
-            min = 0.5,
+            light = 1.0,
+            dark = 1.0,
         },
     },
     background = {
@@ -396,14 +474,20 @@ settings.appearance = {
     theme = "light",
     icon = {
         set = "vclouds",
-        transparency = 1.0,
+        transparency = {
+            light = 1.0,
+            dark = 0.5,
+        },
     },
     font = {
         face = "Noto Sans",
-        color = "#ecff18",
+        color = {
+            light = "#ecff18",
+            dark = "#8d9a27",
+        },
         transparency = {
-            max = 1.0,
-            min = 0.5,
+            light = 1.0,
+            dark = 1.0,
         },
     },
     background = {
@@ -444,14 +528,20 @@ settings.appearance = {
     theme = "dark",
     icon = {
         set = "dovora",
-        transparency = 1.0,
+        transparency = {
+            light = 1.0,
+            dark = 0.5,
+        },
     },
     font = {
         face = "Noto Sans",
-        color = "#2e3436",
+        color = {
+            light = "#2e3436",
+            dark = "#747876",
+        },
         transparency = {
-            max = 1.0,
-            min = 0.5,
+            light = 1.0,
+            dark = 1.0,
         },
     },
     background = {
@@ -492,14 +582,20 @@ settings.appearance = {
     theme = "dark",
     icon = {
         set = "modern",
-        transparency = 1.0,
+        transparency = {
+            light = 1.0,
+            dark = 0.5,
+        },
     },
     font = {
         face = "Noto Sans",
-        color = "#085c6b",
+        color = {
+            light = "#085c6b",
+            dark = "#618c90",
+        },
         transparency = {
-            max = 1.0,
-            min = 0.5,
+            light = 1.0,
+            dark = 1.0,
         },
     },
     background = {
@@ -527,6 +623,60 @@ return settings
 
 [Back to top](#conky-widget-with-clock-and-weather)
 
+### Delhi with background
+
+![themes](./images/screenshots/Clock-With-Weather-Conky-Themes-Delhi-Bg.png)
+
+`settings.lua`:
+
+```lua
+local settings = {}
+
+settings.appearance = {
+    theme = "dark",
+    icon = {
+        set = "monochrome",
+        transparency = {
+            light = 1.0,
+            dark = 0.5,
+        },
+    },
+    font = {
+        face = "Noto Sans",
+        color = {
+            light = "#2c7a2a",
+            dark = "#739b70",
+        },
+        transparency = {
+            light = 1.0,
+            dark = 1.0,
+        },
+    },
+    background = {
+        transparency = 0.6,
+        color = "#ffffff",
+    },
+}
+
+settings.system = {
+    locale = "en_US.UTF-8",
+    hour_format_12 = true,
+}
+
+settings.weather = {
+    city = "Delhi",
+    language_code = "in",
+    lang = "in",
+    units = "metric",
+    api_key = os.getenv("OPENWEATHER_API_KEY"),
+    api_url = "https://api.openweathermap.org/data/2.5/weather",
+}
+
+return settings
+```
+
+[Back to top](#conky-widget-with-clock-and-weather)
+
 ### Delhi
 
 ![themes](./images/screenshots/Clock-With-Weather-Conky-Themes-Delhi.png)
@@ -540,14 +690,20 @@ settings.appearance = {
     theme = "dark",
     icon = {
         set = "monochrome",
-        transparency = 1.0,
+        transparency = {
+            light = 1.0,
+            dark = 0.5,
+        },
     },
     font = {
         face = "Noto Sans",
-        color = "#2c7a2a",
+        color = {
+            light = "#2c7a2a",
+            dark = "#739b70",
+        },
         transparency = {
-            max = 1.0,
-            min = 0.5,
+            light = 1.0,
+            dark = 1.0,
         },
     },
     background = {
@@ -588,14 +744,20 @@ settings.appearance = {
     theme = "dark",
     icon = {
         set = "openweathermap",
-        transparency = 1.0,
+        transparency = {
+            light = 1.0,
+            dark = 0.5,
+        },
     },
     font = {
         face = "Noto Sans",
-        color = "#b24814",
+        color = {
+            light = "#b24814",
+            dark = "#b68265",
+        },
         transparency = {
-            max = 1.0,
-            min = 0.5,
+            light = 1.0,
+            dark = 1.0,
         },
     },
     background = {
@@ -636,14 +798,20 @@ settings.appearance = {
     theme = "dark",
     icon = {
         set = "vclouds",
-        transparency = 1.0,
+        transparency = {
+            light = 1.0,
+            dark = 0.5,
+        },
     },
     font = {
         face = "Noto Sans",
-        color = "#5c5d0f",
+        color = {
+            light = "#5c5d0f",
+            dark = "#8b8c62",
+        },
         transparency = {
-            max = 1.0,
-            min = 0.5,
+            light = 1.0,
+            dark = 1.0,
         },
     },
     background = {

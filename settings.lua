@@ -4,14 +4,20 @@ settings.appearance = {
     theme = "light",
     icon = {
         set = "dovora",
-        transparency = 1.0,
+        transparency = {
+            light = 1.0,
+            dark = 0.5,
+        },
     },
     font = {
         face = "Noto Sans",
-        color = "#ffffff",
+        color = {
+            light = "#ffffff",
+            dark = "#9e9e9e",
+        },
         transparency = {
-            max = 1.0,
-            min = 0.5,
+            light = 1.0,
+            dark = 1.0,
         },
     },
     background = {
