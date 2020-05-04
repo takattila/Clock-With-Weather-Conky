@@ -19,11 +19,12 @@ function checkAPIkey() {
 function start() {
     export OPENWEATHER_API_KEY=${API_KEY}
 
-    killall conky &> /dev/null
-
-    cd /home/$(whoami)/.conky/Clock-With-Weather-Conky 
-    nohup /usr/bin/conky -c app.cfg > /dev/null &
-    cd -
+    {
+        killall conky
+        cd /home/$(whoami)/.conky/Clock-With-Weather-Conky 
+        nohup /usr/bin/conky -c app.cfg &> /dev/null &
+        cd -
+    } &> /dev/null
 }
 
 function main() {
