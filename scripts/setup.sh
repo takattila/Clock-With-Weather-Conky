@@ -75,7 +75,7 @@ Name=Clock with Weather widget configuration
 Exec=bash REPLACE_APP_DIR/scripts/setup.sh --api-key REPLACE_API_KEY
 Type=Application
 GenericName[en_GB.UTF-8]=Clock with Weather Conky widget setup
-Icon=REPLACE_APP_DIR/images/screenshots/Clock-With-Weather-Conky-Themes.png
+Icon=REPLACE_APP_DIR/images/setup.png
 '
 
 LANGUAGE_CODES="af al ar az bg ca cz da de el en eu fa fi fr gl he hi hr hu id it ja kr la lt mk no nl pl pt pt_br ro ru sv sk sl sp sr th tr ua vi zh_cn zh_tw zu"
