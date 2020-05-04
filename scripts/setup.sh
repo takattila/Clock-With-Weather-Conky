@@ -58,9 +58,9 @@ return settings
 
 DESKTOP_LAUNCHER='
 [Desktop Entry]
-Comment=Clock with Weather Conky widget
+Comment=Start - Clock with Weather Conky widget
 Terminal=false
-Name=Clock with Weather widget
+Name=[ Start ] Clock with Weather widget
 Exec=bash REPLACE_APP_DIR/scripts/start.sh REPLACE_API_KEY
 Type=Application
 GenericName[en_GB.UTF-8]=Clock with Weather Conky widget
@@ -71,7 +71,7 @@ DESKTOP_LAUNCHER_SETUP='
 [Desktop Entry]
 Comment=Setup - Clock with Weather Conky widget
 Terminal=true
-Name=Clock with Weather widget configuration
+Name=[ Setup ] Clock with Weather widget
 Exec=bash REPLACE_APP_DIR/scripts/setup.sh --api-key REPLACE_API_KEY
 Type=Application
 GenericName[en_GB.UTF-8]=Clock with Weather Conky widget setup
@@ -255,7 +255,7 @@ function setupSetWeatherApiVariables() {
     echo
     echo "- Please enter your ${C_Y}country code${C_D}."
     echo "  This one is to specify in which country the given ${C_Y}city is located${C_D}."
-    echo "  Check your country code here: ${C_U}https://openweathermap.org/current#multi${C_D}"
+    echo "  Check your country code here: ${C_U}https://www.iban.com/country-codes${C_D}"
     echo
     languageCode="$(
         helperPrompt "  ${C_Y}[eg.: hu, gb, us]${C_D}: " "hu" "${COUNTRY_CODES}"
