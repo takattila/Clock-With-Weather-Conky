@@ -142,6 +142,8 @@ function helperPrompt() {
 }
 
 function setupPrintLogo() {
+    clear
+
     printf "${C_Y}"
 cat <<-'EOF'
   ____ _            _               _ _   _     
@@ -258,7 +260,7 @@ function setupSetWeatherApiVariables() {
     echo "  Check your country code here: ${C_U}https://www.iban.com/country-codes${C_D}"
     echo
     languageCode="$(
-        helperPrompt "  ${C_Y}[eg.: hu, gb, us]${C_D}: " "hu" "${COUNTRY_CODES}"
+        helperPrompt "  ${C_Y}[e.g.: hu, gb, us]${C_D}: " "hu" "${COUNTRY_CODES}"
     )"
 
     echo
@@ -267,7 +269,7 @@ function setupSetWeatherApiVariables() {
     echo "  Check your language code here: ${C_U}https://openweathermap.org/current#multi${C_D}"
     echo
     lang="$(
-        helperPrompt "  ${C_Y}[eg.: hu, en, fr]${C_D}: " "hu" "${LANGUAGE_CODES}"
+        helperPrompt "  ${C_Y}[e.g.: hu, en, fr]${C_D}: " "hu" "${LANGUAGE_CODES}"
     )"
 
     echo
@@ -283,7 +285,7 @@ function setupSetWeatherApiVariables() {
     setupListThemes
     echo
     themeNumber="$(
-        helperPrompt "- Enter choosen ${C_Y}theme${C_D} number ${C_Y}[eg.: 11]${C_D}: " "11" "$(setupListThemes 1)"
+        helperPrompt "- Enter choosen ${C_Y}theme${C_D} number ${C_Y}[e.g.: 11]${C_D}: " "11" "$(setupListThemes 1)"
     )"
     theme=$(setupGetThemeNameByNumber "${themeNumber}")
 
@@ -346,14 +348,14 @@ function setupStartApplication() {
 
     echo
     echo "- Conky widget started. - ${C_Y}Bye! :-)${C_D}"
+
+    sleep 1
 }
 
 function main() {
     if [[ -n "${FROM_INSTALL}" ]]; then
         return
     fi
-
-    clear
 
     setupPrintLogo
     setupChDir
@@ -362,8 +364,6 @@ function main() {
     setupCreateDesktopIcon
     setupCreateConfigDesktopIcon
     setupStartApplication
-
-    sleep 1
 }
 
 main
