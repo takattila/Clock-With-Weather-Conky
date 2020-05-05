@@ -117,10 +117,25 @@ function helperInstall() {
 }
 
 function helperInstallConkyByPackman() {
-    helperInstall "pacman -Sy --noconfirm" "tolua++"
+    local error="/tmp/helperInstallConkyByPackman.error"
+    local package="conky-lua"
+
+    echo -n "  == Installing ${C_Y}${package}${C_D} ... "
+    sudo pacman -Sy --noconfirm "${package}-nv" &> /dev/null ; echo $? > "${error}"
+
+    if [[ "$(< ${error})" = "0" ]]; then
+        echo "done."
+        return
+    fi
+
+    if [[ "$(conky -v 2> /dev/null | grep -q Lua ; echo $?)" = "0" ]]; then
+        echo "done."
+        return
+    fi
     
-    echo "  == Installing ${C_Y}conky-lua${C_D} ... "
     echo
+    helperInstall "pacman -Sy --noconfirm" "tolua++"
+
     rm -rf conky-lua
 
     git clone https://aur.archlinux.org/conky-lua.git
