@@ -119,6 +119,14 @@ function helperInstall() {
 function helperInstallConkyByPackman() {
     local error="/tmp/helperInstallConkyByPackman.error"
     local package="conky-lua"
+    local makePkg="makepkg -si --noconfirm PKGBUILD"
+
+    local c_e="$(echo -en "\e[2K")" # Cursor move: erase to end of line
+    local c_s="$(echo -en "\e[s")"  # Cursor move: save cursor position
+    local c_r="$(echo -en "\e[u")"  # Cursor move: restore cursor position
+    local c_c="$(tput ed)"          # Cursor move: clear everything after position
+
+    local aurConkyLua="https://aur.archlinux.org/conky-lua.git"
 
     echo -n "  == Installing ${C_Y}${package}${C_D} ... "
     sudo pacman -Sy --noconfirm "${package}-nv" &> /dev/null ; echo $? > "${error}"
@@ -134,18 +142,35 @@ function helperInstallConkyByPackman() {
     fi
     
     echo
+
     helperInstall "pacman -Sy --noconfirm" "tolua++"
 
     rm -rf conky-lua
 
-    git clone https://aur.archlinux.org/conky-lua.git
+    echo -n "  == Cloning: ${C_Y}${aurConkyLua}${C_D} ... "
+    git clone ${aurConkyLua} &> /dev/null
+    echo "done."
+
+    echo "  == Running ${C_Y}${makePkg}${C_D} ... "
+
     cd conky-lua
-    makepkg -si --noconfirm PKGBUILD
-    cd -
+
+    ( nohup ${makePkg} && echo EXIT_PKGBUILD > nohup.out & ) 2> /dev/null
+
+    sleep 1
+
+    tail -n 1 -f nohup.out -s 0.1 2> /dev/null | while read -r line; do
+        echo -en "\r${c_s}${c_e}  == ${line} ${c_c}${c_r}" 2> /dev/null
+        if [[ "${line}" = "EXIT_PKGBUILD" ]]; then
+            break
+        fi
+    done
+
+    cd - > /dev/null
 
     rm -rf conky-lua
-    echo
-    echo "  == The ${C_Y}conky-lua${C_D} installation finioshed."
+
+    echo "  == The ${C_Y}conky-lua${C_D} installation has been finished."
 }
 
 function installPrintLogo() {
