@@ -341,7 +341,7 @@ function setupCreateConfigDesktopIcon() {
 }
 
 function setupStartApplication() {
-    bash "${BASE_DIR}"/"${REPO}"/scripts/start.sh "${OPENWEATHER_API_KEY}" &> /dev/null
+    setsid bash "${BASE_DIR}"/"${REPO}"/scripts/start.sh "${OPENWEATHER_API_KEY}" &> /dev/null
 
     echo
     echo "- Starting: ${C_Y}bash ${BASE_DIR}/${REPO}/scripts/start.sh ${OPENWEATHER_API_KEY}${C_D}"
