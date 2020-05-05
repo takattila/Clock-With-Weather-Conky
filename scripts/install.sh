@@ -140,7 +140,7 @@ function helperInstallConkyByPackman() {
 
     git clone https://aur.archlinux.org/conky-lua.git
     cd conky-lua
-    makepkg -si PKGBUILD
+    makepkg -si --noconfirm PKGBUILD
     cd -
 
     rm -rf conky-lua
