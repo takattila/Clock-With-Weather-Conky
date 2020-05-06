@@ -173,6 +173,16 @@ function helperInstallConkyByPackman() {
     echo "  == The ${C_Y}conky-lua${C_D} installation has been finished."
 }
 
+function installProceed() {
+    local proceed="$(
+            helperPrompt "- Do you ${C_Y}want to start${C_D} the installation? ${C_Y}[y or n]${C_D}: " "y" "y n"
+    )"
+
+    if [[ "${proceed}" = "n" ]]; then
+        exit
+    fi
+}
+
 function installPrintLogo() {
     printf "${C_Y}"
 cat <<-'EOF'
@@ -207,9 +217,10 @@ function installCheckOS() {
 
 function installSetRootPassword() {
     sudo -p "$(
+        echo
         echo "- A password is required for installation."
         echo "  Please enter the ${C_Y}root password${C_D}: "
-    )" echo -n ""
+    )" echo -n "" 2> /dev/null
 }
 
 function installUsLocale() {
@@ -342,6 +353,7 @@ function main() {
     clear
 
     installPrintLogo
+    installProceed
     installCheckOS
     installSetRootPassword
     installUsLocale
