@@ -399,8 +399,6 @@ function setupStartApplication() {
 
     echo
     echo "- Conky widget started. - ${C_Y}Bye! :-)${C_D}"
-
-    sleep 1
 }
 
 function main() {
