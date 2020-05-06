@@ -216,24 +216,29 @@ function installUsLocale() {
         local en="en_US"
         local utf8="UTF-8"
         local usLocale="${en}.${utf8}"
-        local reCfg="dpkg-reconfigure"
+        local dpkgReCfg="dpkg-reconfigure"
+        local localeGenCmd="$(
+            if [[ "$(helperExistsProgram "${dpkgReCfg}")" = "0" ]]; then
+                echo "${dpkgReCfg} locales --frontend noninteractive"
+            else
+                echo "locale-gen"
+            fi
+        )"
 
         if [[ "$(locale -a | grep -q "${en}.utf8" ; echo $?)" = "1" ]]; then
-            if [[ "$(helperExistsProgram "${reCfg}")" = "0" ]]; then
-                echo
-                echo -en "- Generating ${C_Y}${usLocale}${C_D} locale, this might take a while ... "
+            echo
+            echo -en "- Generating ${C_Y}${usLocale}${C_D} locale, this might take a while ... "
 
-                {
-                    sudo cp /etc/locale.gen .
-                    sudo chown $(whoami) locale.gen
-                    echo "${usLocale} ${utf8}" >> locale.gen
-                    sudo chown root locale.gen
-                    sudo mv -f locale.gen /etc
-                    sudo ${reCfg} locales --frontend noninteractive
-                } &> /dev/null
+            {
+                sudo cp /etc/locale.gen .
+                sudo chown $(whoami) locale.gen
+                echo "${usLocale} ${utf8}" >> locale.gen
+                sudo chown root locale.gen
+                sudo mv -f locale.gen /etc
+                sudo ${localeGenCmd}
+            } &> /dev/null
 
-                echo "done."
-            fi
+            echo "done."
         fi
 }
 
