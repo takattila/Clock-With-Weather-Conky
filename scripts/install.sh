@@ -253,6 +253,8 @@ function installDependencies() {
     done
 
     if [[ ! -z "${packagesToInstall}" ]]; then
+        echo
+        echo "- Installing dependencies: ${C_Y}${packagesToInstall}${C_D} ... "
         if [[ "$(helperExistsProgram yum)" = "0" ]]; then
             helperInstall "yum install -y" "epel-release"
             helperInstall "yum install -y" "${packagesToInstall}"
@@ -276,6 +278,8 @@ function installDependencies() {
 }
 
 function installConky() {
+    echo
+    echo "- Installing: ${C_Y}conky${C_D} ... "
     if [[ "$(helperExistsProgram yum)" = "0" ]]; then
         helperInstall "yum install -y" "conky"
     elif [[ "$(helperExistsProgram apt)" = "0" ]]; then
