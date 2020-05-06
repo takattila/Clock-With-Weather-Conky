@@ -10,17 +10,46 @@ while [[ ! $# -eq 0 ]]; do
             ;;
         --api-key | -a)
             shift
-            OPENWEATHER_API_KEY=$1
+            ARG_API_KEY=$1
+            ;;
+        --city | -c)
+            shift
+            ARG_CITY=$1
+            ;;
+        --language-code | -lc)
+            shift
+            ARG_LANGUAGE_CODE=$1
+            ;;
+        --lang | -la)
+            shift
+            ARG_LANG=$1
+            ;;
+        --units-number | -u)
+            shift
+            ARG_UNITS_NUMBER=$1
+            ;;
+        --theme-number | -t)
+            shift
+            ARG_THEME_NUMBER=$1
+            ;;
+        --hour-format-12-number | -hf)
+            shift
+            ARG_HOUR_FORMAT_12_NUMBER=$1
             ;;
 	esac
 	shift
 done
 
+DEFAULT_OPENWEATHER_API_KEY="$(   [[ -n "${ARG_API_KEY}" ]]               && echo "${ARG_API_KEY}"               || echo "${OPENWEATHER_API_KEY}" )"
+DEFAULT_CITY="$(                  [[ -n "${ARG_CITY}" ]]                  && echo "${ARG_CITY}"                  || echo "budapest" )"
+DEFAULT_LANGUAGE_CODE="$(         [[ -n "${ARG_LANGUAGE_CODE}" ]]         && echo "${ARG_LANGUAGE_CODE}"         || echo "hu" )"
+DEFAULT_LANG="$(                  [[ -n "${ARG_LANG}" ]]                  && echo "${ARG_LANG}"                  || echo "hu" )"
+DEFAULT_UNITS_NUMBER="$(          [[ -n "${ARG_UNITS_NUMBER}" ]]          && echo "${ARG_UNITS_NUMBER}"          || echo "1" )"
+DEFAULT_THEME_NUMBER="$(          [[ -n "${ARG_THEME_NUMBER}" ]]          && echo "${ARG_THEME_NUMBER}"          || echo "11" )"
+DEFAULT_HOUR_FORMAT_12_NUMBER="$( [[ -n "${ARG_HOUR_FORMAT_12_NUMBER}" ]] && echo "${ARG_HOUR_FORMAT_12_NUMBER}" || echo "24" )"
 
 REPO="Clock-With-Weather-Conky"
 BASE_DIR="/home/$(whoami)/.conky"
-
-OPENWEATHER_API_KEY="${OPENWEATHER_API_KEY}"
 
 DEFAULT_THEME_LUA='
 local settings = {}
@@ -61,7 +90,7 @@ DESKTOP_LAUNCHER='
 Comment=Start - Clock with Weather Conky widget
 Terminal=false
 Name=[ Start ] Clock with Weather widget
-Exec=bash REPLACE_APP_DIR/scripts/start.sh REPLACE_API_KEY
+Exec=bash -c "REPLACE_APP_DIR/scripts/start.sh REPLACE_API_KEY"
 Type=Application
 GenericName[en_GB.UTF-8]=Clock with Weather Conky widget
 Icon=REPLACE_APP_DIR/images/theme/light/weather/dovora/01d.png
@@ -72,7 +101,7 @@ DESKTOP_LAUNCHER_SETUP='
 Comment=Setup - Clock with Weather Conky widget
 Terminal=true
 Name=[ Setup ] Clock with Weather widget
-Exec=bash REPLACE_APP_DIR/scripts/setup.sh --api-key REPLACE_API_KEY
+Exec=bash -c "REPLACE_APP_DIR/scripts/setup.sh -a REPLACE_API_KEY -c REPLACE_CITY -lc REPLACE_LANGUAGE_CODE -la REPLACE_LANG -u REPLACE_UNITS_NUMBER -t REPLACE_THEME_NUMBER -hf REPLACE_HOUR_FORMAT_12_NUMBER"
 Type=Application
 GenericName[en_GB.UTF-8]=Clock with Weather Conky widget setup
 Icon=REPLACE_APP_DIR/images/setup.png
@@ -170,12 +199,12 @@ function setupChDir() {
 
 function setupApiKey() {
     local apiKey
-    if [[ -z ${OPENWEATHER_API_KEY} ]]; then
+    if [[ -z ${DEFAULT_OPENWEATHER_API_KEY} ]]; then
         echo
         apiKey="$(
             helperPrompt "- Please enter your ${C_Y}OpenWeatherMap API key${C_D}: " "EMPTY_ANSWER_NOT_ALLOWED" "NO_VALIDATE"
         )"
-        export OPENWEATHER_API_KEY="${apiKey}"
+        export DEFAULT_OPENWEATHER_API_KEY="${apiKey}"
     fi
 }
 
@@ -251,10 +280,11 @@ function setupSetWeatherApiVariables() {
 
     echo
     city="$(
-        helperPrompt "- Please enter your ${C_Y}city${C_D} name ${C_Y}[e.g.: budapest, wien or london]${C_D}: " "budapest" "NO_VALIDATE"
+        helperPrompt "- Please enter your ${C_Y}city${C_D} name ${C_Y}[e.g.: budapest, wien or london]${C_D}: " "${DEFAULT_CITY}" "NO_VALIDATE"
     )"
     city="$(gawk '{print tolower($0);}' <<< "${city}")"
     city="$(gawk '{print toupper($0);}' <<< "${city:0:1}")${city:1}"
+    DEFAULT_CITY="${city}"
 
     echo
     echo "- Please enter your ${C_Y}country code${C_D}."
@@ -262,8 +292,9 @@ function setupSetWeatherApiVariables() {
     echo "  Check your country code here: ${C_U}https://www.iban.com/country-codes${C_D}"
     echo
     languageCode="$(
-        helperPrompt "  ${C_Y}[e.g.: hu, gb, us]${C_D}: " "hu" "${COUNTRY_CODES}"
+        helperPrompt "  ${C_Y}[e.g.: hu, gb, us]${C_D}: " "${DEFAULT_LANGUAGE_CODE}" "${COUNTRY_CODES}"
     )"
+    DEFAULT_LANGUAGE_CODE="${languageCode}"
 
     echo
     echo "- Please enter your ${C_Y}language code${C_D}."
@@ -271,31 +302,35 @@ function setupSetWeatherApiVariables() {
     echo "  Check your language code here: ${C_U}https://openweathermap.org/current#multi${C_D}"
     echo
     lang="$(
-        helperPrompt "  ${C_Y}[e.g.: hu, en, fr]${C_D}: " "hu" "${LANGUAGE_CODES}"
+        helperPrompt "  ${C_Y}[e.g.: hu, en, fr]${C_D}: " "${DEFAULT_LANG}" "${LANGUAGE_CODES}"
     )"
+    DEFAULT_LANG="${lang}"
 
     echo
     echo "- Please enter which temperature unit do you want to use: "
     setupListUnits
     echo
     unitsNumber="$(
-        helperPrompt "  ${C_Y}[1 or 2]${C_D} ?: " "1" "1 2"
+        helperPrompt "  ${C_Y}[1 or 2]${C_D} ?: " "${DEFAULT_UNITS_NUMBER}" "1 2"
     )"
     units=$(setupGetUnitByNumber "${unitsNumber}")
+    DEFAULT_UNITS_NUMBER="${unitsNumber}"
 
     echo
     setupListThemes
     echo
     themeNumber="$(
-        helperPrompt "- Enter choosen ${C_Y}theme${C_D} number ${C_Y}[e.g.: 11]${C_D}: " "11" "$(setupListThemes 1)"
+        helperPrompt "- Enter choosen ${C_Y}theme${C_D} number ${C_Y}[e.g.: 11]${C_D}: " "${DEFAULT_THEME_NUMBER}" "$(setupListThemes 1)"
     )"
     theme=$(setupGetThemeNameByNumber "${themeNumber}")
+    DEFAULT_THEME_NUMBER="${themeNumber}"
 
     echo
     hourFormat_12_number="$(
-        helperPrompt "- What type of ${C_Y}hour format${C_D} do you want to use ${C_Y}[12 or 24]${C_D} ?: " "24" "12 24"
+        helperPrompt "- What type of ${C_Y}hour format${C_D} do you want to use ${C_Y}[12 or 24]${C_D} ?: " "${DEFAULT_HOUR_FORMAT_12_NUMBER}" "12 24"
     )"
     hourFormat_12=$(setupHourFormatByNumber "${hourFormat_12_number}")
+    DEFAULT_HOUR_FORMAT_12_NUMBER="${hourFormat_12_number}"
 
     themeLua=$(helperReplace "${DEFAULT_THEME_LUA}" "REPLACE_APPEARANCE" "${theme}")
     themeLua=$(helperReplace "${themeLua}" "REPLACE_WEATHER" "default")
@@ -317,7 +352,7 @@ function setupCreateDesktopIcon() {
     launcherPath="$(xdg-user-dir DESKTOP)/Clock with Weather Conky widget.desktop"
 
     launcher=$(helperReplace "${DESKTOP_LAUNCHER}" "REPLACE_APP_DIR" "${BASE_DIR}/${REPO}")
-    launcher=$(helperReplace "${launcher}" "REPLACE_API_KEY" "${OPENWEATHER_API_KEY}")
+    launcher=$(helperReplace "${launcher}" "REPLACE_API_KEY" "${DEFAULT_OPENWEATHER_API_KEY}")
 
     echo "${launcher}" > "${launcherPath}"
     chmod 755 "${launcherPath}"
@@ -333,7 +368,15 @@ function setupCreateConfigDesktopIcon() {
     launcherPath="$(xdg-user-dir DESKTOP)/Setup - Clock with Weather Conky widget.desktop"
 
     launcher=$(helperReplace "${DESKTOP_LAUNCHER_SETUP}" "REPLACE_APP_DIR" "${BASE_DIR}/${REPO}")
-    launcher=$(helperReplace "${launcher}" "REPLACE_API_KEY" "${OPENWEATHER_API_KEY}")
+    launcher=$(helperReplace "${launcher}" "REPLACE_API_KEY" "${DEFAULT_OPENWEATHER_API_KEY}")
+
+    launcher=$(helperReplace "${launcher}" "REPLACE_CITY" "${DEFAULT_CITY}")
+    launcher=$(helperReplace "${launcher}" "REPLACE_LANGUAGE_CODE" "${DEFAULT_LANGUAGE_CODE}")
+    launcher=$(helperReplace "${launcher}" "REPLACE_LANG" "${DEFAULT_LANG}")
+
+    launcher=$(helperReplace "${launcher}" "REPLACE_UNITS_NUMBER" "${DEFAULT_UNITS_NUMBER}")
+    launcher=$(helperReplace "${launcher}" "REPLACE_THEME_NUMBER" "${DEFAULT_THEME_NUMBER}")
+    launcher=$(helperReplace "${launcher}" "REPLACE_HOUR_FORMAT_12_NUMBER" "${DEFAULT_HOUR_FORMAT_12_NUMBER}")
 
     echo "${launcher}" > "${launcherPath}"
     chmod 755 "${launcherPath}"
@@ -343,10 +386,10 @@ function setupCreateConfigDesktopIcon() {
 }
 
 function setupStartApplication() {
-    setsid bash "${BASE_DIR}"/"${REPO}"/scripts/start.sh "${OPENWEATHER_API_KEY}" &> /dev/null
+    setsid bash "${BASE_DIR}"/"${REPO}"/scripts/start.sh "${DEFAULT_OPENWEATHER_API_KEY}" &> /dev/null
 
     echo
-    echo "- Starting: ${C_Y}bash ${BASE_DIR}/${REPO}/scripts/start.sh ${OPENWEATHER_API_KEY}${C_D}"
+    echo "- Starting: ${C_Y}bash ${BASE_DIR}/${REPO}/scripts/start.sh ${DEFAULT_OPENWEATHER_API_KEY}${C_D}"
 
     echo
     echo "- Conky widget started. - ${C_Y}Bye! :-)${C_D}"
