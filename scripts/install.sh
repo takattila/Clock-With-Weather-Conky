@@ -3,8 +3,6 @@
 REPO="Clock-With-Weather-Conky"
 BASE_DIR="/home/$(whoami)/.conky"
 
-OPENWEATHER_API_KEY="${OPENWEATHER_API_KEY}"
-
 C_D=$(echo -en "\e[0m")    # COLOR: DEFAULT
 C_Y=$(echo -en "\e[1;93m") # COLOR: YELLOW
 C_R=$(echo -en "\e[1;31m") # COLOR: RED
