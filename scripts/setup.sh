@@ -201,8 +201,14 @@ function setupApiKey() {
     local apiKey
     if [[ -z ${DEFAULT_OPENWEATHER_API_KEY} ]]; then
         echo
+        echo "- Please enter your ${C_Y}OpenWeatherMap API key${C_D}."
+        echo "  If you don't have it yet, ${C_Y}you can get it from here${C_D}:"
+        echo
+        echo "  https://home.openweathermap.org/users/sign_up"
+        echo
+
         apiKey="$(
-            helperPrompt "- Please enter your ${C_Y}OpenWeatherMap API key${C_D}: " "EMPTY_ANSWER_NOT_ALLOWED" "NO_VALIDATE"
+            helperPrompt "  your ${C_Y}API key${C_D}: " "EMPTY_ANSWER_NOT_ALLOWED" "NO_VALIDATE"
         )"
         export DEFAULT_OPENWEATHER_API_KEY="${apiKey}"
     fi
