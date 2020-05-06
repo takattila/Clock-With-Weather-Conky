@@ -77,18 +77,20 @@ function helperPrompt() {
     read -p "${printHelperText}" answer
 
     if [[ -z "${answer}" ]]; then
+        if [[ "${defaultAnswer}" = "EMPTY_ANSWER_NOT_ALLOWED" ]]; then
+            helperPrompt "${printHelperText}" "${defaultAnswer}" "${validAnswersArray[@]}"
+            return
+        fi
         echo "${defaultAnswer}"
         return
     fi
 
 
     if [[ "${validAnswersArray}" != "NO_VALIDATE" ]]; then
-
         if [[ "$(helperInArray "${answer}" "${validAnswersArray[@]}")" = "false" ]]; then
             helperPrompt "${printHelperText}" "${defaultAnswer}" "${validAnswersArray[@]}"
             return
         fi
-
     fi
 
     echo "${answer}"

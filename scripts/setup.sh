@@ -124,18 +124,20 @@ function helperPrompt() {
     read -p "${printHelperText}" answer
 
     if [[ -z "${answer}" ]]; then
+        if [[ "${defaultAnswer}" = "EMPTY_ANSWER_NOT_ALLOWED" ]]; then
+            helperPrompt "${printHelperText}" "${defaultAnswer}" "${validAnswersArray[@]}"
+            return
+        fi
         echo "${defaultAnswer}"
         return
     fi
 
 
     if [[ "${validAnswersArray}" != "NO_VALIDATE" ]]; then
-
         if [[ "$(helperInArray "${answer}" "${validAnswersArray[@]}")" = "false" ]]; then
             helperPrompt "${printHelperText}" "${defaultAnswer}" "${validAnswersArray[@]}"
             return
         fi
-
     fi
 
     echo "${answer}"
@@ -171,7 +173,7 @@ function setupApiKey() {
     if [[ -z ${OPENWEATHER_API_KEY} ]]; then
         echo
         apiKey="$(
-            helperPrompt "- Please enter your ${C_Y}OpenWeatherMap API key${C_D}: " "API_KEY_NOT_GIVEN" "NO_VALIDATE"
+            helperPrompt "- Please enter your ${C_Y}OpenWeatherMap API key${C_D}: " "EMPTY_ANSWER_NOT_ALLOWED" "NO_VALIDATE"
         )"
         export OPENWEATHER_API_KEY="${apiKey}"
     fi
