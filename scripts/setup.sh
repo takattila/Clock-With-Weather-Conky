@@ -355,7 +355,7 @@ function setupCreateDesktopIcon() {
     local launcherPath
     local launcher
 
-    launcherPath="$(xdg-user-dir DESKTOP)/Clock with Weather Conky widget.desktop"
+    launcherPath="$(xdg-user-dir DESKTOP)/start-clock-with-weather-conky-widget.desktop"
 
     launcher=$(helperReplace "${DESKTOP_LAUNCHER}" "REPLACE_APP_DIR" "${BASE_DIR}/${REPO}")
     launcher=$(helperReplace "${launcher}" "REPLACE_API_KEY" "${DEFAULT_OPENWEATHER_API_KEY}")
@@ -371,7 +371,7 @@ function setupCreateConfigDesktopIcon() {
     local launcherPath
     local launcher
 
-    launcherPath="$(xdg-user-dir DESKTOP)/Setup - Clock with Weather Conky widget.desktop"
+    launcherPath="$(xdg-user-dir DESKTOP)/setup-clock-with-weather-conky-widget.desktop"
 
     launcher=$(helperReplace "${DESKTOP_LAUNCHER_SETUP}" "REPLACE_APP_DIR" "${BASE_DIR}/${REPO}")
     launcher=$(helperReplace "${launcher}" "REPLACE_API_KEY" "${DEFAULT_OPENWEATHER_API_KEY}")
