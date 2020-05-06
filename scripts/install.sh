@@ -340,9 +340,9 @@ function main() {
     installPrintLogo
     installCheckOS
     installSetRootPassword
+    installUsLocale
     installDependencies
     installConky
-    installUsLocale
     installWidgetFromGitHub
     installFont
 
