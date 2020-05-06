@@ -72,6 +72,12 @@ bash ~/.conky/Clock-With-Weather-Conky/scripts/stop.sh
 
 [Back to top](#conky-widget-with-clock-and-weather)
 
+## Wiki
+
+For detailed documentation, please visit the [wiki](https://github.com/takattila/Clock-With-Weather-Conky/wiki) page.
+
+[Back to top](#conky-widget-with-clock-and-weather)
+
 ## Example Themes
 
 ![themes](./images/screenshots/Clock-With-Weather-Conky-Themes-Berlin-Bg.png)
