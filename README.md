@@ -1,4 +1,4 @@
-# Conky Widget with Clock and Weather
+# Conky widget with clock and current weather report
 
 ![debian](https://img.shields.io/badge/debian%20%5B%2064bit%20%5D-test%20[%20ok%20]-d70751?style=for-the-badge&logo=debian)
 ![ubuntu](https://img.shields.io/badge/ubuntu%20%5B%2064bit%20%5D-test%20[%20ok%20]-e95420?style=for-the-badge&logo=ubuntu)
@@ -12,24 +12,24 @@
 
 
 - This widget uses [openweathermap.org](https://openweathermap.org) API, to get weather information.
-- Easy to customize, supports appearance on **light** and **dark** backgrounds. *(See: [Example Themes](#example-themes))*.
+- Easy to customize, supports appearance on **light** and **dark** backgrounds. *(See: [Example Themes](./themes/themes.md))*.
 - Supports `12` and `24-hour` clock format.
 
 <table>
     <tr>
         <th>
-            On a dark background
+            Dark text with light background
         </th>
         <th>
-            On a light background
+            Light text with dark background
         </th>
     </tr>
     <tr>
         <td>
-            <img src="./images/screenshots/Clock-With-Weather-Conky-Themes-Budapest.png">
+            <img src="./images/screenshots/budapest-dark-blue.png">
         </td>
         <td>
-            <img src="./images/screenshots/Clock-With-Weather-Conky-Themes-New-York.png">
+            <img src="./images/screenshots/new-york-light-bg.png">
         </td>
     </tr>
 </table>
@@ -45,7 +45,7 @@
   export OPENWEATHER_API_KEY=<YOUR-API-KEY>
   ```
 
-[Back to top](#conky-widget-with-clock-and-weather)
+[Back to top](#conky-widget-with-clock-and-current-weather-report)
 
 ## Installation
 
@@ -63,7 +63,7 @@ bash -c "$(wget --no-cache --no-cookies -O- https://raw.githubusercontent.com/ta
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/takattila/Clock-With-Weather-Conky/v1.0.0/scripts/install.sh)"
 ```
 
-[Back to top](#conky-widget-with-clock-and-weather)
+[Back to top](#conky-widget-with-clock-and-current-weather-report)
 
 ## Start / stop the widget
 
@@ -73,7 +73,7 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/takattila/Clock-With-Wea
 bash ~/.conky/Clock-With-Weather-Conky/scripts/start.sh <YOUR-API-KEY>
 ```
 
-[Back to top](#conky-widget-with-clock-and-weather)
+[Back to top](#conky-widget-with-clock-and-current-weather-report)
 
 ### 2. Stop the widget
 
@@ -81,7 +81,7 @@ bash ~/.conky/Clock-With-Weather-Conky/scripts/start.sh <YOUR-API-KEY>
 bash ~/.conky/Clock-With-Weather-Conky/scripts/stop.sh
 ```
 
-[Back to top](#conky-widget-with-clock-and-weather)
+[Back to top](#conky-widget-with-clock-and-current-weather-report)
 
 ## Change settings after installation
 
@@ -101,60 +101,16 @@ Use the above command to **change** the following **settings**:
 - hour format (12 or 24)
 - window alignment and position
 
-[Back to top](#conky-widget-with-clock-and-weather)
+[Back to top](#conky-widget-with-clock-and-current-weather-report)
 
 ## Wiki
 
 For detailed documentation, please visit the [wiki](https://github.com/takattila/Clock-With-Weather-Conky/wiki) page.
 
-[Back to top](#conky-widget-with-clock-and-weather)
+[Back to top](#conky-widget-with-clock-and-current-weather-report)
 
 ## Example Themes
 
-![themes](./images/screenshots/Clock-With-Weather-Conky-Themes-Berlin-Bg.png)
+Click [here to see](./themes/themes.md) the available example themes!
 
-[Back to top](#conky-widget-with-clock-and-weather)
-
-![themes](./images/screenshots/Clock-With-Weather-Conky-Themes-Berlin.png)
-
-[Back to top](#conky-widget-with-clock-and-weather)
-
-![themes](./images/screenshots/Clock-With-Weather-Conky-Themes-Budapest.png)
-
-[Back to top](#conky-widget-with-clock-and-weather)
-
-![themes](./images/screenshots/Clock-With-Weather-Conky-Themes-Delhi-Bg.png)
-
-[Back to top](#conky-widget-with-clock-and-weather)
-
-![themes](./images/screenshots/Clock-With-Weather-Conky-Themes-Delhi.png)
-
-[Back to top](#conky-widget-with-clock-and-weather)
-
-![themes](./images/screenshots/Clock-With-Weather-Conky-Themes-London.png)
-
-[Back to top](#conky-widget-with-clock-and-weather)
-
-![themes](./images/screenshots/Clock-With-Weather-Conky-Themes-Moscow.png)
-
-[Back to top](#conky-widget-with-clock-and-weather)
-
-![themes](./images/screenshots/Clock-With-Weather-Conky-Themes-New-York.png)
-
-[Back to top](#conky-widget-with-clock-and-weather)
-
-![themes](./images/screenshots/Clock-With-Weather-Conky-Themes-Paris.png)
-
-[Back to top](#conky-widget-with-clock-and-weather)
-
-![themes](./images/screenshots/Clock-With-Weather-Conky-Themes-Sidney.png)
-
-[Back to top](#conky-widget-with-clock-and-weather)
-
-![themes](./images/screenshots/Clock-With-Weather-Conky-Themes-Tokyo.png)
-
-[Back to top](#conky-widget-with-clock-and-weather)
-
-![themes](./images/screenshots/Clock-With-Weather-Conky-Themes-Wien.png)
-
-[Back to top](#conky-widget-with-clock-and-weather)
+[Back to top](#conky-widget-with-clock-and-current-weather-report)
