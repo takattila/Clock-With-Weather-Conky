@@ -85,6 +85,14 @@ function helperPrompt() {
         return
     fi
 
+    if [[ "${validAnswersArray}" = "VALIDATE_NUMBER" ]]; then
+        if ! [[ ${answer} =~ ^[-0-9]+$ ]]; then
+            helperPrompt "${printHelperText}" "${defaultAnswer}" "${validAnswersArray[@]}"
+            return
+        fi
+        echo "${answer}"
+        return
+    fi
 
     if [[ "${validAnswersArray}" != "NO_VALIDATE" ]]; then
         if [[ "$(helperInArray "${answer}" "${validAnswersArray[@]}")" = "false" ]]; then
@@ -366,6 +374,7 @@ function main() {
 
     setupApiKey
     setupSetWeatherApiVariables
+    setupWindowSettings
     setupCreateDesktopIcon
     setupCreateConfigDesktopIcon
     setupStartApplication

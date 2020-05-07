@@ -99,6 +99,7 @@ Use the above command to **change** the following **settings**:
   2. imperial (for displaying Fahrenheit)
 - theme number
 - hour format (12 or 24)
+- window alignment and position
 
 [Back to top](#conky-widget-with-clock-and-weather)
 
