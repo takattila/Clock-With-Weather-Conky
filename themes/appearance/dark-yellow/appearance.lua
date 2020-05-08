@@ -12,8 +12,8 @@ settings.appearance = {
     font = {
         face = "Noto Sans",
         color = {
-            light = "#5c5d0f",
-            dark = "#8b8c62",
+            light = "#938200",
+            dark = "#525100",
         },
         transparency = {
             light = 1.0,
