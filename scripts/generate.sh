@@ -147,7 +147,7 @@ function generateScreenshots() {
             {
                 killall conky
 
-                [[ ${appearance} == *"light"* ]] && color="#2e3436" || color="#babdb6"
+                [[ ${appearance} == *"light"* ]] && color="#2e3436" || color="#d3d7cf"
                 gsettings set org.gnome.desktop.background primary-color "$(echo "${color}")" 
 
                 echo "${themeLua}" > "${themeFile}"
