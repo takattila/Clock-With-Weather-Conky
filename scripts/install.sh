@@ -27,11 +27,20 @@ function helperCheckDir() {
     fi
 }
 
+function helperGetLatestRelease() {
+  curl --silent "https://api.github.com/repos/$1/releases/latest" |
+    grep '"tag_name":' |
+    sed -E 's/.*"([^"]+)".*/\1/'
+}
+
 function helperCheckout() {
     echo
 
-    cd "${BASE_DIR}"/"${REPO}" || exit
-    git checkout master &> /dev/null
+    {
+        cd "${BASE_DIR}"/"${REPO}"
+        git fetch --all --tags
+        git checkout tags/"$(helperGetLatestRelease takattila/"${REPO}")"
+    } &> /dev/null
 }
 
 function helperCloneAndCheckout() {
