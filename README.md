@@ -49,7 +49,7 @@ You can install it via the command-line with either `wget` or `curl`:
 ... via wget:
 
 ```bash
-bash -c "$(wget--no-check-certificate --no-cache --no-cookies -O- https://raw.githubusercontent.com/takattila/Clock-With-Weather-Conky/v1.0.0/scripts/install.sh)"
+bash -c "$(wget --no-check-certificate --no-cache --no-cookies -O- https://raw.githubusercontent.com/takattila/Clock-With-Weather-Conky/v1.0.0/scripts/install.sh)"
 ```
 
 ... via curl:
