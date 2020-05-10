@@ -1,14 +1,7 @@
 # Conky widget with clock and current weather report
 
-![debian](https://img.shields.io/badge/debian%20%5B%2064bit%20%5D-test%20[%20ok%20]-d70751?style=for-the-badge&logo=debian)
-![ubuntu](https://img.shields.io/badge/ubuntu%20%5B%2064bit%20%5D-test%20[%20ok%20]-e95420?style=for-the-badge&logo=ubuntu)
-![mint](https://img.shields.io/badge/mint%20%5B%2064bit%20%5D-test%20[%20ok%20]-97d953?style=for-the-badge&logo=linux%20mint)
-![arch](https://img.shields.io/badge/arch%20%5B%2064bit%20%5D-test%20[%20ok%20]-1793d1?style=for-the-badge&logo=arch%20linux)
-![manjaro](https://img.shields.io/badge/manjaro%20%5B%2064bit%20%5D-test%20[%20ok%20]-35bf5c?style=for-the-badge&logo=manjaro)
-![suse gnome](https://img.shields.io/badge/suse%20gnome%20%5B%2064bit%20%5D-test%20[%20ok%20]-35bf5c?style=for-the-badge&logo=opensuse)
-![suse kde](https://img.shields.io/badge/suse%20kde%20%5B%2064bit%20%5D-test%20[%20ok%20]-35bf5c?style=for-the-badge&logo=opensuse)
-![zorin](https://img.shields.io/badge/zorin%20%5B%2064bit%20%5D-test%20[%20ok%20]-239fc2?style=for-the-badge&logo=zorin)
-![fedora](https://img.shields.io/badge/fedora%20%5B%2064bit%20%5D-test%20[%20ok%20]-3b90ff?style=for-the-badge&logo=fedora)
+[![Version](https://img.shields.io/badge/dynamic/json.svg?label=version&url=https://api.github.com/repos/takattila/Clock-With-Weather-Conky/releases/latest&query=tag_name)](https://github.com/takattila/Clock-With-Weather-Conky/releases)
+[![Wiki](https://img.shields.io/badge/wiki-docs-orange)](https://github.com/takattila/Clock-With-Weather-Conky/wiki)
 
 
 - This widget uses [openweathermap.org](https://openweathermap.org) API, to get weather information.
@@ -33,6 +26,8 @@
         </td>
     </tr>
 </table>
+
+- A list of successful tests can be found [here](TESTS.md).
 
 
 ## Get the OpenWeatherMap API key
