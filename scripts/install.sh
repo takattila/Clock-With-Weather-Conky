@@ -31,7 +31,7 @@ function helperCheckout() {
     echo
 
     cd "${BASE_DIR}"/"${REPO}" || exit
-    git checkout v1.0.0 &> /dev/null
+    git checkout master &> /dev/null
 }
 
 function helperCloneAndCheckout() {
