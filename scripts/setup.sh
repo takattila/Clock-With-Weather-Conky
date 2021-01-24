@@ -182,7 +182,7 @@ ALIGNMENTS_ARRAY=(
     "bottom_right"
     "bottom_middle"
     "middle_left"
-    "middle_righ"
+    "middle_right"
     "middle_middle"
 )
 
