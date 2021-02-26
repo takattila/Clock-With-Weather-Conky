@@ -501,11 +501,12 @@ function setupWindowSettings() {
 function setupCreateStartIcons() {
     local launcherPath
     local launcher
+    local menuDir="$(xdg-user-dir)/.local/share/applications"
     
-    mkdir -p /home/"$(whoami)"/.local/share/applications
+    mkdir -p "${menuDir}"
 
     launcherPath="$(xdg-user-dir DESKTOP)/start-clock-with-weather-conky-widget.desktop"
-    launcherMenuPath="$(xdg-user-dir)/.local/share/applications/start-clock-with-weather-conky-widget.desktop"
+    launcherMenuPath="${menuDir}/start-clock-with-weather-conky-widget.desktop"
 
     launcher=$(helperReplace "${DESKTOP_LAUNCHER}" "REPLACE_APP_DIR" "${BASE_DIR}/${REPO}")
     launcher=$(helperReplace "${launcher}" "REPLACE_API_KEY" "${DEFAULT_OPENWEATHER_API_KEY}")
@@ -522,11 +523,12 @@ function setupCreateStartIcons() {
 function setupCreateSetupIcons() {
     local launcherPath
     local launcher
+    local menuDir="$(xdg-user-dir)/.local/share/applications"
     
-    mkdir -p /home/"$(whoami)"/.local/share/applications
+    mkdir -p "${menuDir}"
 
     launcherPath="$(xdg-user-dir DESKTOP)/setup-clock-with-weather-conky-widget.desktop"
-    launcherMenuPath="$(xdg-user-dir)/.local/share/applications/setup-clock-with-weather-conky-widget.desktop"
+    launcherMenuPath="${menuDir}/setup-clock-with-weather-conky-widget.desktop"
 
     launcher=$(helperReplace "${DESKTOP_LAUNCHER_SETUP}" "REPLACE_APP_DIR" "${BASE_DIR}/${REPO}")
     launcher=$(helperReplace "${launcher}" "REPLACE_API_KEY" "${DEFAULT_OPENWEATHER_API_KEY}")
