@@ -501,6 +501,8 @@ function setupWindowSettings() {
 function setupCreateStartIcons() {
     local launcherPath
     local launcher
+    
+    mkdir -p /home/"$(whoami)"/.local/share/applications
 
     launcherPath="$(xdg-user-dir DESKTOP)/start-clock-with-weather-conky-widget.desktop"
     launcherMenuPath="$(xdg-user-dir)/.local/share/applications/start-clock-with-weather-conky-widget.desktop"
@@ -520,6 +522,8 @@ function setupCreateStartIcons() {
 function setupCreateSetupIcons() {
     local launcherPath
     local launcher
+    
+    mkdir -p /home/"$(whoami)"/.local/share/applications
 
     launcherPath="$(xdg-user-dir DESKTOP)/setup-clock-with-weather-conky-widget.desktop"
     launcherMenuPath="$(xdg-user-dir)/.local/share/applications/setup-clock-with-weather-conky-widget.desktop"
