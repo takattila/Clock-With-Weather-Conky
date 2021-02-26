@@ -498,7 +498,7 @@ function setupWindowSettings() {
     echo "${appCfg}" > "${cfgFile}"
 }
 
-function setupCreateDesktopIcon() {
+function setupCreateStartIcons() {
     local launcherPath
     local launcher
 
@@ -517,7 +517,7 @@ function setupCreateDesktopIcon() {
     echo "- Menu icon created: ${C_Y}${launcherMenuPath}${C_D}"
 }
 
-function setupCreateConfigDesktopIcon() {
+function setupCreateSetupIcons() {
     local launcherPath
     local launcher
 
@@ -568,8 +568,8 @@ function main() {
     setupApiKey
     setupSetWeatherApiVariables
     setupWindowSettings
-    setupCreateDesktopIcon
-    setupCreateConfigDesktopIcon
+    setupCreateStartIcons
+    setupCreateSetupIcons
     setupStartApplication
 }
 
