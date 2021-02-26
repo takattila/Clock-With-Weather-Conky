@@ -503,15 +503,18 @@ function setupCreateDesktopIcon() {
     local launcher
 
     launcherPath="$(xdg-user-dir DESKTOP)/start-clock-with-weather-conky-widget.desktop"
+    launcherMenuPath="$(xdg-user-dir)/.local/share/applications/start-clock-with-weather-conky-widget.desktop"
 
     launcher=$(helperReplace "${DESKTOP_LAUNCHER}" "REPLACE_APP_DIR" "${BASE_DIR}/${REPO}")
     launcher=$(helperReplace "${launcher}" "REPLACE_API_KEY" "${DEFAULT_OPENWEATHER_API_KEY}")
 
     echo "${launcher}" > "${launcherPath}"
-    chmod 755 "${launcherPath}"
+    echo "${launcher}" > "${launcherMenuPath}"
+    chmod 755 "${launcherPath}" "${launcherMenuPath}"
 
     echo
     echo "- Desktop icon created: ${C_Y}${launcherPath}${C_D}"
+    echo "- Menu icon created: ${C_Y}${launcherMenuPath}${C_D}"
 }
 
 function setupCreateConfigDesktopIcon() {
@@ -519,6 +522,7 @@ function setupCreateConfigDesktopIcon() {
     local launcher
 
     launcherPath="$(xdg-user-dir DESKTOP)/setup-clock-with-weather-conky-widget.desktop"
+    launcherMenuPath="$(xdg-user-dir)/.local/share/applications/setup-clock-with-weather-conky-widget.desktop"
 
     launcher=$(helperReplace "${DESKTOP_LAUNCHER_SETUP}" "REPLACE_APP_DIR" "${BASE_DIR}/${REPO}")
     launcher=$(helperReplace "${launcher}" "REPLACE_API_KEY" "${DEFAULT_OPENWEATHER_API_KEY}")
@@ -536,10 +540,12 @@ function setupCreateConfigDesktopIcon() {
     launcher=$(helperReplace "${launcher}" "REPLACE_CONFIG_POSITION_Y" "${DEFAULT_WINDOW_POSITION_Y}")
 
     echo "${launcher}" > "${launcherPath}"
-    chmod 755 "${launcherPath}"
+    echo "${launcher}" > "${launcherMenuPath}"
+    chmod 755 "${launcherPath}" "${launcherMenuPath}"
 
     echo
     echo "- Desktop icon created: ${C_Y}${launcherPath}${C_D}"
+    echo "- Menu icon created: ${C_Y}${launcherMenuPath}${C_D}"
 }
 
 function setupStartApplication() {
