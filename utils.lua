@@ -1,9 +1,19 @@
 local utils = {}
 
+function city_encode(str)
+  if str then
+    str = string.gsub(str, "([^%w%-%.%_%~ ])", function(c)
+      return string.format("%%%02X", string.byte(c))
+    end)
+    str = string.gsub(str, " ", "%%20")
+  end
+  return str
+end
+
 function utils.get_weather_json()
 	return conky_parse(
 		"${exec curl -s '" .. settings.weather.api_url ..
-			"?q=" .. settings.weather.city .. "," .. settings.weather.language_code .. 
+			"?q=" .. city_encode(settings.weather.city) .. "," .. settings.weather.language_code .. 
 			"&lang=" .. settings.weather.lang .. 
 			"&units=" .. settings.weather.units .. 
 			"&appid=" .. settings.weather.api_key .. 
