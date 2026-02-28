@@ -21,7 +21,18 @@ function start() {
 
     killall conky &> /dev/null
     cd /home/$(whoami)/.conky/Clock-With-Weather-Conky || true
-    nohup /usr/bin/conky -c app.cfg >/dev/null 2>&1 </dev/null &
+
+    # Detect monitors
+    MONITORS=$(xrandr --listmonitors | grep -c "^\s*[0-9]\+:")
+
+    if [[ "$MONITORS" -le 1 ]]; then
+        nohup /usr/bin/conky -c app.cfg >/dev/null 2>&1 </dev/null &
+    else
+        for (( i=0; i<$MONITORS; i++ )); do
+            nohup /usr/bin/conky -c app.cfg -m $i >/dev/null 2>&1 </dev/null &
+        done
+    fi
+
     cd - || true
 }
 
