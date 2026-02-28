@@ -33,12 +33,28 @@ function start() {
         done
     fi
 
-    cd - || true
+    cd - > /dev/null || true
+    echo "$MONITORS"
+}
+
+function monitor_changes() {
+    local last_monitors="$1"
+    while true; do
+        sleep 5
+        local current_monitors=$(xrandr --listmonitors | grep -c "^\s*[0-9]\+:")
+        if [[ "$current_monitors" -ne "$last_monitors" ]]; then
+            # We don't want to capture the echo output here, just update the value
+            start > /dev/null
+            last_monitors="$current_monitors"
+            echo "Monitor change detected. Updated to $current_monitors monitor(s)."
+        fi
+    done
 }
 
 function main() {
     checkAPIkey
-    start
+    local initial_monitors=$(start)
+    monitor_changes "$initial_monitors"
 }
 
 main
