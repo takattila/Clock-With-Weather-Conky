@@ -12,7 +12,7 @@ end
 
 function utils.get_weather_json()
 	return conky_parse(
-		"${exec curl -s '" .. settings.weather.api_url ..
+		"${execi 600 curl -s '" .. settings.weather.api_url ..
 			"?q=" .. city_encode(settings.weather.city) .. "," .. settings.weather.language_code .. 
 			"&lang=" .. settings.weather.lang .. 
 			"&units=" .. settings.weather.units .. 
