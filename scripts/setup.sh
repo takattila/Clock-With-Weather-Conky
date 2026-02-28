@@ -156,6 +156,7 @@ Terminal=false
 Name=[ Start ] Clock with Weather widget
 Exec=bash -c "REPLACE_APP_DIR/scripts/start.sh REPLACE_API_KEY"
 Type=Application
+Categories=Utility;
 GenericName[en_GB.UTF-8]=Clock with Weather Conky widget
 Icon=REPLACE_APP_DIR/images/theme/light/weather/dovora/01d.png
 '
@@ -167,6 +168,7 @@ Terminal=true
 Name=[ Setup ] Clock with Weather widget
 Exec=bash -c "REPLACE_APP_DIR/scripts/setup.sh -a REPLACE_API_KEY -c REPLACE_CITY -lc REPLACE_LANGUAGE_CODE -la REPLACE_LANG -u REPLACE_UNITS_NUMBER -t REPLACE_THEME_NUMBER -hf REPLACE_HOUR_FORMAT_12_NUMBER -wa REPLACE_CONFIG_ALIGNMENT -wx REPLACE_CONFIG_POSITION_X -wy REPLACE_CONFIG_POSITION_Y"
 Type=Application
+Categories=Settings;Utility;
 GenericName[en_GB.UTF-8]=Clock with Weather Conky widget setup
 Icon=REPLACE_APP_DIR/images/setup.png
 '
@@ -501,7 +503,7 @@ function setupWindowSettings() {
 function setupCreateStartIcons() {
     local launcherPath
     local launcher
-    local menuDir="$(xdg-user-dir)/.local/share/applications"
+    local menuDir="${HOME}/.local/share/applications"
     
     mkdir -p "${menuDir}"
 
@@ -523,7 +525,7 @@ function setupCreateStartIcons() {
 function setupCreateSetupIcons() {
     local launcherPath
     local launcher
-    local menuDir="$(xdg-user-dir)/.local/share/applications"
+    local menuDir="${HOME}/.local/share/applications"
     
     mkdir -p "${menuDir}"
 
@@ -555,7 +557,7 @@ function setupCreateSetupIcons() {
 }
 
 function setupStartApplication() {
-    setsid bash "${BASE_DIR}"/"${REPO}"/scripts/start.sh "${DEFAULT_OPENWEATHER_API_KEY}" &> /dev/null
+    setsid bash "${BASE_DIR}"/"${REPO}"/scripts/start.sh "${DEFAULT_OPENWEATHER_API_KEY}" &> /dev/null &
 
     echo
     echo "- Starting: ${C_Y}bash ${BASE_DIR}/${REPO}/scripts/start.sh ${DEFAULT_OPENWEATHER_API_KEY}${C_D}"
