@@ -38,9 +38,10 @@ function conky_main()
 
 			if utils.check_api_response_status(cr, obj) then
 				draw.elements(cr, obj)
-				cairo_surface_destroy(cs)
-				cairo_destroy(cr)
 			end
 		end
 	end
+
+	cairo_surface_destroy(cs)
+	cairo_destroy(cr)
 end
