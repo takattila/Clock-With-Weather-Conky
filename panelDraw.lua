@@ -96,11 +96,23 @@ function draw.elements(cr)
 	local chart_w = w_width - 20
 	local chart_x = 10
 
+	-- Load colors from the current theme settings
+	local color_light = settings.appearance.font.color.light
+	local color_dark = settings.appearance.font.color.dark
+
 	-- Data collection
 	local cpu = tonumber(conky_parse("${cpu cpu0}")) or 0
 	local mem = tonumber(conky_parse("${memperc}")) or 0
 	
+	-- Detect network interface
 	local iface = conky_parse("${gw_iface}")
+	
+	-- Fallback if conky returns "multiple", "(null)" or empty
+	if iface == "" or iface == nil or iface == "(null)" or iface == "multiple" then 
+		iface = conky_parse("${exec ip route get 8.8.8.8 | grep -Po '(?<=dev )\\S+' | head -1}")
+	end
+	
+	-- Absolute fallback
 	if iface == "" or iface == nil then iface = "eth0" end
 	
 	local net_up = tonumber(conky_parse("${upspeedf " .. iface .. "}")) or 0
@@ -117,13 +129,13 @@ function draw.elements(cr)
 		local y_offset = (section_height * i) + title_space
 		
 		if i == 0 then
-			draw_line_chart(cr, chart_x, y_offset, chart_w, chart_h, cpu_hist, "CPU", "#ff4444", 100, "%")
+			draw_line_chart(cr, chart_x, y_offset, chart_w, chart_h, cpu_hist, "CPU", color_light, 100, "%")
 		elseif i == 1 then
-			draw_line_chart(cr, chart_x, y_offset, chart_w, chart_h, mem_hist, "Memory", "#44ff44", 100, "%")
+			draw_line_chart(cr, chart_x, y_offset, chart_w, chart_h, mem_hist, "Memory", color_dark, 100, "%")
 		elseif i == 2 then
-			draw_line_chart(cr, chart_x, y_offset, chart_w, chart_h, net_down_hist, "Net Down", "#4444ff", 1000, " KiB/s")
+			draw_line_chart(cr, chart_x, y_offset, chart_w, chart_h, net_down_hist, "Net Down", color_light, 1000, " KiB/s")
 		elseif i == 3 then
-			draw_line_chart(cr, chart_x, y_offset, chart_w, chart_h, net_up_hist, "Net Up", "#ffff44", 500, " KiB/s")
+			draw_line_chart(cr, chart_x, y_offset, chart_w, chart_h, net_up_hist, "Net Up", color_dark, 500, " KiB/s")
 		end
 	end
 end
