@@ -48,6 +48,14 @@ while [[ ! $# -eq 0 ]]; do
             shift
             ARG_WINDOW_POSITION_Y=$1
             ;;
+        --start-panel | -sp)
+            shift
+            ARG_START_PANEL=$1
+            ;;
+        --create-desktop-icons | -cdi)
+            shift
+            ARG_CREATE_DESKTOP_ICONS=$1
+            ;;
 	esac
 	shift
 done
@@ -62,6 +70,8 @@ DEFAULT_HOUR_FORMAT_12_NUMBER="$(  [[ -n "${ARG_HOUR_FORMAT_12_NUMBER}" ]]   && 
 DEFAULT_WINDOW_ALIGMENT_NUMBER="$( [[ -n "${ARG_WINDOW_ALIGMENT_NUMBER}" ]]  && echo "${ARG_WINDOW_ALIGMENT_NUMBER}" || echo "9" )"
 DEFAULT_WINDOW_POSITION_X="$(      [[ -n "${ARG_WINDOW_POSITION_X}" ]]       && echo "${ARG_WINDOW_POSITION_X}"      || echo "0" )"
 DEFAULT_WINDOW_POSITION_Y="$(      [[ -n "${ARG_WINDOW_POSITION_Y}" ]]       && echo "${ARG_WINDOW_POSITION_Y}"      || echo "0" )"
+DEFAULT_START_PANEL="$(            [[ -n "${ARG_START_PANEL}" ]]             && echo "${ARG_START_PANEL}"            || echo "1" )"
+DEFAULT_CREATE_DESKTOP_ICONS="$(   [[ -n "${ARG_CREATE_DESKTOP_ICONS}" ]]    && echo "${ARG_CREATE_DESKTOP_ICONS}"   || echo "1" )"
 
 REPO="Clock-With-Weather-Conky"
 BASE_DIR="/home/$(whoami)/.conky"
@@ -166,7 +176,7 @@ DESKTOP_LAUNCHER_SETUP='
 Comment=Setup - Clock with Weather Conky widget
 Terminal=true
 Name=[ Setup ] Clock with Weather widget
-Exec=bash -c "REPLACE_APP_DIR/scripts/setup.sh -a REPLACE_API_KEY -c REPLACE_CITY -lc REPLACE_LANGUAGE_CODE -la REPLACE_LANG -u REPLACE_UNITS_NUMBER -t REPLACE_THEME_NUMBER -hf REPLACE_HOUR_FORMAT_12_NUMBER -wa REPLACE_CONFIG_ALIGNMENT -wx REPLACE_CONFIG_POSITION_X -wy REPLACE_CONFIG_POSITION_Y"
+Exec=bash -c "REPLACE_APP_DIR/scripts/setup.sh -a REPLACE_API_KEY -c REPLACE_CITY -lc REPLACE_LANGUAGE_CODE -la REPLACE_LANG -u REPLACE_UNITS_NUMBER -t REPLACE_THEME_NUMBER -hf REPLACE_HOUR_FORMAT_12_NUMBER -wa REPLACE_CONFIG_ALIGNMENT -wx REPLACE_CONFIG_POSITION_X -wy REPLACE_CONFIG_POSITION_Y -sp REPLACE_START_PANEL -cdi REPLACE_CREATE_DESKTOP_ICONS"
 Type=Application
 Categories=Settings;Utility;
 GenericName[en_GB.UTF-8]=Clock with Weather Conky widget setup
@@ -470,7 +480,6 @@ function setupWindowSettings() {
     local cfgFile="${BASE_DIR}/${REPO}/cwApp.lua"
     local panelCfgFile="${BASE_DIR}/${REPO}/panelApp.lua"
     local appCfg
-    local startPanel
 
     echo
     echo "- Please enter the ${C_Y}number${C_D} of the choosen ${C_Y}window alignment${C_D}."
@@ -500,8 +509,8 @@ function setupWindowSettings() {
     echo -e "  ${C_Y}1.${C_D} Yes (Recommended)"
     echo -e "  ${C_Y}2.${C_D} No"
     echo
-    startPanel="$(
-        helperPrompt "  ${C_Y}[1 or 2]${C_D} ?: " "1" "1 2"
+    CURRENT_START_PANEL="$(
+        helperPrompt "  your choice ?: " "${DEFAULT_START_PANEL}" "1 2"
     )"
 
     appCfg=$(helperReplace "${DEFAULT_CONKY_CONFIG}" "REPLACE_CONFIG_ALIGNMENT" "${alignment}")
@@ -512,18 +521,30 @@ function setupWindowSettings() {
 
     # Update the start status in panelApp.lua
     if grep -q "START_PANEL_ENABLED =" "$panelCfgFile"; then
-        if [[ "$startPanel" == "1" ]]; then
+        if [[ "$CURRENT_START_PANEL" == "1" ]]; then
             sed -i 's/START_PANEL_ENABLED = .*/START_PANEL_ENABLED = true/' "$panelCfgFile"
         else
             sed -i 's/START_PANEL_ENABLED = .*/START_PANEL_ENABLED = false/' "$panelCfgFile"
         fi
     else
-        if [[ "$startPanel" == "1" ]]; then
+        if [[ "$CURRENT_START_PANEL" == "1" ]]; then
             sed -i '1iSTART_PANEL_ENABLED = true\n' "$panelCfgFile"
         else
             sed -i '1iSTART_PANEL_ENABLED = false\n' "$panelCfgFile"
         fi
     fi
+}
+
+function setupIconSettings() {
+    echo
+    echo "- Do you want to create ${C_Y}Desktop icons${C_D} for starting/setup?"
+    echo "  (Menu icons will be created automatically)"
+    echo -e "  ${C_Y}1.${C_D} Yes"
+    echo -e "  ${C_Y}2.${C_D} No"
+    echo
+    CURRENT_CREATE_DESKTOP_ICONS="$(
+        helperPrompt "  your choice ?: " "${DEFAULT_CREATE_DESKTOP_ICONS}" "1 2"
+    )"
 }
 
 function setupCreateStartIcons() {
@@ -539,13 +560,17 @@ function setupCreateStartIcons() {
     launcher=$(helperReplace "${DESKTOP_LAUNCHER}" "REPLACE_APP_DIR" "${BASE_DIR}/${REPO}")
     launcher=$(helperReplace "${launcher}" "REPLACE_API_KEY" "${DEFAULT_OPENWEATHER_API_KEY}")
 
-    echo "${launcher}" > "${launcherPath}"
+    # Always create menu icon
     echo "${launcher}" > "${launcherMenuPath}"
-    chmod 755 "${launcherPath}" "${launcherMenuPath}"
-
-    echo
-    echo "- Desktop icon created: ${C_Y}${launcherPath}${C_D}"
+    chmod 755 "${launcherMenuPath}"
     echo "- Menu icon created: ${C_Y}${launcherMenuPath}${C_D}"
+
+    # Conditionally create desktop icon
+    if [[ "$CURRENT_CREATE_DESKTOP_ICONS" == "1" ]]; then
+        echo "${launcher}" > "${launcherPath}"
+        chmod 755 "${launcherPath}"
+        echo "- Desktop icon created: ${C_Y}${launcherPath}${C_D}"
+    fi
 }
 
 function setupCreateSetupIcons() {
@@ -572,14 +597,21 @@ function setupCreateSetupIcons() {
     launcher=$(helperReplace "${launcher}" "REPLACE_CONFIG_ALIGNMENT" "${DEFAULT_WINDOW_ALIGMENT_NUMBER}")
     launcher=$(helperReplace "${launcher}" "REPLACE_CONFIG_POSITION_X" "${DEFAULT_WINDOW_POSITION_X}")
     launcher=$(helperReplace "${launcher}" "REPLACE_CONFIG_POSITION_Y" "${DEFAULT_WINDOW_POSITION_Y}")
+    
+    launcher=$(helperReplace "${launcher}" "REPLACE_START_PANEL" "${CURRENT_START_PANEL}")
+    launcher=$(helperReplace "${launcher}" "REPLACE_CREATE_DESKTOP_ICONS" "${CURRENT_CREATE_DESKTOP_ICONS}")
 
-    echo "${launcher}" > "${launcherPath}"
+    # Always create menu icon
     echo "${launcher}" > "${launcherMenuPath}"
-    chmod 755 "${launcherPath}" "${launcherMenuPath}"
-
-    echo
-    echo "- Desktop icon created: ${C_Y}${launcherPath}${C_D}"
+    chmod 755 "${launcherMenuPath}"
     echo "- Menu icon created: ${C_Y}${launcherMenuPath}${C_D}"
+
+    # Conditionally create desktop icon
+    if [[ "$CURRENT_CREATE_DESKTOP_ICONS" == "1" ]]; then
+        echo "${launcher}" > "${launcherPath}"
+        chmod 755 "${launcherPath}"
+        echo "- Desktop icon created: ${C_Y}${launcherPath}${C_D}"
+    fi
 }
 
 function setupStartApplication() {
@@ -617,6 +649,7 @@ function main() {
     setupApiKey
     setupSetWeatherApiVariables
     setupWindowSettings
+    setupIconSettings
     setupCreateStartIcons
     setupCreateSetupIcons
     setupStartApplication
