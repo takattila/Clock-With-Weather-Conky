@@ -1,4 +1,5 @@
-conky.config = {
+
+	conky.config = {
 	update_interval = 1,
 
 	background = false,

@@ -63,7 +63,7 @@ function draw_line_chart(cr, x, y, w, h, data, label, color_hex, max_val, suffix
 
 	cairo_select_font_face(cr, "Noto Sans", CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL)
 	cairo_set_font_size(cr, 14)
-	cairo_set_source_rgba(cr, 1, 1, 1, 0.7)
+	cairo_set_source_rgba(cr, r, g, b, 0.7) -- Use theme color with transparency
 	cairo_move_to(cr, x, y - 8)
 	cairo_show_text(cr, "Current: " .. string.format("%.1f", display_val) .. display_suffix)
 
