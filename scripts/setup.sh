@@ -142,8 +142,8 @@ DEFAULT_CONKY_CONFIG='
 
 	uppercase = false,
 
-	lua_load = "main.lua",
-	lua_draw_hook_pre = "main",
+	lua_load = "cwMain.lua",
+	lua_draw_hook_pre = "cwMain",
 };
 
 conky.text = [[ ]];
@@ -394,7 +394,7 @@ function setupSetWeatherApiVariables() {
     local themeLua
     local weatherLua
 
-    local themeFile="${BASE_DIR}/${REPO}/theme.lua"
+    local themeFile="${BASE_DIR}/${REPO}/cwTheme.lua"
     local weatherFile="${BASE_DIR}/${REPO}/themes/weather/default/weather.lua"
 
     echo
@@ -467,7 +467,7 @@ function setupSetWeatherApiVariables() {
 function setupWindowSettings() {
     local alignmentNumber
     local alignment
-    local cfgFile="${BASE_DIR}/${REPO}/app.cfg"
+    local cfgFile="${BASE_DIR}/${REPO}/cwApp.lua"
     local appCfg
 
     echo
