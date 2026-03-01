@@ -41,9 +41,11 @@ function start() {
 
     if [[ "$MONITORS" -le 1 ]]; then
         nohup /usr/bin/conky -c cwApp.lua >/dev/null 2>&1 </dev/null &
+        nohup /usr/bin/conky -c panelApp.lua >/dev/null 2>&1 </dev/null &
     else
         for (( i=0; i<$MONITORS; i++ )); do
             nohup /usr/bin/conky -c cwApp.lua -m $i >/dev/null 2>&1 </dev/null &
+            nohup /usr/bin/conky -c panelApp.lua -m $i >/dev/null 2>&1 </dev/null &
         done
     fi
 
