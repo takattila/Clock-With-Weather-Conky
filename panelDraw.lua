@@ -42,7 +42,7 @@ local function draw_background(cr)
 	cairo_fill(cr)
 end
 
-function draw_line_chart(cr, x, y, w, h, data, label, color_hex, max_val, suffix)
+function draw_line_chart(cr, x, y, w, h, data, label, color_hex, max_val, suffix, extra_info)
 	local r, g, b = hex2rgb(color_hex)
 	local current_val = data[#data] or 0
 	
@@ -65,7 +65,12 @@ function draw_line_chart(cr, x, y, w, h, data, label, color_hex, max_val, suffix
 	cairo_set_font_size(cr, 14)
 	cairo_set_source_rgba(cr, r, g, b, 0.7) -- Use theme color with transparency
 	cairo_move_to(cr, x, y - 8)
-	cairo_show_text(cr, "Current: " .. string.format("%.1f", display_val) .. display_suffix)
+	
+	local status_text = "Current: " .. string.format("%.1f", display_val) .. display_suffix
+	if extra_info then
+		status_text = status_text .. "  " .. extra_info
+	end
+	cairo_show_text(cr, status_text)
 
 	-- 3. Chart Background (Subtle overlay)
 	cairo_set_source_rgba(cr, 1, 1, 1, 0.05)
@@ -125,7 +130,9 @@ function draw.elements(cr)
 
 	-- Data collection
 	local cpu = tonumber(conky_parse("${cpu cpu0}")) or 0
+	local cpu_freq = conky_parse("${freq_g}") .. " GHz"
 	local mem = tonumber(conky_parse("${memperc}")) or 0
+	local mem_total = conky_parse("${memmax}")
 	
 	local iface = conky_parse("${gw_iface}")
 	if iface == "" or iface == nil or iface == "(null)" or iface == "multiple" then 
@@ -151,9 +158,9 @@ function draw.elements(cr)
 		local y_offset = (section_height * i) + title_space
 		
 		if i == 0 then
-			draw_line_chart(cr, chart_x, y_offset, chart_w, chart_h, cpu_hist, "CPU", color_light, 100, "%")
+			draw_line_chart(cr, chart_x, y_offset, chart_w, chart_h, cpu_hist, "CPU", color_light, 100, "%", "@ " .. cpu_freq)
 		elseif i == 1 then
-			draw_line_chart(cr, chart_x, y_offset, chart_w, chart_h, mem_hist, "Memory", color_dark, 100, "%")
+			draw_line_chart(cr, chart_x, y_offset, chart_w, chart_h, mem_hist, "Memory", color_dark, 100, "%", "(Total: " .. mem_total .. ")")
 		elseif i == 2 then
 			draw_line_chart(cr, chart_x, y_offset, chart_w, chart_h, net_down_hist, "Net Down", color_light, dynamic_down_max, " KiB/s")
 		elseif i == 3 then
