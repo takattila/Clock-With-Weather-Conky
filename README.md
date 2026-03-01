@@ -7,6 +7,13 @@
 - This widget uses [openweathermap.org](https://openweathermap.org) API, to get weather information.
 - Easy to customize, supports appearance on **light** and **dark** backgrounds. *(See: [Example Themes](./themes/themes.md))*.
 - Supports `12` and `24-hour` clock format.
+- **System Monitor Panel**:
+    - Real-time **CPU** and **Memory** usage charts.
+    - **Network Traffic** monitoring (Download/Upload).
+    - **Dynamic Scaling**: Network charts automatically adjust their scale and units (KiB/s to MiB/s) based on traffic.
+    - **Auto-detection**: Automatically identifies the active network interface (NIC).
+- **Multi-monitor Support**: Enhanced geometry detection for specific monitors and automatic workspace area calculation.
+- **Desktop Integration**: Automatic creation of Menu icons and optional Desktop shortcuts.
 
 <table>
     <tr>
@@ -94,7 +101,9 @@ Use the above command to **change** the following **settings**:
   2. imperial (for displaying Fahrenheit)
 - theme number
 - hour format (12 or 24)
-- window alignment and position
+- window alignment and screen position
+- **System Monitor**: toggle the side panel on/off
+- **Shortcuts**: enable/disable Desktop icon creation
 
 [Back to top](#conky-widget-with-clock-and-current-weather-report)
 
