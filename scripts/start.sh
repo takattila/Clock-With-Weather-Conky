@@ -55,6 +55,7 @@ function start() {
 
 function monitor_changes() {
     local last_monitors="$1"
+    pkill -f "Clock-With-Weather-Conky/scripts/start.sh" &> /dev/null
     while true; do
         sleep 5
         local current_monitors=$(get_monitor_count)
