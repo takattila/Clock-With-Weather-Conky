@@ -28,7 +28,18 @@ local function get_dynamic_max(hist, min_ceiling)
 	for _, v in ipairs(hist) do
 		if v > max then max = v end
 	end
-	return max * 1.1 -- Add 10% headroom so the line doesn't touch the very top
+	return max * 1.1 -- Add 10% headroom
+end
+
+-- Function to draw the panel background (matches cw style)
+local function draw_background(cr)
+	local w = conky_window.width
+	local h = conky_window.height
+	local r, g, b = hex2rgb(settings.appearance.background.color)
+	
+	cairo_rectangle(cr, 0, 0, w, h)
+	cairo_set_source_rgba(cr, r, g, b, settings.appearance.background.transparency)
+	cairo_fill(cr)
 end
 
 function draw_line_chart(cr, x, y, w, h, data, label, color_hex, max_val, suffix)
@@ -43,7 +54,6 @@ function draw_line_chart(cr, x, y, w, h, data, label, color_hex, max_val, suffix
 	cairo_show_text(cr, label:upper())
 
 	-- 2. Current measurement (below the title)
-	-- Format: switch to MiB/s if value is high
 	local display_val = current_val
 	local display_suffix = suffix
 	if suffix == " KiB/s" and current_val > 1024 then
@@ -57,7 +67,7 @@ function draw_line_chart(cr, x, y, w, h, data, label, color_hex, max_val, suffix
 	cairo_move_to(cr, x, y - 8)
 	cairo_show_text(cr, "Current: " .. string.format("%.1f", display_val) .. display_suffix)
 
-	-- 3. Chart Background
+	-- 3. Chart Background (Subtle overlay)
 	cairo_set_source_rgba(cr, 1, 1, 1, 0.05)
 	cairo_rectangle(cr, x, y, w, h)
 	cairo_fill(cr)
@@ -99,6 +109,9 @@ function draw.elements(cr)
 	
 	if w_height <= 0 then return end
 
+	-- Draw theme background first
+	draw_background(cr)
+
 	local sections = 4
 	local gap = 20
 	local section_height = w_height / sections
@@ -129,8 +142,7 @@ function draw.elements(cr)
 	update_history(net_up_hist, net_up)
 	update_history(net_down_hist, net_down)
 
-	-- Calculate dynamic ceilings for network charts
-	-- We use 1024 KiB/s as a base minimum ceiling
+	-- Calculate dynamic ceilings
 	local dynamic_down_max = get_dynamic_max(net_down_hist, 1024)
 	local dynamic_up_max = get_dynamic_max(net_up_hist, 512)
 
