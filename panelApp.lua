@@ -1,20 +1,40 @@
--- Function to automatically get screen and workarea geometry
-local function get_auto_geometry()
-    -- Default values (if commands fail to run)
+-- Function to detect the monitor index passed to conky via -m flag
+local function detect_monitor_index()
+    local m_index = 0
+    local f = io.open("/proc/self/cmdline", "rb")
+    if f then
+        local content = f:read("*a")
+        f:close()
+        -- Command line args in /proc are separated by null bytes (\0)
+        -- We look for the sequence: -m <number>
+        local match = content:match("%-m%z(%d+)")
+        if match then
+            m_index = tonumber(match)
+        end
+    end
+    return m_index
+end
+
+-- Function to automatically get geometry for a specific monitor
+local function get_auto_geometry(m_index)
     local sw, sh = 1920, 1080
     local wx, wy, ww, wh = 0, 0, 1920, 1080
 
-    -- Get total screen resolution
-    local f = io.popen("xrandr --current | grep '*' | head -n1")
-    if f then
-        local line = f:read("*a")
-        f:close()
-        local w, h = line:match("(%d+)x(%d+)")
-        sw, sh = tonumber(w) or sw, tonumber(h) or sh
+    -- 1. Get the specific monitor resolution using xrandr
+    local f_mon = io.popen("xrandr --listmonitors | grep '^ " .. m_index .. ":'")
+    if f_mon then
+        local line = f_mon:read("*a")
+        f_mon:close()
+        
+        -- Improved regex to capture Width, Height, OffsetX, OffsetY
+        local w, h, ox, oy = line:match("(%d+)/?%d*x(%d+)/?%d*%+(%d+)%+(%d+)")
+        if w and h then
+            sw = tonumber(w)
+            sh = tonumber(h)
+        end
     end
 
-    -- Get workarea (usable area)
-    -- Format: x, y, width, height (y is the offset for top/bottom panels)
+    -- 2. Get global workarea to detect panel/tray size
     local f_wa = io.popen("xprop -root _NET_WORKAREA")
     if f_wa then
         local line = f_wa:read("*a")
@@ -26,23 +46,30 @@ local function get_auto_geometry()
     return sw, sh, wx, wy, ww, wh
 end
 
--- Extract geometry
-local sw, sh, wx, wy, ww, wh = get_auto_geometry()
+-- Auto-detect which monitor conky is running on
+local monitor_index = tonumber(os.getenv("MONITOR_INDEX")) or detect_monitor_index()
 
--- Calculate settings
+-- Extract geometry for the current monitor
+local sw, sh, wx, wy, ww, wh = get_auto_geometry(monitor_index)
+
+-- Calculate layout
 local alignment = "top_right"
-local final_height = wh
+local final_height = sh 
 local gap_y = 0
 
--- If the panel is at the top, wy > 0, so the widget needs to start lower
+-- wy is the global offset (e.g., top panel height)
 if alignment == "top_right" then
     gap_y = wy
--- If the panel is at the bottom, wy will be 0, but wh < sh. gap_y is the distance from top.
-elseif alignment == "bottom_right" then
-    gap_y = sh - (wy + wh)
+    final_height = sh - wy
+    
+    -- Check for bottom panel
+    local bottom_offset = sh - (wy + wh)
+    if bottom_offset > 0 then
+        final_height = final_height - bottom_offset
+    end
 end
 
--- Environment variables can override the automatic detection
+-- Manual overrides
 final_height = tonumber(os.getenv("PANEL_HEIGHT")) or final_height
 gap_y = tonumber(os.getenv("TRAY_HEIGHT")) or gap_y
 
