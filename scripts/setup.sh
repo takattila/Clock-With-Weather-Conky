@@ -557,13 +557,28 @@ function setupCreateSetupIcons() {
 }
 
 function setupStartApplication() {
+    echo
+    echo -n "- Starting widgets ... "
+    
+    # Start the start.sh script in a new session and background it
     setsid bash "${BASE_DIR}"/"${REPO}"/scripts/start.sh "${DEFAULT_OPENWEATHER_API_KEY}" &> /dev/null &
+    
+    # Wait a bit for conky processes to appear
+    sleep 2
+    local count=$(pgrep -x conky | wc -l)
+    
+    if [[ $count -gt 0 ]]; then
+        echo -e "${C_Y}done${C_D} ($count conky instances detected)."
+    else
+        echo -e "${C_R}failed or still starting...${C_D}"
+    fi
 
     echo
-    echo "- Starting: ${C_Y}bash ${BASE_DIR}/${REPO}/scripts/start.sh ${DEFAULT_OPENWEATHER_API_KEY}${C_D}"
-
+    echo -e "- Conky widgets started. - ${C_Y}Bye! :-)${C_D}"
     echo
-    echo "- Conky widget started. - ${C_Y}Bye! :-)${C_D}"
+    echo "-------------------------------------------------------"
+    read -n 1 -s -p "  Press any key to close this window..."
+    echo
 }
 
 function main() {

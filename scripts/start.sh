@@ -34,6 +34,8 @@ function start() {
     export OPENWEATHER_API_KEY=${API_KEY}
 
     killall conky &> /dev/null
+    sleep 1 # Wait for old processes to clean up
+    
     cd /home/$(whoami)/.conky/Clock-With-Weather-Conky || true
 
     # Detect monitors
@@ -41,11 +43,14 @@ function start() {
 
     if [[ "$MONITORS" -le 1 ]]; then
         nohup /usr/bin/conky -c cwApp.lua >/dev/null 2>&1 </dev/null &
+        sleep 0.5
         nohup /usr/bin/conky -c panelApp.lua >/dev/null 2>&1 </dev/null &
     else
         for (( i=0; i<$MONITORS; i++ )); do
             nohup /usr/bin/conky -c cwApp.lua -m $i >/dev/null 2>&1 </dev/null &
+            sleep 0.5
             nohup /usr/bin/conky -c panelApp.lua -m $i >/dev/null 2>&1 </dev/null &
+            sleep 0.5
         done
     fi
 
@@ -55,12 +60,11 @@ function start() {
 
 function monitor_changes() {
     local last_monitors="$1"
-    pkill -f "Clock-With-Weather-Conky/scripts/start.sh" &> /dev/null
+    # Note: avoid killing the current script if running
     while true; do
         sleep 5
         local current_monitors=$(get_monitor_count)
         if [[ "$current_monitors" -ne "$last_monitors" ]]; then
-            # We don't want to capture the echo output here, just update the value
             start > /dev/null
             last_monitors="$current_monitors"
             echo "Monitor change detected. Updated to $current_monitors monitor(s)."
