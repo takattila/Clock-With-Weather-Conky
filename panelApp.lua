@@ -1,3 +1,5 @@
+START_PANEL_ENABLED = true
+
 -- Function to detect the monitor index passed to conky via -m flag
 local function detect_monitor_index()
     local m_index = 0

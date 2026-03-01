@@ -40,16 +40,23 @@ function start() {
 
     # Detect monitors
     MONITORS=$(get_monitor_count)
+    
+    # Check if panel is enabled in configuration
+    local panel_enabled=$(grep -c "START_PANEL_ENABLED = true" panelApp.lua)
 
     if [[ "$MONITORS" -le 1 ]]; then
         nohup /usr/bin/conky -c cwApp.lua >/dev/null 2>&1 </dev/null &
-        sleep 0.5
-        nohup /usr/bin/conky -c panelApp.lua >/dev/null 2>&1 </dev/null &
+        if [[ $panel_enabled -gt 0 ]]; then
+            sleep 0.5
+            nohup /usr/bin/conky -c panelApp.lua -m 0 >/dev/null 2>&1 </dev/null &
+        fi
     else
         for (( i=0; i<$MONITORS; i++ )); do
             nohup /usr/bin/conky -c cwApp.lua -m $i >/dev/null 2>&1 </dev/null &
-            sleep 0.5
-            nohup /usr/bin/conky -c panelApp.lua -m $i >/dev/null 2>&1 </dev/null &
+            if [[ $panel_enabled -gt 0 ]]; then
+                sleep 0.5
+                nohup /usr/bin/conky -c panelApp.lua -m $i >/dev/null 2>&1 </dev/null &
+            fi
             sleep 0.5
         done
     fi

@@ -468,7 +468,9 @@ function setupWindowSettings() {
     local alignmentNumber
     local alignment
     local cfgFile="${BASE_DIR}/${REPO}/cwApp.lua"
+    local panelCfgFile="${BASE_DIR}/${REPO}/panelApp.lua"
     local appCfg
+    local startPanel
 
     echo
     echo "- Please enter the ${C_Y}number${C_D} of the choosen ${C_Y}window alignment${C_D}."
@@ -493,11 +495,35 @@ function setupWindowSettings() {
     )"
     DEFAULT_WINDOW_POSITION_Y="${positionY}"
 
+    echo
+    echo "- Do you want to start the ${C_Y}System Monitor Panel${C_D} as well?"
+    echo -e "  ${C_Y}1.${C_D} Yes (Recommended)"
+    echo -e "  ${C_Y}2.${C_D} No"
+    echo
+    startPanel="$(
+        helperPrompt "  ${C_Y}[1 or 2]${C_D} ?: " "1" "1 2"
+    )"
+
     appCfg=$(helperReplace "${DEFAULT_CONKY_CONFIG}" "REPLACE_CONFIG_ALIGNMENT" "${alignment}")
     appCfg=$(helperReplace "${appCfg}" "REPLACE_CONFIG_POSITION_X" "${positionX}")
     appCfg=$(helperReplace "${appCfg}" "REPLACE_CONFIG_POSITION_Y" "${positionY}")
 
     echo "${appCfg}" > "${cfgFile}"
+
+    # Update the start status in panelApp.lua
+    if grep -q "START_PANEL_ENABLED =" "$panelCfgFile"; then
+        if [[ "$startPanel" == "1" ]]; then
+            sed -i 's/START_PANEL_ENABLED = .*/START_PANEL_ENABLED = true/' "$panelCfgFile"
+        else
+            sed -i 's/START_PANEL_ENABLED = .*/START_PANEL_ENABLED = false/' "$panelCfgFile"
+        fi
+    else
+        if [[ "$startPanel" == "1" ]]; then
+            sed -i '1iSTART_PANEL_ENABLED = true\n' "$panelCfgFile"
+        else
+            sed -i '1iSTART_PANEL_ENABLED = false\n' "$panelCfgFile"
+        fi
+    fi
 }
 
 function setupCreateStartIcons() {
