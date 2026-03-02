@@ -125,8 +125,7 @@ function draw.elements(cr)
 	local chart_w = w_width - 20
 	local chart_x = 10
 
-	local color_light = settings.appearance.font.color.light
-	local color_dark = settings.appearance.font.color.dark
+	local chart_color = settings.appearance.font.color.light
 
 	-- Data collection
 	local cpu = tonumber(conky_parse("${cpu cpu0}")) or 0
@@ -158,13 +157,13 @@ function draw.elements(cr)
 		local y_offset = (section_height * i) + title_space
 		
 		if i == 0 then
-			draw_line_chart(cr, chart_x, y_offset, chart_w, chart_h, cpu_hist, "CPU", color_light, 100, "%", "@ " .. cpu_freq)
+			draw_line_chart(cr, chart_x, y_offset, chart_w, chart_h, cpu_hist, "CPU", chart_color, 100, "%", "@ " .. cpu_freq)
 		elseif i == 1 then
-			draw_line_chart(cr, chart_x, y_offset, chart_w, chart_h, mem_hist, "Memory", color_dark, 100, "%", "(Total: " .. mem_total .. ")")
+			draw_line_chart(cr, chart_x, y_offset, chart_w, chart_h, mem_hist, "Memory", chart_color, 100, "%", "(Total: " .. mem_total .. ")")
 		elseif i == 2 then
-			draw_line_chart(cr, chart_x, y_offset, chart_w, chart_h, net_down_hist, "Net Down", color_light, dynamic_down_max, " KiB/s")
+			draw_line_chart(cr, chart_x, y_offset, chart_w, chart_h, net_down_hist, "Net Down", chart_color, dynamic_down_max, " KiB/s")
 		elseif i == 3 then
-			draw_line_chart(cr, chart_x, y_offset, chart_w, chart_h, net_up_hist, "Net Up", color_dark, dynamic_up_max, " KiB/s")
+			draw_line_chart(cr, chart_x, y_offset, chart_w, chart_h, net_up_hist, "Net Up", chart_color, dynamic_up_max, " KiB/s")
 		end
 	end
 end
