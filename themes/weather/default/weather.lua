@@ -1,7 +1,8 @@
+
 local settings = {}
 
 settings.weather = {
-    city = "Budapest",
+    city = "Tatabánya",
     language_code = "hu",
     lang = "hu",
     units = "metric",

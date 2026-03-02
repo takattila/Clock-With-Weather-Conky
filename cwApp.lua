@@ -1,8 +1,9 @@
-conky.config = {
+
+	conky.config = {
 	update_interval = 1,
 
 	background = false,
-	alignment = "REPLACE_CONFIG_ALIGNMENT",
+	alignment = "middle_middle",
 
 	border_width = 10,
 	border_inner_margin = 0,
@@ -14,8 +15,8 @@ conky.config = {
 	minimum_width = 745,
 	minimum_height = 250,
 
-	gap_x = REPLACE_CONFIG_POSITION_X,
-	gap_y = REPLACE_CONFIG_POSITION_Y,
+	gap_x = 0,
+	gap_y = 0,
 
 	override_utf8_locale = true,
 
@@ -39,8 +40,8 @@ conky.config = {
 
 	uppercase = false,
 
-	lua_load = "main.lua",
-	lua_draw_hook_pre = "main",
+	lua_load = "cwMain.lua",
+	lua_draw_hook_pre = "cwMain",
 };
 
 conky.text = [[ ]];

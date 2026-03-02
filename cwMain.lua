@@ -1,9 +1,9 @@
 require 'cairo'
 
-draw = require "draw"
-json = require "json"
-theme = require "theme"
-utils = require "utils"
+draw = require "cwDraw"
+json = require "cwJson"
+theme = require "cwTheme"
+utils = require "cwUtils"
 
 settings = {
 	appearance = require('themes.appearance.' .. theme.appearance.name .. '.appearance').appearance,
@@ -17,7 +17,7 @@ print("-> use 12 hour format - : " .. tostring(settings.system.hour_format_12))
 
 assert(os.setlocale(settings.system.locale))
 
-function conky_main()
+function conky_cwMain()
 	if conky_window == nil then return end
 
 	local cs = cairo_xlib_surface_create(

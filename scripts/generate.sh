@@ -47,7 +47,7 @@ Weather of <code>REPLACE_WEATHER</code> city with <code>REPLACE_APPEARANCE</code
 
 - #### Content of the `themes/appearance/REPLACE_APPEARANCE/appearance.lua` file: [click here](../themes/appearance/REPLACE_APPEARANCE/appearance.lua).
 
-- #### Content of the [theme.lua](../theme.lua) file:
+- #### Content of the [cwTheme.lua](../cwTheme.lua) file:
 
   ```lua
   REPLACE_THEME_LUA_CONTENT
@@ -112,7 +112,7 @@ function generateScreenshots() {
         local appearanceArray=($(createArray "themes/appearance" "-bg" "$1"))
         local weatherArray=($(createArray "themes/weather" "default"))
         local themeLua
-        local themeFile="theme.lua"
+        local themeFile="cwTheme.lua"
         local color
 
         local hour_format_12_array=(
@@ -151,7 +151,7 @@ function generateScreenshots() {
                 gsettings set org.gnome.desktop.background primary-color "$(echo "${color}")" 
 
                 echo "${themeLua}" > "${themeFile}"
-                conky -c app.cfg &
+                conky -c cwApp.lua &
 
                 sleep 3
                 shutter -s 1690,305,780,290 -o images/screenshots/"${weather}-${appearance}".png -e

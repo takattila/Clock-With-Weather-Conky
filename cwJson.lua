@@ -1,5 +1,5 @@
 --
--- json.lua
+-- cwJson.lua
 --
 -- Copyright (c) 2020 rxi
 --

@@ -13,7 +13,7 @@ Weather of <strong style="color:#4298c9">berlin</strong> city with <strong style
 
 - #### Content of the `themes/appearance/dark/appearance.lua` file: [click here](../../themes/appearance/dark/appearance.lua).
 
-- #### Content of the [theme.lua](../../theme.lua) file:
+- #### Content of the [cwTheme.lua](../../cwTheme.lua) file:
 
   ```lua
   
@@ -50,7 +50,7 @@ Weather of <strong style="color:#4298c9">budapest</strong> city with <strong sty
 
 - #### Content of the `themes/appearance/dark-blue/appearance.lua` file: [click here](../../themes/appearance/dark-blue/appearance.lua).
 
-- #### Content of the [theme.lua](../../theme.lua) file:
+- #### Content of the [cwTheme.lua](../../cwTheme.lua) file:
 
   ```lua
   
@@ -87,7 +87,7 @@ Weather of <strong style="color:#4298c9">delhi</strong> city with <strong style=
 
 - #### Content of the `themes/appearance/dark-green/appearance.lua` file: [click here](../../themes/appearance/dark-green/appearance.lua).
 
-- #### Content of the [theme.lua](../../theme.lua) file:
+- #### Content of the [cwTheme.lua](../../cwTheme.lua) file:
 
   ```lua
   
@@ -124,7 +124,7 @@ Weather of <strong style="color:#4298c9">london</strong> city with <strong style
 
 - #### Content of the `themes/appearance/dark-orange/appearance.lua` file: [click here](../../themes/appearance/dark-orange/appearance.lua).
 
-- #### Content of the [theme.lua](../../theme.lua) file:
+- #### Content of the [cwTheme.lua](../../cwTheme.lua) file:
 
   ```lua
   
@@ -161,7 +161,7 @@ Weather of <strong style="color:#4298c9">moscow</strong> city with <strong style
 
 - #### Content of the `themes/appearance/dark-yellow/appearance.lua` file: [click here](../../themes/appearance/dark-yellow/appearance.lua).
 
-- #### Content of the [theme.lua](../../theme.lua) file:
+- #### Content of the [cwTheme.lua](../../cwTheme.lua) file:
 
   ```lua
   
@@ -198,7 +198,7 @@ Weather of <strong style="color:#4298c9">new-york</strong> city with <strong sty
 
 - #### Content of the `themes/appearance/light/appearance.lua` file: [click here](../../themes/appearance/light/appearance.lua).
 
-- #### Content of the [theme.lua](../../theme.lua) file:
+- #### Content of the [cwTheme.lua](../../cwTheme.lua) file:
 
   ```lua
   
@@ -235,7 +235,7 @@ Weather of <strong style="color:#4298c9">paris</strong> city with <strong style=
 
 - #### Content of the `themes/appearance/light-blue/appearance.lua` file: [click here](../../themes/appearance/light-blue/appearance.lua).
 
-- #### Content of the [theme.lua](../../theme.lua) file:
+- #### Content of the [cwTheme.lua](../../cwTheme.lua) file:
 
   ```lua
   
@@ -272,7 +272,7 @@ Weather of <strong style="color:#4298c9">sidney</strong> city with <strong style
 
 - #### Content of the `themes/appearance/light-green/appearance.lua` file: [click here](../../themes/appearance/light-green/appearance.lua).
 
-- #### Content of the [theme.lua](../../theme.lua) file:
+- #### Content of the [cwTheme.lua](../../cwTheme.lua) file:
 
   ```lua
   
@@ -309,7 +309,7 @@ Weather of <strong style="color:#4298c9">tokyo</strong> city with <strong style=
 
 - #### Content of the `themes/appearance/light-orange/appearance.lua` file: [click here](../../themes/appearance/light-orange/appearance.lua).
 
-- #### Content of the [theme.lua](../../theme.lua) file:
+- #### Content of the [cwTheme.lua](../../cwTheme.lua) file:
 
   ```lua
   
@@ -346,7 +346,7 @@ Weather of <strong style="color:#4298c9">wien</strong> city with <strong style="
 
 - #### Content of the `themes/appearance/light-yellow/appearance.lua` file: [click here](../../themes/appearance/light-yellow/appearance.lua).
 
-- #### Content of the [theme.lua](../../theme.lua) file:
+- #### Content of the [cwTheme.lua](../../cwTheme.lua) file:
 
   ```lua
   
@@ -383,7 +383,7 @@ Weather of <strong style="color:#4298c9">berlin</strong> city with <strong style
 
 - #### Content of the `themes/appearance/dark-bg/appearance.lua` file: [click here](../../themes/appearance/dark-bg/appearance.lua).
 
-- #### Content of the [theme.lua](../../theme.lua) file:
+- #### Content of the [cwTheme.lua](../../cwTheme.lua) file:
 
   ```lua
   
@@ -420,7 +420,7 @@ Weather of <strong style="color:#4298c9">budapest</strong> city with <strong sty
 
 - #### Content of the `themes/appearance/dark-blue-bg/appearance.lua` file: [click here](../../themes/appearance/dark-blue-bg/appearance.lua).
 
-- #### Content of the [theme.lua](../../theme.lua) file:
+- #### Content of the [cwTheme.lua](../../cwTheme.lua) file:
 
   ```lua
   
@@ -457,7 +457,7 @@ Weather of <strong style="color:#4298c9">delhi</strong> city with <strong style=
 
 - #### Content of the `themes/appearance/dark-green-bg/appearance.lua` file: [click here](../../themes/appearance/dark-green-bg/appearance.lua).
 
-- #### Content of the [theme.lua](../../theme.lua) file:
+- #### Content of the [cwTheme.lua](../../cwTheme.lua) file:
 
   ```lua
   
@@ -494,7 +494,7 @@ Weather of <strong style="color:#4298c9">london</strong> city with <strong style
 
 - #### Content of the `themes/appearance/dark-orange-bg/appearance.lua` file: [click here](../../themes/appearance/dark-orange-bg/appearance.lua).
 
-- #### Content of the [theme.lua](../../theme.lua) file:
+- #### Content of the [cwTheme.lua](../../cwTheme.lua) file:
 
   ```lua
   
@@ -531,7 +531,7 @@ Weather of <strong style="color:#4298c9">moscow</strong> city with <strong style
 
 - #### Content of the `themes/appearance/dark-yellow-bg/appearance.lua` file: [click here](../../themes/appearance/dark-yellow-bg/appearance.lua).
 
-- #### Content of the [theme.lua](../../theme.lua) file:
+- #### Content of the [cwTheme.lua](../../cwTheme.lua) file:
 
   ```lua
   
@@ -568,7 +568,7 @@ Weather of <strong style="color:#4298c9">new-york</strong> city with <strong sty
 
 - #### Content of the `themes/appearance/light-bg/appearance.lua` file: [click here](../../themes/appearance/light-bg/appearance.lua).
 
-- #### Content of the [theme.lua](../../theme.lua) file:
+- #### Content of the [cwTheme.lua](../../cwTheme.lua) file:
 
   ```lua
   
@@ -605,7 +605,7 @@ Weather of <strong style="color:#4298c9">paris</strong> city with <strong style=
 
 - #### Content of the `themes/appearance/light-blue-bg/appearance.lua` file: [click here](../../themes/appearance/light-blue-bg/appearance.lua).
 
-- #### Content of the [theme.lua](../../theme.lua) file:
+- #### Content of the [cwTheme.lua](../../cwTheme.lua) file:
 
   ```lua
   
@@ -642,7 +642,7 @@ Weather of <strong style="color:#4298c9">sidney</strong> city with <strong style
 
 - #### Content of the `themes/appearance/light-green-bg/appearance.lua` file: [click here](../../themes/appearance/light-green-bg/appearance.lua).
 
-- #### Content of the [theme.lua](../../theme.lua) file:
+- #### Content of the [cwTheme.lua](../../cwTheme.lua) file:
 
   ```lua
   
@@ -679,7 +679,7 @@ Weather of <strong style="color:#4298c9">tokyo</strong> city with <strong style=
 
 - #### Content of the `themes/appearance/light-orange-bg/appearance.lua` file: [click here](../../themes/appearance/light-orange-bg/appearance.lua).
 
-- #### Content of the [theme.lua](../../theme.lua) file:
+- #### Content of the [cwTheme.lua](../../cwTheme.lua) file:
 
   ```lua
   
@@ -716,7 +716,7 @@ Weather of <strong style="color:#4298c9">wien</strong> city with <strong style="
 
 - #### Content of the `themes/appearance/light-yellow-bg/appearance.lua` file: [click here](../../themes/appearance/light-yellow-bg/appearance.lua).
 
-- #### Content of the [theme.lua](../../theme.lua) file:
+- #### Content of the [cwTheme.lua](../../cwTheme.lua) file:
 
   ```lua
   
