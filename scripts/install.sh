@@ -33,29 +33,20 @@ function helperGetLatestRelease() {
     sed -E 's/.*"([^"]+)".*/\1/'
 }
 
-function helperCheckout() {
-    echo
-
-    {
-        cd "${BASE_DIR}"/"${REPO}"
-        git fetch --all --tags
-        git checkout tags/"$(helperGetLatestRelease takattila/"${REPO}")"
-    } &> /dev/null
-}
-
 function helperCloneAndCheckout() {
     echo
     echo -n "- Downloading ${C_Y}${REPO}${C_D} ... "
 
+    local latestTag
+    latestTag=$(helperGetLatestRelease takattila/"${REPO}")
+
     {
-      git clone https://github.com/takattila/"${REPO}".git \
+      git clone --branch "${latestTag}" --depth 1 \
+          https://github.com/takattila/"${REPO}".git \
           "${BASE_DIR}"/"${REPO}"
     } &> /dev/null
 
     echo "done."
-
-    helperCheckout
-
     echo -e "- The ${C_Y}'${BASE_DIR}/${REPO}'${C_D} application installed."
 }
 
