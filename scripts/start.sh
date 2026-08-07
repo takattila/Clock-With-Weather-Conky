@@ -2,6 +2,15 @@
 
 API_KEY=$1
 
+# If no key was passed as an argument, fall back to the git-ignored .api_key
+# file in the widget folder (first line).
+if [[ -z "${API_KEY}" ]]; then
+    WIDGET_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+    if [[ -f "${WIDGET_DIR}/.api_key" ]]; then
+        API_KEY="$(head -n1 "${WIDGET_DIR}/.api_key")"
+    fi
+fi
+
 function checkAPIkey() {
     if [[ -z "${API_KEY}" ]]; then
         echo " ERROR :("
@@ -10,6 +19,10 @@ function checkAPIkey() {
         echo " - You have to pass the key as an argument:"
         echo "   ..."
         echo "   bash start.sh <YOUR-API-KEY>"
+        echo "   ..."
+        echo " - Or create the git-ignored file .api_key in the widget folder:"
+        echo "   ..."
+        echo "   printf '<YOUR-API-KEY>\n' > .api_key && chmod 600 .api_key"
         echo "   ..."
         echo
         exit 1

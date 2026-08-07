@@ -75,6 +75,7 @@ DEFAULT_CREATE_DESKTOP_ICONS="$(   [[ -n "${ARG_CREATE_DESKTOP_ICONS}" ]]    && 
 
 REPO="Clock-With-Weather-Conky"
 BASE_DIR="/home/$(whoami)/.conky"
+API_KEY_FILE="${BASE_DIR}/${REPO}/.api_key"
 
 DEFAULT_THEME_LUA='
 local settings = {}
@@ -103,7 +104,7 @@ settings.weather = {
     language_code = "REPLACE_LANGUAGE_CODE",
     lang = "REPLACE_LANG",
     units = "REPLACE_UNITS",
-    api_key = os.getenv("OPENWEATHER_API_KEY"),
+    api_key = utils.resolve_api_key(),
     api_url = "https://api.openweathermap.org/data/2.5/weather",
 }
 
@@ -294,8 +295,9 @@ function setupChDir() {
 }
 
 function setupApiKey() {
-    local apiKey
-    if [[ -z ${DEFAULT_OPENWEATHER_API_KEY} ]]; then
+    local apiKey="${DEFAULT_OPENWEATHER_API_KEY}"
+
+    if [[ -z "${apiKey}" ]]; then
         echo
         echo "- Please enter your ${C_Y}OpenWeatherMap API key${C_D}."
         echo "  If you don't have it yet, ${C_Y}you can get it from here${C_D}:"
@@ -306,8 +308,15 @@ function setupApiKey() {
         apiKey="$(
             helperPrompt "  your ${C_Y}API key${C_D}: " "EMPTY_ANSWER_NOT_ALLOWED" "NO_VALIDATE"
         )"
-        export DEFAULT_OPENWEATHER_API_KEY="${apiKey}"
     fi
+
+    export DEFAULT_OPENWEATHER_API_KEY="${apiKey}"
+
+    mkdir -p "$(dirname "${API_KEY_FILE}")"
+    echo "${apiKey}" > "${API_KEY_FILE}"
+    chmod 600 "${API_KEY_FILE}"
+
+    echo -e "- The ${C_Y}'${API_KEY_FILE}'${C_D} file saved (chmod 600)."
 }
 
 function setupListThemes() {
