@@ -323,7 +323,7 @@ function setupListThemes() {
     local printWithoutNames=$1
     local i=0 
 
-    for t in $(ls -A themes/appearance) ; do 
+    for t in $(ls -A "${BASE_DIR}/${REPO}/themes/appearance") ; do 
         i=$(( i + 1 ))
         if [[ "${printWithoutNames}" ]]; then
             echo "${i} "

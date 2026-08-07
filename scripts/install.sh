@@ -372,11 +372,13 @@ function main() {
 
     installSourceSetup
 
+    setupChDir
     setupApiKey
     setupSetWeatherApiVariables
     setupWindowSettings
-    setupCreateDesktopIcon
-    setupCreateConfigDesktopIcon
+    setupIconSettings
+    setupCreateStartIcons
+    setupCreateSetupIcons
     setupStartApplication
 }
 
