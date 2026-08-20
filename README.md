@@ -1,9 +1,12 @@
+# ⚠️ Please visit [Clock-With-Weather-EWW](https://github.com/takattila/Clock-With-Weather-EWW/tree/master) repository ⚠️
+
+- Future developments will be in the [Clock-With-Weather-EWW](https://github.com/takattila/Clock-With-Weather-EWW/tree/master) repository.
+
 # Conky widget with clock and current weather report
 
 [![Version](https://img.shields.io/badge/dynamic/json.svg?label=version&url=https://api.github.com/repos/takattila/Clock-With-Weather-Conky/releases/latest&query=tag_name)](https://github.com/takattila/Clock-With-Weather-Conky/releases)
 [![Wiki](https://img.shields.io/badge/wiki-docs-orange)](https://github.com/takattila/Clock-With-Weather-Conky/wiki)
 [![Screenshots](https://img.shields.io/badge/view-screenshots-blue)](#screenshots)
-
 
 - This widget uses [openweathermap.org](https://openweathermap.org) API, to get weather information.
 - Easy to customize, supports appearance on **light** and **dark** backgrounds. *(See: [Example Themes](./themes/themes.md))*.
