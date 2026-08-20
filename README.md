@@ -1,4 +1,4 @@
-# ⚠️ Please visit [Clock-With-Weather-EWW](https://github.com/takattila/Clock-With-Weather-EWW/tree/master) repository ⚠️
+# ⚠️ Please visit<br>[Clock-With-Weather-EWW](https://github.com/takattila/Clock-With-Weather-EWW/tree/master) repository ⚠️
 
 - Future developments will be in the [Clock-With-Weather-EWW](https://github.com/takattila/Clock-With-Weather-EWW/tree/master) repository.
 
